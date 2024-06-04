@@ -86,7 +86,7 @@ Follow these steps to set up and run the project locally:
 
 5.  **Open in Your Browser:**
 
-Open `http://localhost:9000` in your web browser.
+Open `http://localhost:5173` in your web browser.
 
 ## Author
 
