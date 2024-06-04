@@ -1,18 +1,7 @@
 import React from "react";
 import Boy_Img from "../assets/boy.png";
 import Girl_Img from "../assets/girl.png";
-import {
-	Fa500Px,
-	FaArrowRight,
-	FaBeer,
-	FaFacebookMessenger,
-	FaFileMedicalAlt,
-	FaFolderOpen,
-	FaPaperPlane,
-	FaSadTear,
-	FaSeedling,
-	FaSmog,
-} from "react-icons/fa";
+import { FaEllipsisV, FaFolderOpen, FaPaperPlane } from "react-icons/fa";
 
 const Home = () => {
 	return (
@@ -135,9 +124,7 @@ const Home = () => {
 			<div className="sm:w-[60%] w-full h-[80vh] relative">
 				<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center sticky top-0 left-0 bg-slate-800 text-white">
 					<h1>Group Name</h1>
-					<span className="rotate-90 font-bold cursor-pointer text-lg">
-						...
-					</span>
+					<FaEllipsisV className="cursor-pointer" />
 				</div>
 				<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[66vh]">
 					<span className="self-end border rounded-lg py-1 px-2 bg-green-700 text-white">
