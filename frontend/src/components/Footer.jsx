@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
 	return (
-		<div className="w-full min-h-32  shadow-gray-950 shadow-inner flex flex-col justify-between items-start p-4 bg-slate-800 text-white">
+		<div className="w-full min-h-32  shadow-gray-950 shadow-inner flex flex-col justify-between items-start px-4 py-8 bg-slate-800 text-white">
 			<h1 className="font-bold text-lg">Chat Application 🖋️</h1>
 			<div className="flex items-center justify-start w-full p-4 flex-wrap">
-				<div className="flex flex-col min-w-[300px] w-[33%] my-3">
+				<div className="flex flex-col min-w-[280px] w-[33%] my-3">
 					<h1 className="font-semibold mb-2">Contact</h1>
 					<span>Akash Deep</span>
 					<span>Patna, Bihar</span>
@@ -21,7 +21,7 @@ const Footer = () => {
 						</Link>
 					</span>
 				</div>
-				<div className="flex flex-col min-w-[300px] w-[33%] my-3">
+				<div className="flex flex-col min-w-[280px] w-[33%] my-3">
 					<h1 className="font-semibold mb-2">Pages</h1>
 					<span>
 						<Link
@@ -56,7 +56,7 @@ const Footer = () => {
 						</Link>
 					</span>
 				</div>
-				<div className="flex flex-col min-w-[300px] w-[33%] my-3">
+				<div className="flex flex-col min-w-[280px] w-[33%] my-3">
 					<h1 className="font-semibold mb-2">Links</h1>
 					<span>
 						<a
