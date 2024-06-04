@@ -11,7 +11,9 @@ const Applayout = () => {
 	return (
 		<div>
 			<Header />
-			<Outlet />
+			<div className="min-h-[90vh] p-4">
+				<Outlet />
+			</div>
 			<Footer />
 		</div>
 	);
