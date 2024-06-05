@@ -101,7 +101,7 @@ const Footer = () => {
 				</div>
 			</div>
 			<h1 className="font-bold">
-				All rights reserved 2024 &copy; Chat App
+				All rights reserved 2024 &copy; ChatApp
 			</h1>
 		</div>
 	);
