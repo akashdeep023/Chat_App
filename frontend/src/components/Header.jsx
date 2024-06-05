@@ -18,7 +18,9 @@ const Header = () => {
 				</Link>
 			</div>
 			<Link to={"/signin"}>
-				<span>SingIn</span>
+				<button className="py-2 px-4 border border-slate-400 rounded-full bg-gradient-to-tr to-slate-800 text-black via-white  from-slate-800 hover:bg-gradient-to-br shadow-sm hover:shadow-white">
+					SingIn
+				</button>
 			</Link>
 		</div>
 	);

@@ -74,17 +74,7 @@ const Home = () => {
 					<FaPenAlt />
 				</div>
 				<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Boy_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">
-							Group Name Group Name Group Name
-						</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 bg-gradient-to-tr hover:bg-gradient-to-tr to-slate-800 text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Girl_Img}
@@ -92,7 +82,7 @@ const Home = () => {
 						/>
 						<span className="line-clamp-1">Group Name</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Boy_Img}
@@ -102,7 +92,7 @@ const Home = () => {
 							Group Name Group Name Group Name
 						</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Girl_Img}
@@ -110,7 +100,7 @@ const Home = () => {
 						/>
 						<span className="line-clamp-1">Group Name</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Boy_Img}
@@ -120,7 +110,7 @@ const Home = () => {
 							Group Name Group Name Group Name
 						</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Girl_Img}
@@ -128,7 +118,7 @@ const Home = () => {
 						/>
 						<span className="line-clamp-1">Group Name</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Boy_Img}
@@ -138,7 +128,7 @@ const Home = () => {
 							Group Name Group Name Group Name
 						</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Girl_Img}
@@ -146,7 +136,7 @@ const Home = () => {
 						/>
 						<span className="line-clamp-1">Group Name</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Boy_Img}
@@ -156,7 +146,7 @@ const Home = () => {
 							Group Name Group Name Group Name
 						</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Girl_Img}
@@ -164,7 +154,7 @@ const Home = () => {
 						/>
 						<span className="line-clamp-1">Group Name</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Boy_Img}
@@ -174,7 +164,7 @@ const Home = () => {
 							Group Name Group Name Group Name
 						</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 text-white hover:text-black transition-all hover:bg-slate-400 cursor-pointer">
+					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
 							src={Girl_Img}
@@ -201,7 +191,7 @@ const Home = () => {
 					</div>
 				)}
 				{chatMenuBtn && (
-					<div className="border-slate-500 border rounded-md absolute top-2 right-2 bg-slate-800 text-white flex items-center justify-center gap-4 w-48 h-48 ">
+					<div className="border-slate-500 border rounded-md absolute top-2 right-2 bg-gradient-to-tr to-slate-800 text-black from-white flex items-center justify-center gap-4 w-48 h-48 ">
 						<MdOutlineClose
 							size={22}
 							className="absolute top-2 right-3 cursor-pointer"
@@ -231,58 +221,58 @@ const Home = () => {
 					className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[66vh]"
 					ref={chatBox}
 				>
-					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-green-700 text-white">
+					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 from-green-400 text-white">
 						Hi
 					</span>
-					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gray-400">
+					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 text-black from-white">
 						Hello
 					</span>
-					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-green-700 text-white">
+					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 from-green-400 text-white">
 						How are you?
 					</span>
-					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gray-400">
+					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 text-black from-white">
 						Fine
 					</span>
-					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-green-700 text-white">
+					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 from-green-400 text-white">
 						Ok Bye bye.
 					</span>
-					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gray-400">
+					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 text-black from-white">
 						Ok Bye.
 					</span>
-					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-green-700 text-white">
+					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 from-green-400 text-white">
 						Hi
 					</span>
-					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gray-400">
+					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 text-black from-white">
 						Hello
 					</span>
-					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-green-700 text-white">
+					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 from-green-400 text-white">
 						How are you?
 					</span>
-					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gray-400">
+					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 text-black from-white">
 						Fine
 					</span>
-					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-green-700 text-white">
+					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 from-green-400 text-white">
 						Ok Bye bye.
 					</span>
-					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gray-400">
+					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 text-black from-white">
 						Ok Bye.
 					</span>
-					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-green-700 text-white">
+					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 from-green-400 text-white">
 						Hi
 					</span>
-					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gray-400">
+					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 text-black from-white">
 						Hello
 					</span>
-					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-green-700 text-white">
+					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 from-green-400 text-white">
 						How are you?
 					</span>
-					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gray-400">
+					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 text-black from-white">
 						Fine
 					</span>
-					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-green-700 text-white">
+					<span className="self-end border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 from-green-400 text-white">
 						Ok Bye bye.
 					</span>
-					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gray-400">
+					<span className="self-start border-slate-500 border rounded-lg py-1 px-2 bg-gradient-to-tr to-slate-800 text-black from-white">
 						Ok Bye.
 					</span>
 				</div>
