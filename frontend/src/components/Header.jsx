@@ -37,7 +37,7 @@ const Header = () => {
 	useEffect(() => {
 		if (user) {
 			navigate("/");
-		} else {
+		} else if (pathname !== "/signin" && pathname !== "/signup") {
 			navigate("/signin");
 		}
 		handleScrollTop();
