@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 // Use the CORS middleware
 app.use(
 	cors({
-		origin: "https://chat-application-jack.vercel.app",
+		origin: "https://chat-application-jack.vercel.app/",
 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 		credentials: true,
 	})
