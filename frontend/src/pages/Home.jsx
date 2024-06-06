@@ -68,7 +68,7 @@ const Home = () => {
 	}, []);
 	return (
 		<div className="flex w-full border-slate-500 border rounded-sm shadow-md shadow-black">
-			<div className="w-0 sm:w-[40%] h-[80vh] relative">
+			<div className="hidden sm:block sm:w-[40%] h-[80vh] relative">
 				<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white border-slate-500 border-r">
 					<h1>ChatsApp</h1>
 					<FaPenAlt />

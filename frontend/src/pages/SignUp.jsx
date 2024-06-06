@@ -1,23 +1,55 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
-	const [username, setUsername] = useState("");
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [inputfield, setInputField] = useState("");
 	const [load, setLoad] = useState("");
+	const navigate = useNavigate();
 
-	const signUpUser = () => {
+	const signUpUser = (e) => {
 		// Signup ---
+		toast.loading("Wait until you SignUp");
+		e.target.disabled = true;
+		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				firstName: firstName,
+				lastName: lastName,
+				email: email,
+				password: password,
+			}),
+		})
+			.then((response) => response.json())
+			.then((json) => {
+				setLoad("");
+				e.target.disabled = false;
+				toast.dismiss();
+				toast.success(json?.message);
+				if (json.token) {
+					navigate("/signin");
+				}
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+				setLoad("");
+				toast.dismiss();
+				toast.error("Error : " + error.code);
+				e.target.disabled = false;
+			});
 	};
-	const handleSignup = () => {
-		if (username && email && password) {
-			setInputField("");
+	const handleSignup = (e) => {
+		if (firstName && lastName && email && password) {
 			setLoad("Loading...");
-			signUpUser();
+			signUpUser(e);
 		} else {
-			setInputField("All Input Fields Required");
+			toast.error("Error : All Input Fields Required");
 		}
 	};
 	return (
@@ -28,15 +60,27 @@ const SignUp = () => {
 				</h2>
 				<form className="w-full flex justify-between flex-col">
 					<h3 className="text-xl font-semibold p-1">
-						Enter Username
+						Enter First Name
 					</h3>
 					<input
 						className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
 						type="text"
 						placeholder="Enter Username"
-						name="username"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
+						name="firstName"
+						value={firstName}
+						onChange={(e) => setFirstName(e.target.value)}
+						required
+					/>
+					<h3 className="text-xl font-semibold p-1">
+						Enter Last Name
+					</h3>
+					<input
+						className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
+						type="text"
+						placeholder="Enter Username"
+						name="lastName"
+						value={lastName}
+						onChange={(e) => setLastName(e.target.value)}
 						required
 					/>
 					<h3 className="text-xl font-semibold p-1">
@@ -63,12 +107,9 @@ const SignUp = () => {
 						onChange={(e) => setPassword(e.target.value)}
 						required
 					/>
-					<div className="text-red-600 font-semibold self-center">
-						{inputfield}
-					</div>
 					<button
 						onClick={(e) => {
-							handleSignup();
+							handleSignup(e);
 							e.preventDefault();
 						}}
 						className="w-full font-semibold hover:bg-black rounded-full px-5 py-4 mt-5 text-lg border border-slate-400  text-slate-400 hover:text-white bg-slate-700 transition-all"

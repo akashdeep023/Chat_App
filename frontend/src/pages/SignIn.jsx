@@ -1,21 +1,58 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { addAuth } from "../redux/auth/authSlice";
 
 const SignIn = () => {
-	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [inputfield, setInputField] = useState("");
 	const [load, setLoad] = useState("");
-	const logInUser = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const logInUser = (e) => {
 		// SignIn ---
+		toast.loading("Wait until you SignIn");
+		e.target.disabled = true;
+		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				email: email,
+				password: password,
+			}),
+		})
+			.then((response) => response.json())
+			.then((json) => {
+				setLoad("");
+				e.target.disabled = false;
+				toast.dismiss();
+				if (json.token) {
+					dispatch(addAuth(json.data));
+					localStorage.setItem("token", json.token);
+					navigate("/");
+					toast.success(json?.message);
+				} else {
+					toast.error(json?.message);
+				}
+			})
+			.catch((error) => {
+				console.error("Error:", error);
+				setLoad("");
+				toast.dismiss();
+				toast.error("Error : " + error.code);
+				e.target.disabled = false;
+			});
 	};
-	const handleLogin = () => {
-		if (username && password) {
-			setInputField("");
+	const handleLogin = (e) => {
+		if (email && password) {
 			setLoad("Loading...");
-			logInUser();
+			logInUser(e);
 		} else {
-			setInputField("All input fields are not valid");
+			toast.error("Error : All Input Fields Required");
 		}
 	};
 	return (
@@ -30,11 +67,11 @@ const SignIn = () => {
 					</h3>
 					<input
 						className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
-						type="text"
-						placeholder="Enter Username"
-						name="username"
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
+						type="email"
+						placeholder="Enter Email Address"
+						name="email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<h3 className="text-xl font-semibold p-1">
 						Enter Password
@@ -52,8 +89,8 @@ const SignIn = () => {
 					</div>
 					<button
 						onClick={(e) => {
-							handleLogin();
 							e.preventDefault();
+							handleLogin(e);
 						}}
 						className="w-full font-semibold hover:bg-black rounded-full px-5 py-4 mt-5 text-lg border border-slate-400  text-slate-400 hover:text-white bg-slate-700 transition-all"
 					>
