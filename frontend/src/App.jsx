@@ -1,31 +1,45 @@
-import React, { useEffect } from "react";
-import {
-	createBrowserRouter,
-	Outlet,
-	RouterProvider,
-	useLocation,
-} from "react-router-dom";
+import React from "react";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Error from "./pages/Error";
-import handleScrollTop from "./utils/handleScrollTop";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const Applayout = () => {
-	// Scroll to top of page --------------------------------
-	const { pathname } = useLocation();
-	useEffect(() => {
-		handleScrollTop();
-	}, [pathname]);
 	return (
 		<div>
-			<Header />
-			<div className="min-h-[85vh] p-4 bg-gradient-to-tr to-black via-blue-900 from-black">
-				<Outlet />
-			</div>
-			<Footer />
+			<Provider store={store}>
+				<ToastContainer
+					position="top-left"
+					autoClose={3000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme="dark"
+					stacked
+					limit={3}
+					toastStyle={{
+						border: "1px solid #dadadaaa",
+						textTransform: "capitalize",
+					}}
+					// transition:Bounce
+				/>
+				<Header />
+				<div className="min-h-[85vh] p-4 bg-gradient-to-tr to-black via-blue-900 from-black">
+					<Outlet />
+				</div>
+				<Footer />
+			</Provider>
 		</div>
 	);
 };
