@@ -20,7 +20,8 @@ const User = require("./models/user");
 app.get(
 	"/api",
 	wrapAsync(async (req, res) => {
-		const user = User.find();
+		const user = await User.find();
+
 		res.json({ message: "Welcome to Chat Application!", data: user });
 	})
 );
