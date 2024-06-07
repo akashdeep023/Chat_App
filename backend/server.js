@@ -3,17 +3,22 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
-const connectDb = require("./config/db");
+// const connectDb = require("./config/db");
 const PORT = process.env.PORT || 3000;
 
 // Use the CORS middleware
-app.use(
-	cors({
-		origin: process.env.FRONTEND_URL,
-	})
-);
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const mongoose = require("mongoose");
+main()
+	.then(() => console.log("Database Connection established"))
+	.catch((err) => console.log(err));
+
+async function main() {
+	await mongoose.connect(process.env.MONGODB_URI);
+}
 
 app.get("/", (req, res) => {
 	res.json({ message: "Welcome to Chat Application!" });
@@ -45,5 +50,5 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, async () => {
 	console.log(`Server listening on ${PORT}`);
-	await connectDb();
+	// await connectDb();
 });
