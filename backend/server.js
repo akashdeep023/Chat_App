@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const mongoose = require("mongoose");
+// Connect to Database
 main()
 	.then(() => console.log("Database Connection established"))
 	.catch((err) => console.log(err));
@@ -22,17 +23,6 @@ async function main() {
 app.get("/", (req, res) => {
 	res.json({ message: "Welcome to Chat Application!" });
 });
-
-const wrapAsync = require("./middlewares/wrapAsync");
-const User = require("./models/user");
-app.get(
-	"/api",
-	wrapAsync(async (req, res) => {
-		const user = await User.find();
-
-		res.json({ message: "Welcome to Chat Application!", data: user });
-	})
-);
 
 const authRouter = require("./routes/auth");
 app.use("/api/auth", authRouter);

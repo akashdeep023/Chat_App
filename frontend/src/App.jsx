@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -12,11 +12,26 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 
 const Applayout = () => {
+	const [toastPosition, setToastPosition] = useState("bottom-left");
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth >= 600) {
+				setToastPosition("bottom-left");
+			} else {
+				setToastPosition("top-left");
+			}
+		};
+		handleResize();
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 	return (
 		<div>
 			<Provider store={store}>
 				<ToastContainer
-					position="top-left"
+					position={toastPosition}
 					autoClose={3000}
 					hideProgressBar={false}
 					newestOnTop={false}
