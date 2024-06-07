@@ -28,7 +28,7 @@ app.use((err, req, res, next) => {
 	res.status(500).json({ message: "Something Went Worng!" });
 });
 
-app.listen(PORT, () => {
-	connectDb();
+app.listen(PORT, async () => {
+	await connectDb();
 	console.log(`Server listening on ${PORT}`);
 });
