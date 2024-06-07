@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Logo from "../assets/chatapp.png";
+import Logo from "../assets/logo.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import { addAuth, removeAuth } from "../redux/auth/authSlice";
 import handleScrollTop from "../utils/handleScrollTop";
