@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
-// const connectDb = require("./config/db");
 const PORT = process.env.PORT || 3000;
 
 // Use the CORS middleware
@@ -50,5 +49,4 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, async () => {
 	console.log(`Server listening on ${PORT}`);
-	// await connectDb();
 });
