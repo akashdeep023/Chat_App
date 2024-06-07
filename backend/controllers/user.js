@@ -18,11 +18,15 @@ const getAuthUser = async (req, res) => {
 };
 
 const getAllUsers = async (req, res) => {
-	const allUsers = await User.find();
-	allUsers.forEach((user) => {
-		user.password = null;
-	});
-	res.status(200).send({ data: allUsers });
+	try {
+		const allUsers = await User.find();
+		allUsers.forEach((user) => {
+			user.password = null;
+		});
+		res.status(200).send({ data: allUsers });
+	} catch (err) {
+		return res.status(500).json({ message: err.message });
+	}
 };
 
 module.exports = { getAuthUser, getAllUsers };
