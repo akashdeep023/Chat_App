@@ -15,6 +15,16 @@ app.get("/", (req, res) => {
 	res.json({ message: "Welcome to Chat Application!" });
 });
 
+const wrapAsync = require("./middlewares/wrapAsync");
+const User = require("./models/user");
+app.get(
+	"/api",
+	wrapAsync(async (req, res) => {
+		const user = User.find();
+		res.json({ message: "Welcome to Chat Application!", data: user });
+	})
+);
+
 const authRouter = require("./routes/auth");
 app.use("/api/auth", authRouter);
 const userRouter = require("./routes/user");
