@@ -7,14 +7,7 @@ const connectDb = require("./config/db");
 const PORT = process.env.PORT || 3000;
 
 // Use the CORS middleware
-app.use(
-	cors({
-		origin: "https://chat-application-jack.vercel.app",
-		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-		credentials: true,
-	})
-);
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
