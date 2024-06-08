@@ -118,6 +118,9 @@ const Home = () => {
 								<span className="line-clamp-1 capitalize">
 									{user?.firstName} {user?.lastName}
 								</span>
+								<span className="font-light text-xs">
+									{user?.createdAt}
+								</span>
 							</div>
 						);
 					})}

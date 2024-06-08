@@ -63,7 +63,7 @@ const SignIn = () => {
 				</h2>
 				<form className="w-full flex justify-between flex-col">
 					<h3 className="text-xl font-semibold p-1">
-						Enter Username
+						Enter Email Address
 					</h3>
 					<input
 						className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
