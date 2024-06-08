@@ -119,7 +119,7 @@ const Home = () => {
 									{user?.firstName} {user?.lastName}
 								</span>
 								<span className="font-light text-xs">
-									{user?.createdAt}
+									{user?.createdAt?.toString().split("T")[0]}
 								</span>
 							</div>
 						);
@@ -128,7 +128,7 @@ const Home = () => {
 			</div>
 			<div className="sm:w-[60%] w-full h-[80vh] relative">
 				<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white">
-					<h1>Group Name</h1>
+					<h1>Tech Group</h1>
 					<FaEllipsisV
 						className="cursor-pointer"
 						onClick={() => setChatMenuBtn(true)}
