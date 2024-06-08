@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { addAuth } from "../redux/auth/authSlice";
+import { checkValidSignInFrom } from "../utils/validate";
 
 const SignIn = () => {
 	const [email, setEmail] = useState("");
@@ -49,10 +50,15 @@ const SignIn = () => {
 	};
 	const handleLogin = (e) => {
 		if (email && password) {
+			const validError = checkValidSignInFrom(email, password);
+			if (validError) {
+				toast.error(validError);
+				return;
+			}
 			setLoad("Loading...");
 			logInUser(e);
 		} else {
-			toast.error("Error : All Input Fields Required");
+			toast.error("Required: All Fields");
 		}
 	};
 	return (

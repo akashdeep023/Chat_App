@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { checkValidSignUpFrom } from "../utils/validate";
 
 const SignUp = () => {
 	const [firstName, setFirstName] = useState("");
@@ -46,10 +47,20 @@ const SignUp = () => {
 	};
 	const handleSignup = (e) => {
 		if (firstName && lastName && email && password) {
+			const validError = checkValidSignUpFrom(
+				firstName,
+				lastName,
+				email,
+				password
+			);
+			if (validError) {
+				toast.error(validError);
+				return;
+			}
 			setLoad("Loading...");
 			signUpUser(e);
 		} else {
-			toast.error("Error : All Input Fields Required");
+			toast.error("Required: All Fields");
 		}
 	};
 	return (
