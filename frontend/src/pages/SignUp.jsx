@@ -32,9 +32,11 @@ const SignUp = () => {
 				setLoad("");
 				e.target.disabled = false;
 				toast.dismiss();
-				toast.success(json?.message);
 				if (json.token) {
 					navigate("/signin");
+					toast.success(json?.message);
+				} else {
+					toast.error(json?.message);
 				}
 			})
 			.catch((error) => {
