@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Boy_Img from "../assets/boy.png";
 import Girl_Img from "../assets/girl.png";
+import Group_Img from "../assets/group.png";
 import {
 	FaArrowAltCircleDown,
 	FaEllipsisV,
@@ -9,6 +10,8 @@ import {
 	FaPenAlt,
 } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { addAllUsers } from "../redux/auth/usersSlice";
 
 const Home = () => {
 	const chatBox = useRef();
@@ -17,6 +20,10 @@ const Home = () => {
 	const [chatMenuBtn, setChatMenuBtn] = useState(false);
 	const [mediaBox, setMediaBox] = useState(false);
 	const [mediaURL, setMediaURL] = useState("");
+	const dispatch = useDispatch();
+	const users = useSelector((store) => store.users.users);
+	const authUserId = useSelector((store) => store?.auth?._id);
+
 	// Media Box Control
 	const handleMediaBox = () => {
 		if (mediaFile.current?.files[0]) {
@@ -49,7 +56,7 @@ const Home = () => {
 			const currentScrollPos = chatBox.current.scrollTop;
 			if (
 				currentScrollPos + chatBox.current.clientHeight <
-				chatBox.current.scrollHeight - 100
+				chatBox.current.scrollHeight - 30
 			) {
 				setScrollShow(true);
 			} else {
@@ -66,6 +73,18 @@ const Home = () => {
 	useEffect(() => {
 		handleScrollDownChat();
 	}, []);
+	// All Users Api Call
+	useEffect(() => {
+		const getAllUsers = () => {
+			fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/users`)
+				.then((res) => res.json())
+				.then((json) => {
+					dispatch(addAllUsers(json.data));
+				})
+				.catch((err) => console.log(err));
+		};
+		getAllUsers();
+	}, []);
 	return (
 		<div className="flex w-full border-slate-500 border rounded-sm shadow-md shadow-black">
 			<div className="hidden sm:block sm:w-[40%] h-[80vh] relative">
@@ -77,101 +96,31 @@ const Home = () => {
 					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 bg-gradient-to-tr hover:bg-gradient-to-tr to-slate-800 text-black via-white  from-slate-800 transition-all cursor-pointer">
 						<img
 							className="h-12 w-12 rounded-full"
-							src={Girl_Img}
+							src={Group_Img}
 							alt="img"
 						/>
-						<span className="line-clamp-1">Group Name</span>
+						<span className="line-clamp-1">Tech Group</span>
 					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Boy_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">
-							Group Name Group Name Group Name
-						</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Girl_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">Group Name</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Boy_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">
-							Group Name Group Name Group Name
-						</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Girl_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">Group Name</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Boy_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">
-							Group Name Group Name Group Name
-						</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Girl_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">Group Name</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Boy_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">
-							Group Name Group Name Group Name
-						</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Girl_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">Group Name</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Boy_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">
-							Group Name Group Name Group Name
-						</span>
-					</div>
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Girl_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">Group Name</span>
-					</div>
+					{users?.map((user) => {
+						if (user?._id == authUserId) {
+							return;
+						}
+						return (
+							<div
+								key={user?._id}
+								className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer"
+							>
+								<img
+									className="h-12 w-12 rounded-full"
+									src={Boy_Img}
+									alt="img"
+								/>
+								<span className="line-clamp-1 capitalize">
+									{user?.firstName} {user?.lastName}
+								</span>
+							</div>
+						);
+					})}
 				</div>
 			</div>
 			<div className="sm:w-[60%] w-full h-[80vh] relative">
