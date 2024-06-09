@@ -8,7 +8,6 @@ import { checkValidSignInFrom } from "../utils/validate";
 const SignIn = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [inputfield, setInputField] = useState("");
 	const [load, setLoad] = useState("");
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -90,15 +89,12 @@ const SignIn = () => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<div className="text-red-600 font-semibold self-center">
-						{inputfield}
-					</div>
 					<button
 						onClick={(e) => {
 							e.preventDefault();
 							handleLogin(e);
 						}}
-						className="w-full font-semibold hover:bg-black rounded-full px-5 py-4 mt-5 text-lg border border-slate-400  text-slate-400 hover:text-white bg-slate-700 transition-all"
+						className="disabled:opacity-50 disabled:cursor-not-allowed w-full font-semibold hover:bg-black rounded-full px-5 py-4 mt-5 text-lg border border-slate-400  text-slate-400 hover:text-white bg-slate-700 transition-all"
 					>
 						{load == "" ? "SignIn" : load}
 					</button>

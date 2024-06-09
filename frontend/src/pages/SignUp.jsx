@@ -125,7 +125,7 @@ const SignUp = () => {
 							handleSignup(e);
 							e.preventDefault();
 						}}
-						className="w-full font-semibold hover:bg-black rounded-full px-5 py-4 mt-5 text-lg border border-slate-400  text-slate-400 hover:text-white bg-slate-700 transition-all"
+						className="disabled:opacity-50 disabled:cursor-not-allowed w-full font-semibold hover:bg-black rounded-full px-5 py-4 mt-5 text-lg border border-slate-400  text-slate-400 hover:text-white bg-slate-700 transition-all"
 					>
 						{load == "" ? "SignUp" : load}
 					</button>
