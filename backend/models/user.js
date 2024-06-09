@@ -19,11 +19,6 @@ const userSchema = new mongoose.Schema(
 			required: true,
 			unique: true,
 		},
-		role: {
-			type: String,
-			required: true,
-			default: "MEMBER",
-		},
 		image: {
 			type: String,
 			default:
