@@ -1,32 +1,39 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
-	firstName: {
-		type: String,
-		required: true,
+const userSchema = new mongoose.Schema(
+	{
+		firstName: {
+			type: String,
+			required: true,
+		},
+		lastName: {
+			type: String,
+			required: true,
+		},
+		password: {
+			type: String,
+			required: true,
+		},
+		email: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+		role: {
+			type: String,
+			required: true,
+			default: "MEMBER",
+		},
+		image: {
+			type: String,
+			default:
+				"https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+		},
 	},
-	lastName: {
-		type: String,
-		required: true,
-	},
-	password: {
-		type: String,
-		required: true,
-	},
-	email: {
-		type: String,
-		required: true,
-	},
-	role: {
-		type: String,
-		required: true,
-		default: "MEMBER",
-	},
-	createdAt: {
-		type: Date,
-		default: Date.now(),
-	},
-});
+	{
+		timestaps: true,
+	}
+);
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
