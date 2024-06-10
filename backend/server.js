@@ -1,16 +1,21 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
-const PORT = process.env.PORT || 3000;
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
 
-// Use the CORS middleware
+const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const PORT = process.env.PORT || 3000;
 
-const mongoose = require("mongoose");
+// All routers
+const authRouter = require("./routes/auth");
+const userRouter = require("./routes/user");
+const chatRouter = require("./routes/chat");
+const messageRouter = require("./routes/message");
+
 // Connect to Database
 main()
 	.then(() => console.log("Database Connection established"))
@@ -24,17 +29,18 @@ app.get("/", (req, res) => {
 	res.json({ message: "Welcome to Chat Application!" });
 });
 
-const authRouter = require("./routes/auth");
 app.use("/api/auth", authRouter);
-const userRouter = require("./routes/user");
 app.use("/api/user", userRouter);
+app.use("/api/chat", chatRouter);
+app.use("/api/message", messageRouter);
 
 app.all("*", (req, res) => {
 	res.json({ error: "Invalid Route" });
 });
 
 app.use((err, req, res, next) => {
-	res.status(500).json({ message: "Something Went Worng!" });
+	const errorMessage = err.message || "Something Went Wrong!";
+	res.status(500).json({ message: errorMessage });
 });
 
 app.listen(PORT, async () => {
