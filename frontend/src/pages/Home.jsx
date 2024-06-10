@@ -76,7 +76,14 @@ const Home = () => {
 	// All Users Api Call
 	useEffect(() => {
 		const getAllUsers = () => {
-			fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/users`)
+			const token = localStorage.getItem("token");
+			fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/users`, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			})
 				.then((res) => res.json())
 				.then((json) => {
 					dispatch(addAllUsers(json.data));
@@ -102,9 +109,6 @@ const Home = () => {
 						<span className="line-clamp-1">Tech Group</span>
 					</div>
 					{users?.map((user) => {
-						if (user?._id == authUserId) {
-							return;
-						}
 						return (
 							<div
 								key={user?._id}
@@ -112,7 +116,7 @@ const Home = () => {
 							>
 								<img
 									className="h-12 w-12 rounded-full"
-									src={Boy_Img}
+									src={user?.image || Boy_Img}
 									alt="img"
 								/>
 								<span className="line-clamp-1 capitalize">

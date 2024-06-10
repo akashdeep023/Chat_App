@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { checkValidSignUpFrom } from "../utils/validate";
+import { PiEye, PiEyeClosedLight } from "react-icons/pi";
 
 const SignUp = () => {
 	const [firstName, setFirstName] = useState("");
@@ -9,6 +10,7 @@ const SignUp = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [load, setLoad] = useState("");
+	const [isShow, setIsShow] = useState(false);
 	const navigate = useNavigate();
 
 	const signUpUser = (e) => {
@@ -111,15 +113,26 @@ const SignUp = () => {
 					<h3 className="text-xl font-semibold p-1">
 						Enter Password
 					</h3>
-					<input
-						className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
-						type="password"
-						placeholder="Enter Password"
-						name="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						required
-					/>
+					<div className="relative">
+						<input
+							className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
+							type={isShow ? "text" : "password"}
+							placeholder="Enter Password"
+							name="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<span
+							onClick={() => setIsShow(!isShow)}
+							className="cursor-pointer text-black/80 absolute right-5 top-7"
+						>
+							{isShow ? (
+								<PiEyeClosedLight fontSize={22} />
+							) : (
+								<PiEye fontSize={22} />
+							)}
+						</span>
+					</div>
 					<button
 						onClick={(e) => {
 							handleSignup(e);

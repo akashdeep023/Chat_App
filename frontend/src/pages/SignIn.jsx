@@ -4,11 +4,13 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { addAuth } from "../redux/auth/authSlice";
 import { checkValidSignInFrom } from "../utils/validate";
+import { PiEye, PiEyeClosedLight } from "react-icons/pi";
 
 const SignIn = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [load, setLoad] = useState("");
+	const [isShow, setIsShow] = useState(false);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const logInUser = (e) => {
@@ -81,14 +83,26 @@ const SignIn = () => {
 					<h3 className="text-xl font-semibold p-1">
 						Enter Password
 					</h3>
-					<input
-						className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
-						type="password"
-						placeholder="Enter Password"
-						name="password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
+					<div className="relative">
+						<input
+							className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
+							type={isShow ? "text" : "password"}
+							placeholder="Enter Password"
+							name="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<span
+							onClick={() => setIsShow(!isShow)}
+							className="cursor-pointer text-black/80 absolute right-5 top-7"
+						>
+							{isShow ? (
+								<PiEyeClosedLight fontSize={22} />
+							) : (
+								<PiEye fontSize={22} />
+							)}
+						</span>
+					</div>
 					<button
 						onClick={(e) => {
 							e.preventDefault();
