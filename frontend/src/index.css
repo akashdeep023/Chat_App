@@ -15,3 +15,11 @@ body::-webkit-scrollbar-thumb,
     background-color: #1E293B;
     box-shadow: inset 0px 0px 2px white;
 }
+
+body {
+    user-select: none;
+}
+
+.hiddenbox {
+    top: -80px;
+}

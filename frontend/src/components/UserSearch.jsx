@@ -26,7 +26,7 @@ const UserSearch = () => {
 	return (
 		<div className="hidden sm:block sm:w-[40%] h-[80vh] bg-black/40 border-r border-slate-500">
 			<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white border-slate-500 border-r">
-				<h1 className="mr-2">ChatsApp</h1>
+				<h1 className="mr-2">New Chat</h1>
 				<div className="w-2/3 flex flex-nowrap items-center gap-2">
 					<input
 						type="text"

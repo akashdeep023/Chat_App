@@ -53,8 +53,27 @@ const Header = () => {
 		navigate("/signin");
 	};
 
+	useEffect(() => {
+		var prevScrollPos = window.pageYOffset;
+		const handleScroll = () => {
+			var currentScrollPos = window.pageYOffset;
+			if (prevScrollPos < currentScrollPos && currentScrollPos > 80) {
+				document.getElementById("header").classList.add("hiddenbox");
+			} else {
+				document.getElementById("header").classList.remove("hiddenbox");
+			}
+			prevScrollPos = currentScrollPos;
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 	return (
-		<div className="w-full h-16 md:h-20 shadow-gray-950 shadow-inner flex justify-between items-center p-4 font-semibold bg-slate-800 text-white">
+		<div
+			id="header"
+			className="w-full h-16 fixed top-0 z-50 md:h-20 shadow-gray-950 shadow-inner flex justify-between items-center p-4 font-semibold bg-slate-800 text-white"
+		>
 			<div className="flex items-center justify-start gap-2">
 				<Link to={"/"}>
 					<img

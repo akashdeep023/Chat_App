@@ -53,6 +53,7 @@ const Applayout = () => {
 				// transition:Bounce
 			/>
 			<Header />
+			<div className="h-16 md:h-20"></div>
 			<div className="min-h-[85vh] p-4 bg-gradient-to-tr to-black via-blue-900 from-black">
 				<Outlet />
 				{isProfileDetails && <ProfileDetail />}

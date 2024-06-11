@@ -107,8 +107,11 @@ const Home = () => {
 			) : (
 				<div className="hidden sm:block sm:w-[40%] h-[80vh] bg-black/40 border-r border-slate-500">
 					<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white border-slate-500 border-r">
-						<h1>ChatsApp</h1>
-						<FaPenAlt />
+						<h1>My Chat</h1>
+						<div className="flex items-center gap-2 border border-slate-600 py-1 px-2 rounded-md cursor-pointer hover:bg-slate-600 active:bg-black/20">
+							<h1>New Group Create</h1>
+							<FaPenAlt />
+						</div>
 					</div>
 					<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
 						<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 bg-gradient-to-tr hover:bg-gradient-to-tr to-slate-800 text-black via-white  from-slate-800 transition-all cursor-pointer">
