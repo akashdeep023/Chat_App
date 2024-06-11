@@ -8,11 +8,15 @@ import SignIn from "./pages/SignIn";
 import Error from "./pages/Error";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import store from "./redux/store";
+import ProfileDetail from "./components/ProfileDetail";
 
 const Applayout = () => {
 	const [toastPosition, setToastPosition] = useState("bottom-left");
+	const isProfileDetails = useSelector(
+		(store) => store.condition.isProfileDetail
+	);
 	useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth >= 600) {
@@ -29,32 +33,31 @@ const Applayout = () => {
 	}, []);
 	return (
 		<div>
-			<Provider store={store}>
-				<ToastContainer
-					position={toastPosition}
-					autoClose={3000}
-					hideProgressBar={false}
-					newestOnTop={false}
-					closeOnClick
-					rtl={false}
-					pauseOnFocusLoss
-					draggable
-					pauseOnHover
-					theme="dark"
-					stacked
-					limit={3}
-					toastStyle={{
-						border: "1px solid #dadadaaa",
-						textTransform: "capitalize",
-					}}
-					// transition:Bounce
-				/>
-				<Header />
-				<div className="min-h-[85vh] p-4 bg-gradient-to-tr to-black via-blue-900 from-black">
-					<Outlet />
-				</div>
-				<Footer />
-			</Provider>
+			<ToastContainer
+				position={toastPosition}
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+				stacked
+				limit={3}
+				toastStyle={{
+					border: "1px solid #dadadaaa",
+					textTransform: "capitalize",
+				}}
+				// transition:Bounce
+			/>
+			<Header />
+			<div className="min-h-[85vh] p-4 bg-gradient-to-tr to-black via-blue-900 from-black">
+				<Outlet />
+				{isProfileDetails && <ProfileDetail />}
+			</div>
+			<Footer />
 		</div>
 	);
 };
@@ -84,7 +87,11 @@ const routers = createBrowserRouter([
 ]);
 
 function App() {
-	return <RouterProvider router={routers} />;
+	return (
+		<Provider store={store}>
+			<RouterProvider router={routers} />
+		</Provider>
+	);
 }
 
 export default App;

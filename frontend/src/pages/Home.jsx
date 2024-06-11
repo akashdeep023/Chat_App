@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Boy_Img from "../assets/boy.png";
-import Girl_Img from "../assets/girl.png";
 import Group_Img from "../assets/group.png";
 import {
 	FaArrowAltCircleDown,
@@ -9,9 +8,10 @@ import {
 	FaPaperPlane,
 	FaPenAlt,
 } from "react-icons/fa";
-import { MdOutlineClose } from "react-icons/md";
+import { MdChat, MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { addAllUsers } from "../redux/auth/usersSlice";
+import UserSearch from "../components/UserSearch";
 
 const Home = () => {
 	const chatBox = useRef();
@@ -23,6 +23,7 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const users = useSelector((store) => store.users.users);
 	const authUserId = useSelector((store) => store?.auth?._id);
+	const [userSearchBox, setUserSearchBox] = useState(false);
 
 	// Media Box Control
 	const handleMediaBox = () => {
@@ -92,45 +93,60 @@ const Home = () => {
 		};
 		getAllUsers();
 	}, []);
+
 	return (
-		<div className="flex w-full border-slate-500 border rounded-sm shadow-md shadow-black">
-			<div className="hidden sm:block sm:w-[40%] h-[80vh] relative">
-				<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white border-slate-500 border-r">
-					<h1>ChatsApp</h1>
-					<FaPenAlt />
-				</div>
-				<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
-					<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 bg-gradient-to-tr hover:bg-gradient-to-tr to-slate-800 text-black via-white  from-slate-800 transition-all cursor-pointer">
-						<img
-							className="h-12 w-12 rounded-full"
-							src={Group_Img}
-							alt="img"
-						/>
-						<span className="line-clamp-1">Tech Group</span>
-					</div>
-					{users?.map((user) => {
-						return (
-							<div
-								key={user?._id}
-								className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer"
-							>
-								<img
-									className="h-12 w-12 rounded-full"
-									src={user?.image || Boy_Img}
-									alt="img"
-								/>
-								<span className="line-clamp-1 capitalize">
-									{user?.firstName} {user?.lastName}
-								</span>
-								<span className="font-light text-xs">
-									{user?.createdAt?.toString().split("T")[0]}
-								</span>
-							</div>
-						);
-					})}
-				</div>
+		<div className="flex w-full border-slate-500 border rounded-sm shadow-md shadow-black relative">
+			<div className="absolute bottom-4 right-[61%] cursor-pointer text-white">
+				<MdChat
+					fontSize={30}
+					onClick={() => setUserSearchBox(!userSearchBox)}
+				/>
 			</div>
-			<div className="sm:w-[60%] w-full h-[80vh] relative">
+			{userSearchBox ? (
+				<UserSearch />
+			) : (
+				<div className="hidden sm:block sm:w-[40%] h-[80vh] bg-black/40 border-r border-slate-500">
+					<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white border-slate-500 border-r">
+						<h1>ChatsApp</h1>
+						<FaPenAlt />
+					</div>
+					<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
+						<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 bg-gradient-to-tr hover:bg-gradient-to-tr to-slate-800 text-black via-white  from-slate-800 transition-all cursor-pointer">
+							<img
+								className="h-12 w-12 rounded-full"
+								src={Group_Img}
+								alt="img"
+							/>
+							<span className="line-clamp-1">Tech Group</span>
+						</div>
+						{/* {users?.map((user) => {
+							return (
+								<div
+									key={user?._id}
+									className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer"
+								>
+									<img
+										className="h-12 w-12 rounded-full"
+										src={user?.image || Boy_Img}
+										alt="img"
+									/>
+									<span className="line-clamp-1 capitalize">
+										{user?.firstName} {user?.lastName}
+									</span>
+									<span className="font-light text-xs">
+										{
+											user?.createdAt
+												?.toString()
+												.split("T")[0]
+										}
+									</span>
+								</div>
+							);
+						})} */}
+					</div>
+				</div>
+			)}
+			<div className="sm:w-[60%] w-full h-[80vh] bg-black/40 relative">
 				<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white">
 					<h1>Tech Group</h1>
 					<FaEllipsisV
@@ -138,14 +154,6 @@ const Home = () => {
 						onClick={() => setChatMenuBtn(true)}
 					/>
 				</div>
-				{scrollShow && (
-					<div
-						className="absolute bottom-16 right-5 cursor-pointer opacity-80"
-						onClick={handleScrollDownChat}
-					>
-						<FaArrowAltCircleDown size={30} />
-					</div>
-				)}
 				{chatMenuBtn && (
 					<div className="border-slate-500 border rounded-md absolute top-2 right-2 bg-gradient-to-tr to-slate-800 text-black from-white flex items-center justify-center gap-4 w-48 h-48 ">
 						<MdOutlineClose
@@ -157,6 +165,14 @@ const Home = () => {
 							<span>Setting</span>
 							<span>Clear Chat</span>
 						</div>
+					</div>
+				)}
+				{scrollShow && (
+					<div
+						className="absolute bottom-16 right-5 cursor-pointer opacity-80"
+						onClick={handleScrollDownChat}
+					>
+						<FaArrowAltCircleDown size={30} />
 					</div>
 				)}
 				{mediaBox && (
