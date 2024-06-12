@@ -6,6 +6,7 @@ const conditionSlice = createSlice({
 		isLoading: false,
 		isProfileDetail: false,
 		isUserSearchBox: false,
+		selectedChat: "",
 	},
 	reducers: {
 		setLoading: (state, action) => {
@@ -17,8 +18,15 @@ const conditionSlice = createSlice({
 		setUserSearchBox: (state, action) => {
 			state.isUserSearchBox = !state.isUserSearchBox;
 		},
+		setSelectedChat: (state, action) => {
+			state.selectedChat = action.payload;
+		},
 	},
 });
-export const { setLoading, setProfileDetail, setUserSearchBox } =
-	conditionSlice.actions;
+export const {
+	setLoading,
+	setProfileDetail,
+	setUserSearchBox,
+	setSelectedChat,
+} = conditionSlice.actions;
 export default conditionSlice.reducer;

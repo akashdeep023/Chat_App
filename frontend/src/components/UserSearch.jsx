@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading, setUserSearchBox } from "../redux/auth/conditionSlice";
+import {
+	setLoading,
+	setSelectedChat,
+	setUserSearchBox,
+} from "../redux/auth/conditionSlice";
 
 const UserSearch = () => {
 	const dispatch = useDispatch();
@@ -40,6 +44,7 @@ const UserSearch = () => {
 		})
 			.then((res) => res.json())
 			.then((json) => {
+				dispatch(setSelectedChat(json.message?._id));
 				dispatch(setLoading());
 				dispatch(setUserSearchBox());
 			})
@@ -64,7 +69,7 @@ const UserSearch = () => {
 					return (
 						<div
 							key={user?._id}
-							className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer"
+							className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-slate-300  from-slate-800 transition-all cursor-pointer"
 							onClick={() => handleCreateChat(user._id)}
 						>
 							<img

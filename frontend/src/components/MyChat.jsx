@@ -3,11 +3,13 @@ import { FaPenAlt } from "react-icons/fa";
 import Group_Img from "../assets/group.png";
 import { addMyChat } from "../redux/auth/myChatSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { setSelectedChat } from "../redux/auth/conditionSlice";
 
 const MyChat = () => {
 	const dispatch = useDispatch();
 	const myChat = useSelector((store) => store.myChat.chat);
 	const authUserId = useSelector((store) => store?.auth?._id);
+	const selectedChat = useSelector((store) => store?.condition?.selectedChat);
 	// All My Chat Api Call
 	useEffect(() => {
 		const getMyChat = () => {
@@ -39,20 +41,19 @@ const MyChat = () => {
 				</div>
 			</div>
 			<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
-				<div className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 bg-gradient-to-tr hover:bg-gradient-to-tr to-slate-800 text-black via-white  from-slate-800 transition-all cursor-pointer">
-					<img
-						className="h-12 w-12 rounded-full"
-						src={Group_Img}
-						alt="img"
-					/>
-					<span className="line-clamp-1">Tech Group</span>
-				</div>
 				{myChat &&
 					myChat?.map((chat) => {
 						return (
 							<div
 								key={chat?._id}
-								className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer"
+								className={`w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-black/55 to-slate-800  via-slate-300  from-slate-800 transition-all cursor-pointer ${
+									selectedChat == chat?._id
+										? "bg-gradient-to-tr text-black"
+										: "text-white"
+								}`}
+								onClick={() =>
+									dispatch(setSelectedChat(chat?._id))
+								}
 							>
 								<img
 									className="h-12 w-12 rounded-full"
@@ -66,13 +67,16 @@ const MyChat = () => {
 								<div className="w-full">
 									<div className="flex justify-between items-center w-full">
 										<span className="line-clamp-1 capitalize">
-											{authUserId == chat.users[0]._id
-												? chat.users[1].firstName +
-												  " " +
-												  chat.users[1].lastName
-												: chat.users[0].firstName +
-												  " " +
-												  chat.users[0].lastName}
+											{chat?.chatName == "Messenger"
+												? authUserId ==
+												  chat.users[0]._id
+													? chat.users[1].firstName +
+													  " " +
+													  chat.users[1].lastName
+													: chat.users[0].firstName +
+													  " " +
+													  chat.users[0].lastName
+												: chat?.chatName}
 										</span>
 										<div>
 											<span className="text-xs font-light">
