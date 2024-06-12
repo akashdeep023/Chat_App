@@ -80,7 +80,7 @@ const SignUp = () => {
 					<input
 						className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
 						type="text"
-						placeholder="Enter Username"
+						placeholder="Enter First Name"
 						name="firstName"
 						value={firstName}
 						onChange={(e) => setFirstName(e.target.value)}
@@ -92,7 +92,7 @@ const SignUp = () => {
 					<input
 						className="w-full border border-slate-700 my-3 py-4 px-8 rounded-full flex justify-between bg-white text-black "
 						type="text"
-						placeholder="Enter Username"
+						placeholder="Enter Last Name"
 						name="lastName"
 						value={lastName}
 						onChange={(e) => setLastName(e.target.value)}
