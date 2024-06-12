@@ -11,12 +11,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { Provider, useSelector } from "react-redux";
 import store from "./redux/store";
 import ProfileDetail from "./components/ProfileDetail";
+import Loading from "./components/Loading";
 
 const Applayout = () => {
 	const [toastPosition, setToastPosition] = useState("bottom-left");
 	const isProfileDetails = useSelector(
 		(store) => store.condition.isProfileDetail
 	);
+	const isLoading = useSelector((store) => store.condition.isLoading);
 	useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth >= 600) {
@@ -54,9 +56,10 @@ const Applayout = () => {
 			/>
 			<Header />
 			<div className="h-16 md:h-20"></div>
-			<div className="min-h-[85vh] p-4 bg-gradient-to-tr to-black via-blue-900 from-black">
+			<div className="min-h-[85vh] p-2 sm:p-4  bg-gradient-to-tr to-black via-blue-900 from-black">
 				<Outlet />
 				{isProfileDetails && <ProfileDetail />}
+				{isLoading && <Loading />}
 			</div>
 			<Footer />
 		</div>
