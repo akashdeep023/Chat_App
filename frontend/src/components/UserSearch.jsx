@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading, setUserSearchBox } from "../redux/auth/conditionSlice";
 
 const UserSearch = () => {
+	const dispatch = useDispatch();
 	const users = useSelector((store) => store.users.users);
 	const [selectedUsers, setSelectedUsers] = useState(users);
 	const [inputUserName, setInputUserName] = useState("");
@@ -23,15 +25,35 @@ const UserSearch = () => {
 			})
 		);
 	}, [inputUserName]);
+	const handleCreateChat = async (userId) => {
+		dispatch(setLoading());
+		const token = localStorage.getItem("token");
+		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				userId: userId,
+			}),
+		})
+			.then((res) => res.json())
+			.then((json) => {
+				dispatch(setLoading());
+				dispatch(setUserSearchBox());
+			})
+			.catch((err) => console.log(err));
+	};
 	return (
-		<div className="hidden sm:block sm:w-[40%] h-[80vh] bg-black/40 border-r border-slate-500">
+		<>
 			<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white border-slate-500 border-r">
-				<h1 className="mr-2">New Chat</h1>
+				<h1 className="mr-2 whitespace-nowrap">New Chat</h1>
 				<div className="w-2/3 flex flex-nowrap items-center gap-2">
 					<input
 						type="text"
-						placeholder="Search"
-						className="w-full px-2 py-1.5 font-normal rounded-sm outline-none text-black"
+						placeholder="Search Users..."
+						className="w-full border border-slate-600 py-1 px-2 font-normal outline-none rounded-md cursor-pointer bg-transparent active:bg-black/20"
 						onChange={(e) => setInputUserName(e.target?.value)}
 					/>
 					<FaSearch />
@@ -43,6 +65,7 @@ const UserSearch = () => {
 						<div
 							key={user?._id}
 							className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-white  from-slate-800 transition-all cursor-pointer"
+							onClick={() => handleCreateChat(user._id)}
 						>
 							<img
 								className="h-12 w-12 rounded-full"
@@ -59,7 +82,7 @@ const UserSearch = () => {
 					);
 				})}
 			</div>
-		</div>
+		</>
 	);
 };
 
