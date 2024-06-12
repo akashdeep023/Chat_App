@@ -110,18 +110,18 @@ const Header = () => {
 						</span>
 					</div>
 					{showProfileBox && (
-						<div className="border w-40 h-24 py-2 flex flex-col justify-center rounded-md items-center gap-1 absolute top-16 right-4 z-40 bg-white text-black">
+						<div className="border border-slate-500 text-white w-40 h-24 py-2 flex flex-col justify-center rounded-md items-center gap-1 absolute top-16 right-4 z-40 bg-slate-700">
 							<div
 								onClick={() => {
 									setShowProfileBox(false);
 									dispatch(setProfileDetail());
 								}}
-								className="flex flex-nowrap items-center w-full h-fit cursor-pointer justify-center hover:bg-slate-400 p-1"
+								className="flex flex-nowrap items-center w-full h-fit cursor-pointer justify-center hover:bg-slate-400 hover:text-black p-1"
 							>
 								Profile
 							</div>
 							<div
-								className="flex flex-nowrap items-center w-full h-fit cursor-pointer justify-center hover:bg-slate-400 p-1"
+								className="flex flex-nowrap items-center w-full h-fit cursor-pointer justify-center hover:bg-slate-400 hover:text-black p-1"
 								onClick={handleLogout}
 							>
 								Logout
