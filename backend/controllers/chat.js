@@ -35,16 +35,18 @@ const postChat = async (req, res) => {
 			"users",
 			"-password"
 		);
-		return res.status(200).json(chatAll);
+		return res.status(200).json({ message: chatAll });
 	} else {
 		const chat = existingChat[0];
-		return res.status(200).json(chat);
+		return res.status(200).json({ message: chat });
 	}
 };
 const getChat = async (req, res) => {
 	const chat = await Chat.find({
 		users: { $elemMatch: { $eq: req.user._id } },
 	})
+		.sort({ _id: -1 })
+		.sort({ latestMessage: 1 })
 		.populate("users", "-password")
 		.populate({
 			path: "latestMessage",
@@ -54,7 +56,7 @@ const getChat = async (req, res) => {
 			},
 		})
 		.populate("groupAdmin", "-password");
-	return res.status(200).json(chat);
+	return res.status(200).json({ message: chat });
 };
 const createGroup = async (req, res) => {
 	if (!req.body.users || !req.body.name) {
