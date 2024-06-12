@@ -23,7 +23,7 @@ const postChat = async (req, res) => {
 		.populate("groupAdmin", "-password");
 
 	if (existingChat.length == 0) {
-		const chatName = "Massagers";
+		const chatName = "Messenger";
 		const isGroupChat = false;
 		const users = [req.user._id, userId];
 		const chat = await Chat.create({
