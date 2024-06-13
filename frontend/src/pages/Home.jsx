@@ -11,10 +11,10 @@ import { setUserSearchBox } from "../redux/auth/conditionSlice";
 
 const Home = () => {
 	const dispatch = useDispatch();
-	const users = useSelector((store) => store.users.users);
 	const isUserSearchBox = useSelector(
-		(store) => store.condition.isUserSearchBox
+		(store) => store?.condition?.isUserSearchBox
 	);
+	const selectedChat = useSelector((store) => store?.condition?.selectedChat);
 
 	// All Users Api Call
 	useEffect(() => {
@@ -38,7 +38,11 @@ const Home = () => {
 
 	return (
 		<div className="flex w-full border-slate-500 border rounded-sm shadow-md shadow-black relative">
-			<div className="hidden sm:block sm:w-[40%] h-[80vh] bg-black/40 border-r border-slate-500 relative">
+			<div
+				className={`${
+					selectedChat && "hidden"
+				} sm:block sm:w-[40%] w-full h-[80vh] bg-black/40 border-r border-slate-500 relative`}
+			>
 				<div className="absolute bottom-4 right-5 cursor-pointer text-white">
 					<MdChat
 						fontSize={30}
@@ -47,11 +51,13 @@ const Home = () => {
 				</div>
 				{isUserSearchBox ? <UserSearch /> : <MyChat />}
 			</div>
-			{"ChatSelected" == "ChatSelectedn" ? (
-				<MessageBox />
-			) : (
-				<ChatNotSelected />
-			)}
+			<div
+				className={`${
+					!selectedChat && "hidden"
+				} sm:block sm:w-[60%] w-full h-[80vh] bg-black/40 relative`}
+			>
+				{selectedChat ? <MessageBox /> : <ChatNotSelected />}
+			</div>
 		</div>
 	);
 };
