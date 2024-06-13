@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
 	FaArrowAltCircleDown,
+	FaArrowLeft,
 	FaEllipsisV,
 	FaFolderOpen,
 	FaPaperPlane,
 } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
+import { setSelectedChat } from "../redux/auth/conditionSlice";
+import { useDispatch } from "react-redux";
 
 const MessageBox = () => {
 	const chatBox = useRef();
@@ -14,6 +17,8 @@ const MessageBox = () => {
 	const [chatMenuBtn, setChatMenuBtn] = useState(false);
 	const [mediaBox, setMediaBox] = useState(false);
 	const [mediaURL, setMediaURL] = useState("");
+	const dispatch = useDispatch();
+
 	// Media Box Control
 	const handleMediaBox = () => {
 		if (mediaFile.current?.files[0]) {
@@ -64,9 +69,17 @@ const MessageBox = () => {
 		handleScrollDownChat();
 	}, []);
 	return (
-		<div className="sm:w-[60%] w-full h-[80vh] bg-black/40 relative">
+		<>
 			<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white">
-				<h1>Tech Group</h1>
+				<div className="flex items-center gap-3">
+					<div className="sm:hidden bg-black/15 hover:bg-black/50 h-7 w-7 rounded-md flex items-center justify-center cursor-pointer">
+						<FaArrowLeft
+							fontSize={14}
+							onClick={() => dispatch(setSelectedChat(""))}
+						/>
+					</div>
+					<h1>Tech Group</h1>
+				</div>
 				<FaEllipsisV
 					className="cursor-pointer"
 					onClick={() => setChatMenuBtn(true)}
@@ -199,7 +212,7 @@ const MessageBox = () => {
 					</button>
 				</span>
 			</div>
-		</div>
+		</>
 	);
 };
 

@@ -6,6 +6,7 @@ import {
 	setSelectedChat,
 	setUserSearchBox,
 } from "../redux/auth/conditionSlice";
+import { toast } from "react-toastify";
 
 const UserSearch = () => {
 	const dispatch = useDispatch();
@@ -46,10 +47,12 @@ const UserSearch = () => {
 			.then((json) => {
 				dispatch(setSelectedChat(json.message?._id));
 				dispatch(setLoading());
+				toast.success("Created & Selected chat");
 				dispatch(setUserSearchBox());
 			})
 			.catch((err) => {
 				console.log(err);
+				toast.error(err.message);
 				dispatch(setLoading());
 			});
 	};
@@ -59,12 +62,15 @@ const UserSearch = () => {
 				<h1 className="mr-2 whitespace-nowrap">New Chat</h1>
 				<div className="w-2/3 flex flex-nowrap items-center gap-2">
 					<input
+						id="search"
 						type="text"
 						placeholder="Search Users..."
 						className="w-full border border-slate-600 py-1 px-2 font-normal outline-none rounded-md cursor-pointer bg-transparent active:bg-black/20"
 						onChange={(e) => setInputUserName(e.target?.value)}
 					/>
-					<FaSearch />
+					<label htmlFor="search" className="cursor-pointer">
+						<FaSearch />
+					</label>
 				</div>
 			</div>
 			<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
