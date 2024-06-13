@@ -74,6 +74,7 @@ const MessageBox = () => {
 				<div className="flex items-center gap-3">
 					<div className="sm:hidden bg-black/15 hover:bg-black/50 h-7 w-7 rounded-md flex items-center justify-center cursor-pointer">
 						<FaArrowLeft
+							title="Back"
 							fontSize={14}
 							onClick={() => dispatch(setSelectedChat(""))}
 						/>
@@ -81,6 +82,7 @@ const MessageBox = () => {
 					<h1>Tech Group</h1>
 				</div>
 				<FaEllipsisV
+					title="Menu"
 					className="cursor-pointer"
 					onClick={() => setChatMenuBtn(true)}
 				/>
@@ -89,6 +91,7 @@ const MessageBox = () => {
 				<div className="pt-4 border border-slate-500 text-white w-40 h-32 py-2 flex flex-col justify-center rounded-md items-center gap-1 absolute top-2 right-3 z-40 bg-slate-700">
 					<div className="bg-black/15 hover:bg-black/50 h-6 w-6 rounded-md flex items-center justify-center absolute top-2 right-3 cursor-pointer">
 						<MdOutlineClose
+							title="Close"
 							size={20}
 							onClick={() => setChatMenuBtn(false)}
 						/>
@@ -106,7 +109,7 @@ const MessageBox = () => {
 					className="absolute bottom-16 right-5 cursor-pointer opacity-80"
 					onClick={handleScrollDownChat}
 				>
-					<FaArrowAltCircleDown size={30} />
+					<FaArrowAltCircleDown title="Scroll Down" size={30} />
 				</div>
 			)}
 			{mediaBox && (
@@ -117,6 +120,7 @@ const MessageBox = () => {
 						className="h-full w-full object-contain"
 					/>
 					<MdOutlineClose
+						title="Delete"
 						size={25}
 						className="absolute top-2 right-3 cursor-pointer text-white bg-slate-800 rounded-xl p-1"
 						onClick={clearMediaFile}
@@ -185,6 +189,7 @@ const MessageBox = () => {
 			<div className="w-full flex items-center gap-1 h-[7vh] p-3 bg-slate-800 text-white">
 				<label htmlFor="media" className="cursor-pointer">
 					<FaFolderOpen
+						title="Open File"
 						size={22}
 						className="active:scale-75 hover:text-green-400"
 					/>
@@ -206,6 +211,7 @@ const MessageBox = () => {
 				<span>
 					<button className="outline-none p-2 border-slate-500 border-l">
 						<FaPaperPlane
+							title="Send"
 							size={18}
 							className="active:scale-75 hover:text-green-400"
 						/>

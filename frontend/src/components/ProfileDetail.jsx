@@ -55,6 +55,7 @@ const ProfileDetail = () => {
 				</div>
 				<div className="bg-black/15 hover:bg-black/50 h-7 w-7 rounded-md flex items-center justify-center absolute top-2 right-3 cursor-pointer">
 					<MdOutlineClose
+						title="Close"
 						size={22}
 						onClick={() => dispatch(setProfileDetail())}
 					/>

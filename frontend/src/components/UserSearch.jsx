@@ -69,7 +69,7 @@ const UserSearch = () => {
 						onChange={(e) => setInputUserName(e.target?.value)}
 					/>
 					<label htmlFor="search" className="cursor-pointer">
-						<FaSearch />
+						<FaSearch title="Search Users" />
 					</label>
 				</div>
 			</div>

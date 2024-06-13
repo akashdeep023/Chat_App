@@ -43,8 +43,9 @@ const Home = () => {
 					selectedChat && "hidden"
 				} sm:block sm:w-[40%] w-full h-[80vh] bg-black/40 border-r border-slate-500 relative`}
 			>
-				<div className="absolute bottom-4 right-5 cursor-pointer text-white">
+				<div className="absolute bottom-3 right-5 cursor-pointer text-white">
 					<MdChat
+						title="New Chat"
 						fontSize={30}
 						onClick={() => dispatch(setUserSearchBox())}
 					/>

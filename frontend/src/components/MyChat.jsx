@@ -33,7 +33,10 @@ const MyChat = () => {
 		<>
 			<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white border-slate-500 border-r">
 				<h1 className="mr-2 whitespace-nowrap">My Chat</h1>
-				<div className="flex items-center gap-2 border border-slate-600 py-1 px-2 rounded-md cursor-pointer hover:bg-slate-600 active:bg-black/20">
+				<div
+					className="flex items-center gap-2 border border-slate-600 py-1 px-2 rounded-md cursor-pointer hover:bg-slate-600 active:bg-black/20"
+					title="Create New Group"
+				>
 					<h1 className="line-clamp-1 lin whitespace-nowrap w-full">
 						New Group
 					</h1>
