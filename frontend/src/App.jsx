@@ -59,8 +59,8 @@ const Applayout = () => {
 			<div className="min-h-[85vh] p-2 sm:p-4  bg-gradient-to-tr to-black via-blue-900 from-black">
 				<Outlet />
 				{isProfileDetails && <ProfileDetail />}
-				{isLoading && <Loading />}
 			</div>
+			{isLoading && <Loading />}
 			<Footer />
 		</div>
 	);

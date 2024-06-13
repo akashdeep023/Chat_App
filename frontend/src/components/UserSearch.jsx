@@ -31,7 +31,7 @@ const UserSearch = () => {
 		);
 	}, [inputUserName]);
 	const handleCreateChat = async (userId) => {
-		dispatch(setLoading());
+		dispatch(setLoading(true));
 		const token = localStorage.getItem("token");
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat`, {
 			method: "POST",
@@ -46,14 +46,14 @@ const UserSearch = () => {
 			.then((res) => res.json())
 			.then((json) => {
 				dispatch(setSelectedChat(json.message?._id));
-				dispatch(setLoading());
+				dispatch(setLoading(false));
 				toast.success("Created & Selected chat");
 				dispatch(setUserSearchBox());
 			})
 			.catch((err) => {
 				console.log(err);
 				toast.error(err.message);
-				dispatch(setLoading());
+				dispatch(setLoading(false));
 			});
 	};
 	return (

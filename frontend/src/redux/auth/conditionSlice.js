@@ -10,7 +10,7 @@ const conditionSlice = createSlice({
 	},
 	reducers: {
 		setLoading: (state, action) => {
-			state.isLoading = !state.isLoading;
+			state.isLoading = action.payload;
 		},
 		setProfileDetail: (state, action) => {
 			state.isProfileDetail = !state.isProfileDetail;
