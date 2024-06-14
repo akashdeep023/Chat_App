@@ -10,9 +10,9 @@ const getAuthUser = async (req, res) => {
 };
 
 const getAllUsers = async (req, res) => {
-	const allUsers = await User.find({ _id: { $ne: req.user._id } }).select(
-		"-password"
-	);
+	const allUsers = await User.find({ _id: { $ne: req.user._id } })
+		.select("-password")
+		.sort({ _id: -1 });
 	res.status(200).send({ data: allUsers });
 };
 
