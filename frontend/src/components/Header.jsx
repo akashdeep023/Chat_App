@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addAuth, removeAuth } from "../redux/auth/authSlice";
 import handleScrollTop from "../utils/handleScrollTop";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { setProfileDetail } from "../redux/auth/conditionSlice";
+import { setHeaderMenu, setProfileDetail } from "../redux/auth/conditionSlice";
 
 const Header = () => {
 	const user = useSelector((store) => store.auth);
+	const isHeaderMenu = useSelector((store) => store?.condition?.isHeaderMenu);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [showProfileBox, setShowProfileBox] = useState(false);
 	const token = localStorage.getItem("token");
 	const getAuthUser = (token) => {
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
@@ -34,7 +34,7 @@ const Header = () => {
 		} else {
 			navigate("/signin");
 		}
-		setShowProfileBox(false);
+		dispatch(setHeaderMenu(false));
 	}, [token]);
 	// Scroll to top of page && Redirect Auth change --------------------------------
 	const { pathname } = useLocation();
@@ -93,7 +93,7 @@ const Header = () => {
 						Hi, {user.firstName}
 					</span>
 					<div
-						onClick={() => setShowProfileBox(!showProfileBox)}
+						onClick={() => dispatch(setHeaderMenu(!isHeaderMenu))}
 						className="flex flex-nowrap transition-all items-center ml-3  border border-slate-400 rounded-full bg-gradient-to-tr to-slate-800 text-black via-white  from-slate-800 hover:bg-gradient-to-br shadow-sm  cursor-pointer"
 					>
 						<img
@@ -102,18 +102,18 @@ const Header = () => {
 							className="w-10 h-10 rounded-full"
 						/>
 						<span className="m-2">
-							{showProfileBox ? (
+							{isHeaderMenu ? (
 								<MdKeyboardArrowDown fontSize={20} />
 							) : (
 								<MdKeyboardArrowUp fontSize={20} />
 							)}
 						</span>
 					</div>
-					{showProfileBox && (
+					{isHeaderMenu && (
 						<div className="border border-slate-500 text-white w-40 h-24 py-2 flex flex-col justify-center rounded-md items-center gap-1 absolute top-16 right-4 z-40 bg-slate-700">
 							<div
 								onClick={() => {
-									setShowProfileBox(false);
+									dispatch(setHeaderMenu(false));
 									dispatch(setProfileDetail());
 								}}
 								className="flex flex-nowrap items-center w-full h-fit cursor-pointer justify-center hover:bg-slate-400 hover:text-black p-1"

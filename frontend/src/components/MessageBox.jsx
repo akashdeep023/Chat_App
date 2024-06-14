@@ -7,16 +7,19 @@ import {
 	FaPaperPlane,
 } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
-import { setSelectedChat } from "../redux/auth/conditionSlice";
-import { useDispatch } from "react-redux";
+import { setChatMenuBtn, setSelectedChat } from "../redux/auth/conditionSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const MessageBox = () => {
 	const chatBox = useRef();
 	const mediaFile = useRef();
 	const [scrollShow, setScrollShow] = useState(true);
-	const [chatMenuBtn, setChatMenuBtn] = useState(false);
 	const [mediaBox, setMediaBox] = useState(false);
 	const [mediaURL, setMediaURL] = useState("");
+	const isChatMenuBtn = useSelector(
+		(store) => store?.condition?.isChatMenuBtn
+	);
+
 	const dispatch = useDispatch();
 
 	// Media Box Control
@@ -84,16 +87,16 @@ const MessageBox = () => {
 				<FaEllipsisV
 					title="Menu"
 					className="cursor-pointer"
-					onClick={() => setChatMenuBtn(true)}
+					onClick={() => dispatch(setChatMenuBtn(true))}
 				/>
 			</div>
-			{chatMenuBtn && (
+			{isChatMenuBtn && (
 				<div className="pt-4 border border-slate-500 text-white w-40 h-32 py-2 flex flex-col justify-center rounded-md items-center gap-1 absolute top-2 right-3 z-40 bg-slate-700">
 					<div className="bg-black/15 hover:bg-black/50 h-6 w-6 rounded-md flex items-center justify-center absolute top-2 right-3 cursor-pointer">
 						<MdOutlineClose
 							title="Close"
 							size={20}
-							onClick={() => setChatMenuBtn(false)}
+							onClick={() => dispatch(setChatMenuBtn(false))}
 						/>
 					</div>
 					<div className="flex flex-nowrap items-center w-full h-fit cursor-pointer justify-center hover:bg-slate-400 hover:text-black p-1">
