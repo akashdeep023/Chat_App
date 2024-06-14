@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Provider, useSelector } from "react-redux";
 import store from "./redux/store";
 import ProfileDetail from "./components/ProfileDetail";
-import Loading from "./components/Loading";
+import Loading from "./components/loading/Loading";
 
 const Applayout = () => {
 	const [toastPosition, setToastPosition] = useState("bottom-left");

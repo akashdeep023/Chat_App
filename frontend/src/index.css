@@ -25,7 +25,7 @@ body {
     top: -80px;
 }
 
-/* Loading Style */
+/* Chat Loading Style */
 #loader {
     width: 40px;
     aspect-ratio: 1;
@@ -37,10 +37,10 @@ body {
         var(--c), var(--m);
     background-size: 8px 15px, 8px 8px;
     background-repeat: no-repeat;
-    animation: l14 1s infinite alternate;
+    animation: chatLoading 1s infinite alternate;
 }
 
-@keyframes l14 {
+@keyframes chatLoading {
 
     0%,
     10% {
@@ -58,5 +58,22 @@ body {
     90%,
     100% {
         background-position: 0 100%, 0 0, 50% 100%, 50% 0, 100% 100%, 100% 0
+    }
+}
+
+/* Shimmer Style ---- */
+.shimmer-animated {
+    background: linear-gradient(to right, #334155, #1E293B, #334155, #1E293B, #334155);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
     }
 }

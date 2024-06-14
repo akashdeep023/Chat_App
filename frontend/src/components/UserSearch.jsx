@@ -7,10 +7,14 @@ import {
 	setUserSearchBox,
 } from "../redux/auth/conditionSlice";
 import { toast } from "react-toastify";
+import ChatShimmer from "./loading/ChatShimmer";
 
 const UserSearch = () => {
 	const dispatch = useDispatch();
 	const users = useSelector((store) => store.users.users);
+	const isChatLoading = useSelector(
+		(store) => store?.condition?.isChatLoading
+	);
 	const [selectedUsers, setSelectedUsers] = useState(users);
 	const [inputUserName, setInputUserName] = useState("");
 	useEffect(() => {
@@ -74,27 +78,56 @@ const UserSearch = () => {
 				</div>
 			</div>
 			<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
-				{selectedUsers?.map((user) => {
-					return (
-						<div
-							key={user?._id}
-							className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-gradient-to-tr to-slate-800 text-white hover:text-black via-slate-300  from-slate-800 transition-all cursor-pointer"
-							onClick={() => handleCreateChat(user._id)}
-						>
-							<img
-								className="h-12 w-12 rounded-full"
-								src={user?.image}
-								alt="img"
-							/>
-							<span className="line-clamp-1 capitalize">
-								{user?.firstName} {user?.lastName}
-							</span>
-							<span className="font-light text-xs">
-								{user?.createdAt?.toString().split("T")[0]}
-							</span>
-						</div>
-					);
-				})}
+				{selectedUsers.length == 0 && isChatLoading ? (
+					<ChatShimmer />
+				) : (
+					<>
+						{selectedUsers?.length === 0 && (
+							<div className="w-full h-full flex justify-center items-center text-white">
+								<h1 className="text-base font-semibold">
+									No Users Found
+								</h1>
+							</div>
+						)}
+						{selectedUsers?.map((user) => {
+							return (
+								<div
+									key={user?._id}
+									className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-black/50 transition-all cursor-pointer text-white"
+									onClick={() => handleCreateChat(user._id)}
+								>
+									<img
+										className="h-12 min-w-12 rounded-full"
+										src={user?.image}
+										alt="img"
+									/>
+									<div className="w-full">
+										<span className="line-clamp-1 capitalize">
+											{user?.firstName} {user?.lastName}
+										</span>
+										<div>
+											<span className="text-xs font-light">
+												{
+													user?.createdAt &&
+														new Date(
+															user?.createdAt
+														).toDateString()
+													// .split(" ")[0]
+												}
+											</span>{" "}
+											<span className="text-xs font-light">
+												{user?.createdAt &&
+													new Date(user?.createdAt)
+														.toTimeString()
+														.split(" ")[0]}
+											</span>
+										</div>
+									</div>
+								</div>
+							);
+						})}
+					</>
+				)}
 			</div>
 		</>
 	);

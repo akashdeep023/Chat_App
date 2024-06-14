@@ -3,15 +3,20 @@ import { FaPenAlt } from "react-icons/fa";
 import Group_Img from "../assets/group.png";
 import { addMyChat } from "../redux/auth/myChatSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedChat } from "../redux/auth/conditionSlice";
+import { setChatLoading, setSelectedChat } from "../redux/auth/conditionSlice";
+import ChatShimmer from "./loading/ChatShimmer";
 
 const MyChat = () => {
 	const dispatch = useDispatch();
 	const myChat = useSelector((store) => store.myChat.chat);
 	const authUserId = useSelector((store) => store?.auth?._id);
 	const selectedChat = useSelector((store) => store?.condition?.selectedChat);
+	const isChatLoading = useSelector(
+		(store) => store?.condition?.isChatLoading
+	);
 	// All My Chat Api Call
 	useEffect(() => {
+		dispatch(setChatLoading(true));
 		const getMyChat = () => {
 			const token = localStorage.getItem("token");
 			fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat`, {
@@ -24,8 +29,12 @@ const MyChat = () => {
 				.then((res) => res.json())
 				.then((json) => {
 					dispatch(addMyChat(json.message));
+					dispatch(setChatLoading(false));
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					dispatch(setChatLoading(true));
+				});
 		};
 		getMyChat();
 	}, []);
@@ -44,7 +53,9 @@ const MyChat = () => {
 				</div>
 			</div>
 			<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
-				{myChat &&
+				{myChat.length == 0 && isChatLoading ? (
+					<ChatShimmer />
+				) : (
 					myChat?.map((chat) => {
 						return (
 							<div
@@ -59,7 +70,7 @@ const MyChat = () => {
 								}
 							>
 								<img
-									className="h-12 w-12 rounded-full"
+									className="h-12 min-w-12 rounded-full"
 									src={
 										authUserId == chat.users[0]._id
 											? chat.users[1].image
@@ -86,9 +97,7 @@ const MyChat = () => {
 												{chat?.latestMessage &&
 													new Date(
 														chat?.latestMessage?.createdAt
-													)
-														.toDateString()
-														.split(" ")[0]}
+													).toDateString()}
 											</span>{" "}
 											<span className="text-xs font-light">
 												{chat?.latestMessage &&
@@ -102,12 +111,12 @@ const MyChat = () => {
 									</div>
 									<span className="text-xs font-light">
 										{chat?.latestMessage?.message}
-									</span>{" "}
+									</span>
 								</div>
-								<span className="font-light text-xs"></span>
 							</div>
 						);
-					})}
+					})
+				)}
 			</div>
 		</>
 	);
