@@ -4,6 +4,7 @@ const conditionSlice = createSlice({
 	name: "condition",
 	initialState: {
 		isLoading: false,
+		isChatLoading: false,
 		isProfileDetail: false,
 		isHeaderMenu: false,
 		isChatMenuBtn: false,
@@ -13,6 +14,9 @@ const conditionSlice = createSlice({
 	reducers: {
 		setLoading: (state, action) => {
 			state.isLoading = action.payload;
+		},
+		setChatLoading: (state, action) => {
+			state.isChatLoading = action.payload;
 		},
 		setProfileDetail: (state, action) => {
 			state.isProfileDetail = !state.isProfileDetail;
@@ -35,6 +39,7 @@ const conditionSlice = createSlice({
 });
 export const {
 	setLoading,
+	setChatLoading,
 	setProfileDetail,
 	setHeaderMenu,
 	setChatMenuBtn,
