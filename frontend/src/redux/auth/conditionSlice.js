@@ -5,6 +5,8 @@ const conditionSlice = createSlice({
 	initialState: {
 		isLoading: false,
 		isProfileDetail: false,
+		isHeaderMenu: false,
+		isChatMenuBtn: false,
 		isUserSearchBox: false,
 		selectedChat: "",
 	},
@@ -14,6 +16,14 @@ const conditionSlice = createSlice({
 		},
 		setProfileDetail: (state, action) => {
 			state.isProfileDetail = !state.isProfileDetail;
+		},
+		setHeaderMenu: (state, action) => {
+			state.isHeaderMenu = action.payload;
+			state.isChatMenuBtn = false;
+		},
+		setChatMenuBtn: (state, action) => {
+			state.isHeaderMenu = false;
+			state.isChatMenuBtn = action.payload;
 		},
 		setUserSearchBox: (state, action) => {
 			state.isUserSearchBox = !state.isUserSearchBox;
@@ -26,6 +36,8 @@ const conditionSlice = createSlice({
 export const {
 	setLoading,
 	setProfileDetail,
+	setHeaderMenu,
+	setChatMenuBtn,
 	setUserSearchBox,
 	setSelectedChat,
 } = conditionSlice.actions;
