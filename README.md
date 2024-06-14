@@ -59,13 +59,15 @@ Follow these steps to set up and run the project locally:
     Frontend Folder :
 
     ```bash
-    BACKEND_URL=http://localhost:9000
+    VITE_BACKEND_URL=http://localhost:9000
     ```
 
     Backend Folder :
 
     ```bash
-    # Wait ---
+    MONGODB_URI=mongodb://127.0.0.1:27017/chat-app
+    PORT=9000
+    JWT_SECRET=secret-kvndkvdlkajkhkJkBiu6JJNjkbhhLJ5dKbkjsamnv
     ```
 
     Replace the values with your specific configurations.
