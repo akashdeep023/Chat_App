@@ -135,19 +135,16 @@ const UserSearch = () => {
 										</span>
 										<div>
 											<span className="text-xs font-light">
-												{
-													user?.createdAt &&
-														new Date(
-															user?.createdAt
-														).toDateString()
-													// .split(" ")[0]
-												}
+												{new Date(
+													user?.createdAt
+												).toDateString()}
 											</span>{" "}
 											<span className="text-xs font-light">
-												{user?.createdAt &&
+												{
 													new Date(user?.createdAt)
 														.toTimeString()
-														.split(" ")[0]}
+														.split(" ")[0]
+												}
 											</span>
 										</div>
 									</div>

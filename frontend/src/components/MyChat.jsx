@@ -120,7 +120,26 @@ const MyChat = () => {
 											</div>
 										</div>
 										<span className="text-xs font-light">
-											{chat?.latestMessage?.message}
+											{chat?.latestMessage ? (
+												chat?.latestMessage?.message
+											) : (
+												<>
+													<span className="text-xs font-light">
+														{new Date(
+															chat?.createdAt
+														).toDateString()}
+													</span>{" "}
+													<span className="text-xs font-light">
+														{
+															new Date(
+																chat?.createdAt
+															)
+																.toTimeString()
+																.split(" ")[0]
+														}
+													</span>
+												</>
+											)}
 										</span>
 									</div>
 								</div>
