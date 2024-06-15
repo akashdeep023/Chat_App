@@ -124,7 +124,7 @@ const SignUp = () => {
 						/>
 						<span
 							onClick={() => setIsShow(!isShow)}
-							className="cursor-pointer text-black/80 absolute right-5 top-7"
+							className="cursor-pointer text-black/80 absolute right-5 top-8"
 						>
 							{isShow ? (
 								<PiEyeClosedLight fontSize={22} />

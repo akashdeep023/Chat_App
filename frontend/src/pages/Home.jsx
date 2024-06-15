@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { MdChat } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { addAllUsers } from "../redux/auth/usersSlice";
 import UserSearch from "../components/UserSearch";
 import MyChat from "../components/MyChat";
 import MessageBox from "../components/MessageBox";
@@ -10,31 +8,11 @@ import ChatNotSelected from "../components/ChatNotSelected";
 import { setUserSearchBox } from "../redux/auth/conditionSlice";
 
 const Home = () => {
+	const selectedChat = useSelector((store) => store?.condition?.selectedChat);
 	const dispatch = useDispatch();
 	const isUserSearchBox = useSelector(
 		(store) => store?.condition?.isUserSearchBox
 	);
-	const selectedChat = useSelector((store) => store?.condition?.selectedChat);
-
-	// All Users Api Call
-	useEffect(() => {
-		const getAllUsers = () => {
-			const token = localStorage.getItem("token");
-			fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/users`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`,
-				},
-			})
-				.then((res) => res.json())
-				.then((json) => {
-					dispatch(addAllUsers(json.data));
-				})
-				.catch((err) => console.log(err));
-		};
-		getAllUsers();
-	}, [isUserSearchBox]);
 
 	return (
 		<div className="flex w-full border-slate-500 border rounded-sm shadow-md shadow-black relative">

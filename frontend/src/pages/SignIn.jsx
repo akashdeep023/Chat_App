@@ -33,8 +33,8 @@ const SignIn = () => {
 				e.target.disabled = false;
 				toast.dismiss();
 				if (json.token) {
-					dispatch(addAuth(json.data));
 					localStorage.setItem("token", json.token);
+					dispatch(addAuth(json.data));
 					navigate("/");
 					toast.success(json?.message);
 				} else {
@@ -94,7 +94,7 @@ const SignIn = () => {
 						/>
 						<span
 							onClick={() => setIsShow(!isShow)}
-							className="cursor-pointer text-black/80 absolute right-5 top-7"
+							className="cursor-pointer text-black/80 absolute right-5 top-8"
 						>
 							{isShow ? (
 								<PiEyeClosedLight fontSize={22} />
