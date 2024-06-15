@@ -28,12 +28,12 @@ const MyChat = () => {
 			})
 				.then((res) => res.json())
 				.then((json) => {
-					dispatch(addMyChat(json.message));
+					dispatch(addMyChat(json?.data || []));
 					dispatch(setChatLoading(false));
 				})
 				.catch((err) => {
 					console.log(err);
-					dispatch(setChatLoading(true));
+					dispatch(setChatLoading(false));
 				});
 		};
 		getMyChat();
@@ -56,66 +56,77 @@ const MyChat = () => {
 				{myChat.length == 0 && isChatLoading ? (
 					<ChatShimmer />
 				) : (
-					myChat?.map((chat) => {
-						return (
-							<div
-								key={chat?._id}
-								className={`w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-black/55 to-slate-800  via-slate-300  from-slate-800 transition-all cursor-pointer ${
-									selectedChat == chat?._id
-										? "bg-gradient-to-tr text-black"
-										: "text-white"
-								}`}
-								onClick={() =>
-									dispatch(setSelectedChat(chat?._id))
-								}
-							>
-								<img
-									className="h-12 min-w-12 rounded-full"
-									src={
-										authUserId == chat.users[0]._id
-											? chat.users[1].image
-											: chat.users[0].image
-									}
-									alt="img"
-								/>
-								<div className="w-full">
-									<div className="flex justify-between items-center w-full">
-										<span className="line-clamp-1 capitalize">
-											{chat?.chatName == "Messenger"
-												? authUserId ==
-												  chat.users[0]._id
-													? chat.users[1].firstName +
-													  " " +
-													  chat.users[1].lastName
-													: chat.users[0].firstName +
-													  " " +
-													  chat.users[0].lastName
-												: chat?.chatName}
-										</span>
-										<div>
-											<span className="text-xs font-light">
-												{chat?.latestMessage &&
-													new Date(
-														chat?.latestMessage?.createdAt
-													).toDateString()}
-											</span>{" "}
-											<span className="text-xs font-light">
-												{chat?.latestMessage &&
-													new Date(
-														chat?.latestMessage?.createdAt
-													)
-														.toTimeString()
-														.split(" ")[0]}
-											</span>
-										</div>
-									</div>
-									<span className="text-xs font-light">
-										{chat?.latestMessage?.message}
-									</span>
-								</div>
+					<>
+						{myChat?.length === 0 && (
+							<div className="w-full h-full flex justify-center items-center text-white">
+								<h1 className="text-base font-semibold">
+									Start a new conversation.
+								</h1>
 							</div>
-						);
-					})
+						)}
+						{myChat?.map((chat) => {
+							return (
+								<div
+									key={chat?._id}
+									className={`w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-black/55 to-slate-800  via-slate-300  from-slate-800 transition-all cursor-pointer ${
+										selectedChat == chat?._id
+											? "bg-gradient-to-tr text-black"
+											: "text-white"
+									}`}
+									onClick={() =>
+										dispatch(setSelectedChat(chat?._id))
+									}
+								>
+									<img
+										className="h-12 min-w-12 rounded-full"
+										src={
+											authUserId == chat.users[0]._id
+												? chat.users[1].image
+												: chat.users[0].image
+										}
+										alt="img"
+									/>
+									<div className="w-full">
+										<div className="flex justify-between items-center w-full">
+											<span className="line-clamp-1 capitalize">
+												{chat?.chatName == "Messenger"
+													? authUserId ==
+													  chat.users[0]._id
+														? chat.users[1]
+																.firstName +
+														  " " +
+														  chat.users[1].lastName
+														: chat.users[0]
+																.firstName +
+														  " " +
+														  chat.users[0].lastName
+													: chat?.chatName}
+											</span>
+											<div>
+												<span className="text-xs font-light">
+													{chat?.latestMessage &&
+														new Date(
+															chat?.latestMessage?.createdAt
+														).toDateString()}
+												</span>{" "}
+												<span className="text-xs font-light">
+													{chat?.latestMessage &&
+														new Date(
+															chat?.latestMessage?.createdAt
+														)
+															.toTimeString()
+															.split(" ")[0]}
+												</span>
+											</div>
+										</div>
+										<span className="text-xs font-light">
+											{chat?.latestMessage?.message}
+										</span>
+									</div>
+								</div>
+							);
+						})}
+					</>
 				)}
 			</div>
 		</>

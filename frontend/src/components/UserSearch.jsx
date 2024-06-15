@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
+	setChatLoading,
 	setLoading,
 	setSelectedChat,
 	setUserSearchBox,
@@ -11,12 +12,39 @@ import ChatShimmer from "./loading/ChatShimmer";
 
 const UserSearch = () => {
 	const dispatch = useDispatch();
-	const users = useSelector((store) => store.users.users);
 	const isChatLoading = useSelector(
 		(store) => store?.condition?.isChatLoading
 	);
-	const [selectedUsers, setSelectedUsers] = useState(users);
+	const [users, setUsers] = useState([]);
+	const [selectedUsers, setSelectedUsers] = useState([]);
 	const [inputUserName, setInputUserName] = useState("");
+
+	// All Users Api Call
+	useEffect(() => {
+		const getAllUsers = () => {
+			dispatch(setChatLoading(true));
+			const token = localStorage.getItem("token");
+			fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/users`, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			})
+				.then((res) => res.json())
+				.then((json) => {
+					setUsers(json.data || []);
+					setSelectedUsers(json.data || []);
+					dispatch(setChatLoading(false));
+				})
+				.catch((err) => {
+					console.log(err);
+					dispatch(setChatLoading(false));
+				});
+		};
+		getAllUsers();
+	}, []);
+
 	useEffect(() => {
 		setSelectedUsers(
 			users.filter((user) => {
@@ -49,7 +77,7 @@ const UserSearch = () => {
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				dispatch(setSelectedChat(json.message?._id));
+				dispatch(setSelectedChat(json.data?._id));
 				dispatch(setLoading(false));
 				toast.success("Created & Selected chat");
 				dispatch(setUserSearchBox());
@@ -85,7 +113,7 @@ const UserSearch = () => {
 						{selectedUsers?.length === 0 && (
 							<div className="w-full h-full flex justify-center items-center text-white">
 								<h1 className="text-base font-semibold">
-									No Users Found
+									No users registered.
 								</h1>
 							</div>
 						)}

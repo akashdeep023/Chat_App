@@ -29,8 +29,8 @@ const Header = () => {
 	};
 	useEffect(() => {
 		if (token) {
-			navigate("/");
 			getAuthUser(token);
+			navigate("/");
 		} else {
 			navigate("/signin");
 		}
