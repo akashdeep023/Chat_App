@@ -87,6 +87,7 @@ const routers = createBrowserRouter([
 				element: <Error />,
 			},
 		],
+		errorElement: <Error />,
 	},
 ]);
 
