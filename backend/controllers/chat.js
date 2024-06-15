@@ -35,10 +35,10 @@ const postChat = async (req, res) => {
 			"users",
 			"-password"
 		);
-		return res.status(200).json({ message: chatAll });
+		return res.status(200).json({ data: chatAll });
 	} else {
 		const chat = existingChat[0];
-		return res.status(200).json({ message: chat });
+		return res.status(200).json({ data: chat });
 	}
 };
 const getChat = async (req, res) => {
@@ -56,7 +56,7 @@ const getChat = async (req, res) => {
 			},
 		})
 		.populate("groupAdmin", "-password");
-	return res.status(200).json({ message: chat });
+	return res.status(200).json({ data: chat });
 };
 const createGroup = async (req, res) => {
 	if (!req.body.users || !req.body.name) {
@@ -78,7 +78,7 @@ const createGroup = async (req, res) => {
 	const groups = await Chat.findOne({ _id: groupChat._id })
 		.populate("users", "-password")
 		.populate("groupAdmin", "-password");
-	res.status(200).json({ messages: groups });
+	res.status(200).json({ data: groups });
 };
 const renameGroup = async (req, res) => {
 	const { name, chatId } = req.body;
@@ -95,7 +95,7 @@ const renameGroup = async (req, res) => {
 	if (!chat) {
 		return res.status(200).json({ message: "chat not found" });
 	} else {
-		return res.status(200).json({ messages: chat });
+		return res.status(200).json({ data: chat });
 	}
 };
 const removeFromGroup = async (req, res) => {
@@ -115,7 +115,7 @@ const removeFromGroup = async (req, res) => {
 	if (!chat) {
 		return res.status(200).json({ message: "chat not found" });
 	} else {
-		return res.status(200).json({ messages: chat });
+		return res.status(200).json({ data: chat });
 	}
 };
 const addToGroup = async (req, res) => {
@@ -135,7 +135,7 @@ const addToGroup = async (req, res) => {
 	if (!chat) {
 		return res.status(200).json({ message: "chat not found" });
 	} else {
-		return res.status(200).json({ messages: chat });
+		return res.status(200).json({ data: chat });
 	}
 };
 
