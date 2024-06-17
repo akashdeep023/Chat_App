@@ -14,10 +14,12 @@ const MyChat = () => {
 	const isChatLoading = useSelector(
 		(store) => store?.condition?.isChatLoading
 	);
+
+	const newMessageId = useSelector((store) => store?.message?.newMessageId);
 	// All My Chat Api Call
 	useEffect(() => {
-		dispatch(setChatLoading(true));
 		const getMyChat = () => {
+			dispatch(setChatLoading(true));
 			const token = localStorage.getItem("token");
 			fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat`, {
 				method: "GET",
@@ -37,7 +39,7 @@ const MyChat = () => {
 				});
 		};
 		getMyChat();
-	}, []);
+	}, [newMessageId]);
 	return (
 		<>
 			<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white border-slate-500 border-r">
