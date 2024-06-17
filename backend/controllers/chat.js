@@ -45,8 +45,8 @@ const getChat = async (req, res) => {
 	const chat = await Chat.find({
 		users: { $elemMatch: { $eq: req.user._id } },
 	})
-		.sort({ _id: -1 })
-		.sort({ latestMessage: 1 })
+		.sort({ latestMessage: -1 })
+		.sort({ createdAt: -1 })
 		.populate("users", "-password")
 		.populate({
 			path: "latestMessage",
