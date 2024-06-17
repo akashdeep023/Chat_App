@@ -35,7 +35,11 @@ const Home = () => {
 					!selectedChat && "hidden"
 				} sm:block sm:w-[60%] w-full h-[80vh] bg-black/40 relative`}
 			>
-				{selectedChat ? <MessageBox /> : <ChatNotSelected />}
+				{selectedChat ? (
+					<MessageBox chatId={selectedChat} />
+				) : (
+					<ChatNotSelected />
+				)}
 			</div>
 		</div>
 	);
