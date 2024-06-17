@@ -5,6 +5,8 @@ const conditionSlice = createSlice({
 	initialState: {
 		isLoading: false,
 		isChatLoading: false,
+		isMessageLoading: false,
+		isSendLoading: false,
 		isProfileDetail: false,
 		isHeaderMenu: false,
 		isChatMenuBtn: false,
@@ -17,6 +19,12 @@ const conditionSlice = createSlice({
 		},
 		setChatLoading: (state, action) => {
 			state.isChatLoading = action.payload;
+		},
+		setMessageLoading: (state, action) => {
+			state.isMessageLoading = action.payload;
+		},
+		setSendLoading: (state, action) => {
+			state.isSendLoading = action.payload;
 		},
 		setProfileDetail: (state, action) => {
 			state.isProfileDetail = !state.isProfileDetail;
@@ -40,6 +48,8 @@ const conditionSlice = createSlice({
 export const {
 	setLoading,
 	setChatLoading,
+	setMessageLoading,
+	setSendLoading,
 	setProfileDetail,
 	setHeaderMenu,
 	setChatMenuBtn,
