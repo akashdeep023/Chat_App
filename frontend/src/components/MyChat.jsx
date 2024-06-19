@@ -5,6 +5,8 @@ import { addMyChat } from "../redux/auth/myChatSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setChatLoading, setSelectedChat } from "../redux/auth/conditionSlice";
 import ChatShimmer from "./loading/ChatShimmer";
+import getChatName from "../utils/getChatName";
+import { addChatName } from "../redux/auth/messageSlice";
 
 const MyChat = () => {
 	const dispatch = useDispatch();
@@ -14,7 +16,6 @@ const MyChat = () => {
 	const isChatLoading = useSelector(
 		(store) => store?.condition?.isChatLoading
 	);
-
 	const newMessageId = useSelector((store) => store?.message?.newMessageId);
 	// All My Chat Api Call
 	useEffect(() => {
@@ -75,9 +76,14 @@ const MyChat = () => {
 											? "bg-gradient-to-tr text-black"
 											: "text-white"
 									}`}
-									onClick={() =>
-										dispatch(setSelectedChat(chat?._id))
-									}
+									onClick={() => {
+										dispatch(setSelectedChat(chat?._id));
+										dispatch(
+											addChatName(
+												getChatName(chat, authUserId)
+											)
+										);
+									}}
 								>
 									<img
 										className="h-12 min-w-12 rounded-full"
@@ -91,25 +97,18 @@ const MyChat = () => {
 									<div className="w-full">
 										<div className="flex justify-between items-center w-full">
 											<span className="line-clamp-1 capitalize">
-												{chat?.chatName == "Messenger"
-													? authUserId ==
-													  chat.users[0]._id
-														? chat.users[1]
-																.firstName +
-														  " " +
-														  chat.users[1].lastName
-														: chat.users[0]
-																.firstName +
-														  " " +
-														  chat.users[0].lastName
-													: chat?.chatName}
+												{getChatName(chat, authUserId)}
 											</span>
-											<div>
+											<div className="line-clamp-1 ">
 												<span className="text-xs font-light">
 													{chat?.latestMessage &&
 														new Date(
 															chat?.latestMessage?.createdAt
-														).toDateString()}
+														)
+															.toDateString()
+															.split(" ")
+															.slice(1, 3)
+															.join(" ")}
 												</span>{" "}
 												<span className="text-xs font-light">
 													{chat?.latestMessage &&
@@ -121,7 +120,7 @@ const MyChat = () => {
 												</span>
 											</div>
 										</div>
-										<span className="text-xs font-light">
+										<span className="text-xs font-light line-clamp-1 ">
 											{chat?.latestMessage ? (
 												chat?.latestMessage?.message
 											) : (

@@ -22,6 +22,7 @@ const MessageBox = ({ chatId }) => {
 	);
 
 	const allMessage = useSelector((store) => store?.message?.message);
+	const chatName = useSelector((store) => store?.message?.chatName);
 	const newMessageId = useSelector((store) => store?.message?.newMessageId);
 
 	// Handle Chat Box Scroll Down 1st Time
@@ -59,7 +60,7 @@ const MessageBox = ({ chatId }) => {
 							onClick={() => dispatch(setSelectedChat(""))}
 						/>
 					</div>
-					<h1>Tech Group</h1>
+					<h1 className="line-clamp-1">{chatName}</h1>
 				</div>
 				<FaEllipsisV
 					title="Menu"
