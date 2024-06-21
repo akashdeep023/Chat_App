@@ -7,4 +7,11 @@ const handleScrollTop = () => {
 	});
 };
 
+export const handleScrollEnd = (box) => {
+	box.scrollTo({
+		left: box.scrollWidth,
+		behavior: "smooth",
+	});
+};
+
 export default handleScrollTop;
