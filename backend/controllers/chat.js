@@ -45,8 +45,7 @@ const getChat = async (req, res) => {
 	const chat = await Chat.find({
 		users: { $elemMatch: { $eq: req.user._id } },
 	})
-		.sort({ latestMessage: -1 })
-		.sort({ createdAt: -1 })
+		.sort({ updatedAt: -1 })
 		.populate("users", "-password")
 		.populate({
 			path: "latestMessage",
@@ -63,7 +62,7 @@ const createGroup = async (req, res) => {
 		return res.status(200).json({ message: "users and name not provide" });
 	}
 	const users = req.body.users;
-	if (users.length > 2) {
+	if (users.length < 2) {
 		return res
 			.status(200)
 			.json({ message: "min 2 users required for group" });
