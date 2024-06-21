@@ -1,19 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setChatLoading, setGroupChatBox } from "../redux/auth/conditionSlice";
+import {
+	setChatLoading,
+	setGroupChatBox,
+	setLoading,
+	setSelectedChat,
+} from "../redux/auth/conditionSlice";
 import { MdOutlineClose } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import ChatShimmer from "./loading/ChatShimmer";
+import { handleScrollEnd } from "../utils/handleScrollTop";
+import { toast } from "react-toastify";
 
 const GroupChatBox = () => {
+	const groupUser = useRef("");
 	const dispatch = useDispatch();
 	const isChatLoading = useSelector(
 		(store) => store?.condition?.isChatLoading
 	);
-	const [users, setUsers] = useState([]);
-	const [inputUserName, setInputUserName] = useState();
-	const [selectedUsers, setSelectedUsers] = useState([]);
-	const [isGroupUsers, setGroupUsers] = useState([]);
+	const [isGroupName, setGroupName] = useState(); // input text
+	const [users, setUsers] = useState([]); // all users
+	const [inputUserName, setInputUserName] = useState(); // input text
+	const [selectedUsers, setSelectedUsers] = useState([]); // user search results
+	const [isGroupUsers, setGroupUsers] = useState([]); // group user results
 	// All Users Api Call
 	useEffect(() => {
 		const getAllUsers = () => {
@@ -56,32 +65,64 @@ const GroupChatBox = () => {
 			})
 		);
 	}, [inputUserName]);
-	// const handleCreateGroupChat = async (userId) => {
-	// 	dispatch(setLoading(true));
-	// 	const token = localStorage.getItem("token");
-	// 	fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat`, {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 			Authorization: `Bearer ${token}`,
-	// 		},
-	// 		body: JSON.stringify({
-	// 			userId: userId,
-	// 		}),
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((json) => {
-	// 			dispatch(setSelectedChat(json.data?._id));
-	// 			dispatch(setLoading(false));
-	// 			toast.success("Created & Selected chat");
-	// 			dispatch(setUserSearchBox());
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 			toast.error(err.message);
-	// 			dispatch(setLoading(false));
-	// 		});
-	// };
+
+	useEffect(() => {
+		handleScrollEnd(groupUser.current);
+	}, [isGroupUsers]);
+
+	const addGroupUser = (user) => {
+		const existUsers = isGroupUsers.find(
+			(currUser) => currUser?._id == user?._id
+		);
+		if (!existUsers) {
+			setGroupUsers([...isGroupUsers, user]);
+		} else {
+			toast.warn('"' + user?.firstName + '" already Added');
+		}
+	};
+
+	const handleRemoveGroupUser = (removeUserId) => {
+		setGroupUsers(
+			isGroupUsers.filter((user) => {
+				return user?._id !== removeUserId;
+			})
+		);
+	};
+
+	const handleCreateGroupChat = async () => {
+		if (isGroupUsers.length < 2) {
+			toast.warn("Please select atleast 2 users");
+			return;
+		} else if (!isGroupName) {
+			toast.warn("Please enter group name");
+			return;
+		}
+		dispatch(setLoading(true));
+		const token = localStorage.getItem("token");
+		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/group`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				name: isGroupName,
+				users: isGroupUsers,
+			}),
+		})
+			.then((res) => res.json())
+			.then((json) => {
+				dispatch(setSelectedChat(json.data?._id));
+				dispatch(setLoading(false));
+				toast.success("Created & Selected chat");
+				// console.log(json);
+			})
+			.catch((err) => {
+				console.log(err);
+				toast.error(err.message);
+				dispatch(setLoading(false));
+			});
+	};
 	return (
 		<div className="flex -m-2 sm:-m-4 flex-col items-center my-6 text-slate-300 min-h-screen w-full fixed top-0 justify-center z-50">
 			<div className="p-3 pt-4 w-[80%] sm:w-[60%] md:w-[50%] lg:w-[40%] min-w-72 max-w-[1000px] border border-slate-400 bg-slate-800 rounded-lg h-fit mt-5 transition-all relative">
@@ -98,20 +139,35 @@ const GroupChatBox = () => {
 							onChange={(e) => setInputUserName(e.target?.value)}
 						/>
 						<label htmlFor="search" className="cursor-pointer">
-							<FaSearch title="Add Users" />
+							<FaSearch title="Search Users" />
 						</label>
 					</div>
-					<div className="flex  w-full px-4 gap-1 py-2 overflow-auto scroll-style-x">
-						{
-							// isGroupUsers?.length != 0 &&
+					<div
+						ref={groupUser}
+						className="flex w-full px-4 gap-1 py-2 overflow-auto scroll-style-x"
+					>
+						{isGroupUsers?.length != 0 &&
 							isGroupUsers?.map((user) => {
 								return (
-									<div className="border border-slate-600 py-1 px-2 font-normal rounded-md cursor-pointer bg-transparent active:bg-black/20 text-nowrap">
+									<div
+										key={user?._id}
+										className="flex justify-center items-center gap-1 border border-slate-600 py-1 px-2 font-normal rounded-md cursor-pointer bg-transparent active:bg-black/20 text-nowrap"
+									>
 										<h1>{user?.firstName}</h1>
+										<div className="bg-black/15 hover:bg-black/50 h-6 w-6 m-0.5 rounded-md flex items-center justify-center cursor-pointer">
+											<MdOutlineClose
+												title={`Remove ${user?.firstName}`}
+												size={18}
+												onClick={() =>
+													handleRemoveGroupUser(
+														user?._id
+													)
+												}
+											/>
+										</div>
 									</div>
 								);
-							})
-						}
+							})}
 					</div>
 					<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-auto overflow-hidden scroll-style h-[50vh]">
 						{selectedUsers.length == 0 && isChatLoading ? (
@@ -130,12 +186,7 @@ const GroupChatBox = () => {
 										<div
 											key={user?._id}
 											className="w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-black/50 transition-all cursor-pointer text-white"
-											onClick={() =>
-												setGroupUsers([
-													...isGroupUsers,
-													user,
-												])
-											}
+											onClick={() => addGroupUser(user)}
 										>
 											<img
 												className="h-12 min-w-12 rounded-full"
@@ -171,7 +222,21 @@ const GroupChatBox = () => {
 						)}
 					</div>
 				</div>
-				<div className="bg-black/15 hover:bg-black/50 h-7 w-7 rounded-md flex items-center justify-center absolute top-2 right-3 cursor-pointer">
+				<div className="w-full flex flex-nowrap items-center justify-center gap-2">
+					<input
+						type="text"
+						placeholder="Group Name"
+						className="w-2/3 border border-slate-600 py-1 px-2 font-normal outline-none rounded-md cursor-pointer bg-transparent active:bg-black/20"
+						onChange={(e) => setGroupName(e.target?.value)}
+					/>
+					<button
+						className="border border-slate-600 py-1 px-2 "
+						onClick={handleCreateGroupChat}
+					>
+						Create
+					</button>
+				</div>
+				<div className="bg-black/15 hover:bg-black/50 h-7 w-7 rounded-md flex items-center justify-center absolute top-3 right-3 cursor-pointer">
 					<MdOutlineClose
 						title="Close"
 						size={22}
