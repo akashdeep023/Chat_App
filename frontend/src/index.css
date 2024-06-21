@@ -4,13 +4,25 @@
 
 body::-webkit-scrollbar,
 .scroll-style::-webkit-scrollbar {
-    width: 7px;
+    width: 5px;
     background-color: white;
 }
 
 body::-webkit-scrollbar-thumb,
 .scroll-style::-webkit-scrollbar-thumb {
-    width: 5px;
+    width: 3px;
+    border-radius: 50px;
+    background-color: #1E293B;
+    box-shadow: inset 0px 0px 2px white;
+}
+
+.scroll-style-x::-webkit-scrollbar {
+    height: 2px;
+    background-color: white;
+}
+
+.scroll-style-x::-webkit-scrollbar-thumb {
+    height: 1px;
     border-radius: 50px;
     background-color: #1E293B;
     box-shadow: inset 0px 0px 2px white;
