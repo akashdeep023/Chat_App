@@ -3,7 +3,11 @@ import { FaPenAlt } from "react-icons/fa";
 import Group_Img from "../assets/group.png";
 import { addMyChat } from "../redux/auth/myChatSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setChatLoading, setSelectedChat } from "../redux/auth/conditionSlice";
+import {
+	setChatLoading,
+	setGroupChatBox,
+	setSelectedChat,
+} from "../redux/auth/conditionSlice";
 import ChatShimmer from "./loading/ChatShimmer";
 import getChatName from "../utils/getChatName";
 import { addChatName } from "../redux/auth/messageSlice";
@@ -48,6 +52,7 @@ const MyChat = () => {
 				<div
 					className="flex items-center gap-2 border border-slate-600 py-1 px-2 rounded-md cursor-pointer hover:bg-slate-600 active:bg-black/20"
 					title="Create New Group"
+					onClick={() => dispatch(setGroupChatBox())}
 				>
 					<h1 className="line-clamp-1 lin whitespace-nowrap w-full">
 						New Group
@@ -55,7 +60,7 @@ const MyChat = () => {
 					<FaPenAlt />
 				</div>
 			</div>
-			<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
+			<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-auto overflow-hidden scroll-style h-[73vh]">
 				{myChat.length == 0 && isChatLoading ? (
 					<ChatShimmer />
 				) : (

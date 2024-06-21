@@ -105,7 +105,7 @@ const UserSearch = () => {
 					</label>
 				</div>
 			</div>
-			<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[73vh]">
+			<div className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-auto overflow-hidden scroll-style h-[73vh]">
 				{selectedUsers.length == 0 && isChatLoading ? (
 					<ChatShimmer />
 				) : (

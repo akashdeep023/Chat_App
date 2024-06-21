@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const MessageLoading = () => {
 	return (
-		<div className="flex justify-center w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[66vh]">
+		<div className="flex justify-center w-full px-4 gap-1 py-2 overflow-y-auto overflow-hidden scroll-style h-[66vh]">
 			<AiOutlineLoading3Quarters
 				fontSize={23}
 				color="white"

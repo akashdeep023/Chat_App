@@ -50,7 +50,7 @@ const AllMessages = ({ allMessage }) => {
 				</div>
 			)}
 			<div
-				className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-scroll overflow-hidden scroll-style h-[66vh]"
+				className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-auto overflow-hidden scroll-style h-[66vh]"
 				ref={chatBox}
 			>
 				{allMessage?.map((message) => {
