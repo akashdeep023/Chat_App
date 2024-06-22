@@ -66,11 +66,26 @@ const AllMessages = ({ allMessage }) => {
 							<div
 								className={`${
 									message?.sender?._id === adminId
-										? "bg-gradient-to-tr to-slate-800 from-green-400"
-										: "bg-gradient-to-tr to-slate-800 from-white"
-								} rounded-lg py-1 px-2`}
+										? "bg-gradient-to-tr to-slate-800 from-green-400 rounded-s-lg rounded-ee-2xl"
+										: "bg-gradient-to-tr to-slate-800 from-white rounded-e-lg rounded-es-2xl"
+								} py-2 px-2 min-w-10 text-center flex flex-col`}
 							>
-								{message.message}
+								{message?.chat?.isGroupChat && (
+									<span className="text-xs font-light text-start">
+										{message?.sender?.firstName}
+									</span>
+								)}
+								<div>
+									<span>{message?.message}</span>
+									<span className="text-xs font-light ml-4 mt-3">
+										{new Date(message?.updatedAt)
+											.toTimeString()
+											.split(" ")[0]
+											.split(":")
+											.slice(0, 2)
+											.join(":")}
+									</span>
+								</div>
 							</div>
 						</div>
 					);
