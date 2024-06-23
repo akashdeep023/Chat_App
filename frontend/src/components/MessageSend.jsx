@@ -4,6 +4,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { setSendLoading } from "../redux/auth/conditionSlice";
 import { addNewMessageId } from "../redux/auth/messageSlice";
+import { LuLoader } from "react-icons/lu";
 
 const MessageSend = ({ chatId }) => {
 	const mediaFile = useRef();
@@ -35,7 +36,6 @@ const MessageSend = ({ chatId }) => {
 	const handleSendMessage = async () => {
 		if (inputText?.trim()) {
 			const message = inputText?.trim();
-			setMessage("");
 			dispatch(setSendLoading(true));
 			const token = localStorage.getItem("token");
 			fetch(`${import.meta.env.VITE_BACKEND_URL}/api/message`, {
@@ -52,10 +52,12 @@ const MessageSend = ({ chatId }) => {
 				.then((res) => res.json())
 				.then((json) => {
 					dispatch(addNewMessageId(json?.data?._id));
+					setMessage("");
 					dispatch(setSendLoading(false));
 				})
 				.catch((err) => {
 					console.log(err);
+					setMessage("");
 					dispatch(setSendLoading(false));
 				});
 		}
@@ -78,7 +80,10 @@ const MessageSend = ({ chatId }) => {
 					/>
 				</div>
 			)}
-			<form className="w-full flex items-center gap-1 h-[7vh] p-3 bg-slate-800 text-white">
+			<form
+				className="w-full flex items-center gap-1 h-[7vh] p-3 bg-slate-800 text-white"
+				onSubmit={(e) => e.preventDefault()}
+			>
 				<label htmlFor="media" className="cursor-pointer">
 					<FaFolderOpen
 						title="Open File"
@@ -102,10 +107,16 @@ const MessageSend = ({ chatId }) => {
 					value={inputText}
 					onChange={(e) => setMessage(e.target?.value)}
 				/>
-				<span>
+				<span className="flex justify-center items-center">
 					{inputText?.trim() &&
 						(isSendLoading ? (
-							"Loading..."
+							<button className="outline-none p-2 border-slate-500 border-l">
+								<LuLoader
+									title="loading..."
+									fontSize={18}
+									className="animate-spin"
+								/>
+							</button>
 						) : (
 							<button
 								className="outline-none p-2 border-slate-500 border-l"

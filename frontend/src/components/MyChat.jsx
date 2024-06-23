@@ -5,7 +5,7 @@ import { addMyChat, addSelectedChat } from "../redux/auth/myChatSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setChatLoading, setGroupChatBox } from "../redux/auth/conditionSlice";
 import ChatShimmer from "./loading/ChatShimmer";
-import getChatName from "../utils/getChatName";
+import getChatName, { getChatImage } from "../utils/getChatName";
 
 const MyChat = () => {
 	const dispatch = useDispatch();
@@ -82,11 +82,7 @@ const MyChat = () => {
 								>
 									<img
 										className="h-12 min-w-12 rounded-full"
-										src={
-											authUserId == chat.users[0]._id
-												? chat.users[1].image
-												: chat.users[0].image
-										}
+										src={getChatImage(chat, authUserId)}
 										alt="img"
 									/>
 									<div className="w-full">
