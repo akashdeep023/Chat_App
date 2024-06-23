@@ -50,19 +50,26 @@ const AllMessages = ({ allMessage }) => {
 				</div>
 			)}
 			<div
-				className="flex flex-col w-full px-4 gap-1 py-2 overflow-y-auto overflow-hidden scroll-style h-[66vh]"
+				className="flex flex-col w-full px-4 gap-2 py-2 overflow-y-auto overflow-hidden scroll-style h-[66vh]"
 				ref={chatBox}
 			>
 				{allMessage?.map((message) => {
 					return (
 						<div
 							key={message._id}
-							className={`flex items-center gap-2 ${
+							className={`flex items-start gap-2 ${
 								message?.sender?._id === adminId
 									? "flex-row-reverse text-white"
 									: "flex-row text-black"
 							}`}
 						>
+							{message?.chat?.isGroupChat && (
+								<img
+									src={message?.sender?.image}
+									alt=""
+									className="h-9 w-9 rounded-full"
+								/>
+							)}
 							<div
 								className={`${
 									message?.sender?._id === adminId
@@ -72,7 +79,7 @@ const AllMessages = ({ allMessage }) => {
 							>
 								{message?.chat?.isGroupChat &&
 									message?.sender?._id !== adminId && (
-										<span className="text-xs font-light text-start">
+										<span className="text-xs font-bold text-start text-green-900">
 											{message?.sender?.firstName}
 										</span>
 									)}
