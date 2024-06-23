@@ -4,17 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	setChatLoading,
 	setLoading,
-	setSelectedChat,
 	setUserSearchBox,
 } from "../redux/auth/conditionSlice";
 import { toast } from "react-toastify";
 import ChatShimmer from "./loading/ChatShimmer";
+import { addSelectedChat } from "../redux/auth/myChatSlice";
 
 const UserSearch = () => {
 	const dispatch = useDispatch();
 	const isChatLoading = useSelector(
 		(store) => store?.condition?.isChatLoading
 	);
+	const authUserId = useSelector((store) => store?.auth?._id);
 	const [users, setUsers] = useState([]);
 	const [selectedUsers, setSelectedUsers] = useState([]);
 	const [inputUserName, setInputUserName] = useState("");
@@ -77,7 +78,7 @@ const UserSearch = () => {
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				dispatch(setSelectedChat(json.data?._id));
+				dispatch(addSelectedChat(json.data));
 				dispatch(setLoading(false));
 				toast.success("Created & Selected chat");
 				dispatch(setUserSearchBox());

@@ -1,22 +1,17 @@
 import React, { useEffect } from "react";
 import { FaPenAlt } from "react-icons/fa";
 import Group_Img from "../assets/group.png";
-import { addMyChat } from "../redux/auth/myChatSlice";
+import { addMyChat, addSelectedChat } from "../redux/auth/myChatSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	setChatLoading,
-	setGroupChatBox,
-	setSelectedChat,
-} from "../redux/auth/conditionSlice";
+import { setChatLoading, setGroupChatBox } from "../redux/auth/conditionSlice";
 import ChatShimmer from "./loading/ChatShimmer";
 import getChatName from "../utils/getChatName";
-import { addChatName } from "../redux/auth/messageSlice";
 
 const MyChat = () => {
 	const dispatch = useDispatch();
 	const myChat = useSelector((store) => store.myChat.chat);
 	const authUserId = useSelector((store) => store?.auth?._id);
-	const selectedChat = useSelector((store) => store?.condition?.selectedChat);
+	const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
 	const isChatLoading = useSelector(
 		(store) => store?.condition?.isChatLoading
 	);
@@ -77,17 +72,12 @@ const MyChat = () => {
 								<div
 									key={chat?._id}
 									className={`w-full h-16 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-black/55 to-slate-800  via-slate-300  from-slate-800 transition-all cursor-pointer ${
-										selectedChat == chat?._id
+										selectedChat?._id == chat?._id
 											? "bg-gradient-to-tr text-black"
 											: "text-white"
 									}`}
 									onClick={() => {
-										dispatch(setSelectedChat(chat?._id));
-										dispatch(
-											addChatName(
-												getChatName(chat, authUserId)
-											)
-										);
+										dispatch(addSelectedChat(chat));
 									}}
 								>
 									<img

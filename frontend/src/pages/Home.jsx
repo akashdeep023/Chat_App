@@ -8,7 +8,7 @@ import ChatNotSelected from "../components/ChatNotSelected";
 import { setUserSearchBox } from "../redux/auth/conditionSlice";
 
 const Home = () => {
-	const selectedChat = useSelector((store) => store?.condition?.selectedChat);
+	const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
 	const dispatch = useDispatch();
 	const isUserSearchBox = useSelector(
 		(store) => store?.condition?.isUserSearchBox
@@ -36,7 +36,7 @@ const Home = () => {
 				} sm:block sm:w-[60%] w-full h-[80vh] bg-black/40 relative`}
 			>
 				{selectedChat ? (
-					<MessageBox chatId={selectedChat} />
+					<MessageBox chatId={selectedChat?._id} />
 				) : (
 					<ChatNotSelected />
 				)}

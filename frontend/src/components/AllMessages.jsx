@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { VscCheckAll } from "react-icons/vsc";
 
 const AllMessages = ({ allMessage }) => {
 	const chatBox = useRef();
@@ -43,59 +44,85 @@ const AllMessages = ({ allMessage }) => {
 		<>
 			{scrollShow && (
 				<div
-					className="absolute bottom-16 right-5 cursor-pointer opacity-80"
+					className="absolute bottom-16 right-4 cursor-pointer opacity-80 z-20"
 					onClick={handleScrollDownChat}
 				>
 					<FaArrowAltCircleDown title="Scroll Down" size={30} />
 				</div>
 			)}
 			<div
-				className="flex flex-col w-full px-4 gap-2 py-2 overflow-y-auto overflow-hidden scroll-style h-[66vh]"
+				className="flex flex-col w-full px-3 gap-1 py-2 overflow-y-auto overflow-hidden scroll-style h-[66vh]"
 				ref={chatBox}
 			>
-				{allMessage?.map((message) => {
+				{allMessage?.map((message, idx) => {
 					return (
-						<div
-							key={message._id}
-							className={`flex items-start gap-2 ${
-								message?.sender?._id === adminId
-									? "flex-row-reverse text-white"
-									: "flex-row text-black"
-							}`}
-						>
-							{message?.chat?.isGroupChat && (
-								<img
-									src={message?.sender?.image}
-									alt=""
-									className="h-9 w-9 rounded-full"
-								/>
-							)}
+						<Fragment key={message._id}>
+							<div className="sticky top-0 flex w-full justify-center z-10">
+								{new Date(
+									allMessage[idx - 1]?.updatedAt
+								).toDateString() !==
+									new Date(
+										message?.updatedAt
+									).toDateString() && (
+									<span className="text-xs font-light mb-2 mt-1 text-white/50 bg-black h-7 w-fit px-5 rounded-md flex items-center justify-center cursor-pointer">
+										{new Date(message?.updatedAt)
+											.toDateString()
+											.split(" ")
+											.slice(0, 3)
+											.reverse()
+											.join("-")}
+									</span>
+								)}
+							</div>
 							<div
-								className={`${
+								className={`flex items-start gap-2 ${
 									message?.sender?._id === adminId
-										? "bg-gradient-to-tr to-slate-800 from-green-400 rounded-s-lg rounded-ee-2xl"
-										: "bg-gradient-to-tr to-slate-800 from-white rounded-e-lg rounded-es-2xl"
-								} py-1.5 px-2 min-w-10 text-center flex flex-col relative`}
+										? "flex-row-reverse text-white"
+										: "flex-row text-black"
+								}`}
 							>
 								{message?.chat?.isGroupChat &&
 									message?.sender?._id !== adminId && (
-										<span className="text-xs font-bold text-start text-green-900">
-											{message?.sender?.firstName}
-										</span>
+										<img
+											src={message?.sender?.image}
+											alt=""
+											className="h-9 w-9 rounded-full"
+										/>
 									)}
-								<div className="pb-1 pr-12">
-									<span>{message?.message}</span>
-									<span className="text-xs font-light ml-4 mt-3 absolute bottom-1 right-2">
-										{new Date(message?.updatedAt)
-											.toTimeString()
-											.split(" ")[0]
-											.split(":")
-											.slice(0, 2)
-											.join(":")}
-									</span>
+								<div
+									className={`${
+										message?.sender?._id === adminId
+											? "bg-gradient-to-tr to-slate-800 from-green-400 rounded-s-lg rounded-ee-2xl"
+											: "bg-gradient-to-tr to-slate-800 from-white rounded-e-lg rounded-es-2xl"
+									} py-1.5 px-2 min-w-10 text-start flex flex-col relative max-w-[85%]`}
+								>
+									{message?.chat?.isGroupChat &&
+										message?.sender?._id !== adminId && (
+											<span className="text-xs font-bold text-start text-green-900">
+												{message?.sender?.firstName}
+											</span>
+										)}
+									<div className="pb-1 pr-14">
+										<span>{message?.message}</span>
+										<span className="text-xs font-light absolute bottom-1 right-2 flex items-end gap-1.5">
+											{new Date(message?.updatedAt)
+												.toTimeString()
+												.split(" ")[0]
+												.split(":")
+												.slice(0, 2)
+												.join(":")}
+											{message?.sender?._id ===
+												adminId && (
+												<VscCheckAll
+													color="white"
+													fontSize={14}
+												/>
+											)}
+										</span>
+									</div>
 								</div>
 							</div>
-						</div>
+						</Fragment>
 					);
 				})}
 			</div>

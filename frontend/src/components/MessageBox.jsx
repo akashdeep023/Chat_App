@@ -4,13 +4,14 @@ import { MdOutlineClose } from "react-icons/md";
 import {
 	setChatMenuBtn,
 	setMessageLoading,
-	setSelectedChat,
 } from "../redux/auth/conditionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AllMessages from "./AllMessages";
 import MessageSend from "./MessageSend";
 import { addAllMessages } from "../redux/auth/messageSlice";
 import MessageLoading from "./loading/MessageLoading";
+import { addSelectedChat } from "../redux/auth/myChatSlice";
+import getChatName from "../utils/getChatName";
 
 const MessageBox = ({ chatId }) => {
 	const dispatch = useDispatch();
@@ -22,8 +23,9 @@ const MessageBox = ({ chatId }) => {
 	);
 
 	const allMessage = useSelector((store) => store?.message?.message);
-	const chatName = useSelector((store) => store?.message?.chatName);
 	const newMessageId = useSelector((store) => store?.message?.newMessageId);
+	const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
+	const authUserId = useSelector((store) => store?.auth?._id);
 
 	// Handle Chat Box Scroll Down 1st Time
 	useEffect(() => {
@@ -57,10 +59,12 @@ const MessageBox = ({ chatId }) => {
 						<FaArrowLeft
 							title="Back"
 							fontSize={14}
-							onClick={() => dispatch(setSelectedChat(""))}
+							onClick={() => dispatch(addSelectedChat(null))}
 						/>
 					</div>
-					<h1 className="line-clamp-1">{chatName}</h1>
+					<h1 className="line-clamp-1">
+						{getChatName(selectedChat, authUserId)}
+					</h1>
 				</div>
 				<FaEllipsisV
 					title="Menu"

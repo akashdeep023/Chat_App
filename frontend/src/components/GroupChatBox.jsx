@@ -4,13 +4,13 @@ import {
 	setChatLoading,
 	setGroupChatBox,
 	setLoading,
-	setSelectedChat,
 } from "../redux/auth/conditionSlice";
 import { MdOutlineClose } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import ChatShimmer from "./loading/ChatShimmer";
 import { handleScrollEnd } from "../utils/handleScrollTop";
 import { toast } from "react-toastify";
+import { addSelectedChat } from "../redux/auth/myChatSlice";
 
 const GroupChatBox = () => {
 	const groupUser = useRef("");
@@ -39,6 +39,7 @@ const GroupChatBox = () => {
 				.then((json) => {
 					setUsers(json.data || []);
 					setSelectedUsers(json.data || []);
+					dispatch(addSelectedChat(json.data));
 					dispatch(setChatLoading(false));
 				})
 				.catch((err) => {
@@ -113,7 +114,7 @@ const GroupChatBox = () => {
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				dispatch(setSelectedChat(json.data?._id));
+				dispatch(addSelectedChat(json.data));
 				dispatch(setLoading(false));
 				toast.success("Created & Selected chat");
 				// console.log(json);
