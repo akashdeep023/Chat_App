@@ -5,7 +5,6 @@ const messageSlice = createSlice({
 	initialState: {
 		message: [],
 		newMessageId: "",
-		chatName: "",
 	},
 	reducers: {
 		addAllMessages: (state, action) => {
@@ -14,12 +13,8 @@ const messageSlice = createSlice({
 		addNewMessageId: (state, action) => {
 			state.newMessageId = action.payload;
 		},
-		addChatName: (state, action) => {
-			state.chatName = action.payload;
-		},
 	},
 });
 
-export const { addAllMessages, addNewMessageId, addChatName } =
-	messageSlice.actions;
+export const { addAllMessages, addNewMessageId } = messageSlice.actions;
 export default messageSlice.reducer;

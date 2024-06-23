@@ -11,7 +11,6 @@ const conditionSlice = createSlice({
 		isHeaderMenu: false,
 		isChatMenuBtn: false,
 		isUserSearchBox: false,
-		selectedChat: "",
 		isGroupChatBox: false,
 	},
 	reducers: {
@@ -41,9 +40,6 @@ const conditionSlice = createSlice({
 		setUserSearchBox: (state, action) => {
 			state.isUserSearchBox = !state.isUserSearchBox;
 		},
-		setSelectedChat: (state, action) => {
-			state.selectedChat = action.payload;
-		},
 		setGroupChatBox: (state, action) => {
 			state.isGroupChatBox = !state.isGroupChatBox;
 		},
@@ -58,7 +54,6 @@ export const {
 	setHeaderMenu,
 	setChatMenuBtn,
 	setUserSearchBox,
-	setSelectedChat,
 	setGroupChatBox,
 } = conditionSlice.actions;
 export default conditionSlice.reducer;
