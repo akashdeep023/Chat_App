@@ -11,7 +11,7 @@ import MessageSend from "./MessageSend";
 import { addAllMessages } from "../redux/auth/messageSlice";
 import MessageLoading from "./loading/MessageLoading";
 import { addSelectedChat } from "../redux/auth/myChatSlice";
-import getChatName from "../utils/getChatName";
+import getChatName, { getChatImage } from "../utils/getChatName";
 
 const MessageBox = ({ chatId }) => {
 	const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const MessageBox = ({ chatId }) => {
 	return (
 		<>
 			<div className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white">
-				<div className="flex items-center gap-3">
+				<div className="flex items-center gap-2">
 					<div className="sm:hidden bg-black/15 hover:bg-black/50 h-7 w-7 rounded-md flex items-center justify-center cursor-pointer">
 						<FaArrowLeft
 							title="Back"
@@ -62,6 +62,13 @@ const MessageBox = ({ chatId }) => {
 							onClick={() => dispatch(addSelectedChat(null))}
 						/>
 					</div>
+					{
+						<img
+							src={getChatImage(selectedChat, authUserId)}
+							alt=""
+							className="h-9 w-9 rounded-full"
+						/>
+					}
 					<h1 className="line-clamp-1">
 						{getChatName(selectedChat, authUserId)}
 					</h1>
