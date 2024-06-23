@@ -68,16 +68,17 @@ const AllMessages = ({ allMessage }) => {
 									message?.sender?._id === adminId
 										? "bg-gradient-to-tr to-slate-800 from-green-400 rounded-s-lg rounded-ee-2xl"
 										: "bg-gradient-to-tr to-slate-800 from-white rounded-e-lg rounded-es-2xl"
-								} py-2 px-2 min-w-10 text-center flex flex-col`}
+								} py-1.5 px-2 min-w-10 text-center flex flex-col relative`}
 							>
-								{message?.chat?.isGroupChat && (
-									<span className="text-xs font-light text-start">
-										{message?.sender?.firstName}
-									</span>
-								)}
-								<div>
+								{message?.chat?.isGroupChat &&
+									message?.sender?._id !== adminId && (
+										<span className="text-xs font-light text-start">
+											{message?.sender?.firstName}
+										</span>
+									)}
+								<div className="pb-1 pr-12">
 									<span>{message?.message}</span>
-									<span className="text-xs font-light ml-4 mt-3">
+									<span className="text-xs font-light ml-4 mt-3 absolute bottom-1 right-2">
 										{new Date(message?.updatedAt)
 											.toTimeString()
 											.split(" ")[0]
