@@ -97,6 +97,7 @@ const GroupChatBox = () => {
 			toast.warn("Please enter group name");
 			return;
 		}
+		dispatch(setGroupChatBox());
 		dispatch(setLoading(true));
 		const token = localStorage.getItem("token");
 		fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/group`, {
@@ -230,7 +231,7 @@ const GroupChatBox = () => {
 						onChange={(e) => setGroupName(e.target?.value)}
 					/>
 					<button
-						className="border border-slate-600 py-1 px-2 "
+						className="border border-slate-600 py-1 px-2 rounded-lg bg-green-400 text-black font-semibold hover:text-white hover:bg-green-700 "
 						onClick={handleCreateGroupChat}
 					>
 						Create
