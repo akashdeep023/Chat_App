@@ -33,7 +33,7 @@ const Home = () => {
 			<div
 				className={`${
 					!selectedChat && "hidden"
-				} sm:block sm:w-[60%] w-full h-[80vh] bg-black/40 relative`}
+				} sm:block sm:w-[60%] w-full h-[80vh] bg-black/40 relative overflow-hidden`}
 			>
 				{selectedChat ? (
 					<MessageBox chatId={selectedChat?._id} />

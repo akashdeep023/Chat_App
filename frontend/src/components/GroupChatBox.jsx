@@ -11,6 +11,7 @@ import ChatShimmer from "./loading/ChatShimmer";
 import { handleScrollEnd } from "../utils/handleScrollTop";
 import { toast } from "react-toastify";
 import { addSelectedChat } from "../redux/auth/myChatSlice";
+import { SimpleDateAndTime } from "../utils/formateDateTime";
 
 const GroupChatBox = () => {
 	const groupUser = useRef("");
@@ -199,22 +200,11 @@ const GroupChatBox = () => {
 													{user?.firstName}{" "}
 													{user?.lastName}
 												</span>
-												<div>
-													<span className="text-xs font-light">
-														{new Date(
-															user?.createdAt
-														).toDateString()}
-													</span>{" "}
-													<span className="text-xs font-light">
-														{
-															new Date(
-																user?.createdAt
-															)
-																.toTimeString()
-																.split(" ")[0]
-														}
-													</span>
-												</div>
+												<span className="text-xs font-light">
+													{SimpleDateAndTime(
+														user?.createdAt
+													)}
+												</span>
 											</div>
 										</div>
 									);

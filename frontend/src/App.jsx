@@ -8,7 +8,7 @@ import SignIn from "./pages/SignIn";
 import Error from "./pages/Error";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Provider, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./redux/store";
 import ProfileDetail from "./components/ProfileDetail";
 import Loading from "./components/loading/Loading";
