@@ -3,6 +3,11 @@ import { FaArrowAltCircleDown } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { VscCheckAll } from "react-icons/vsc";
 import { CgChevronDoubleDown } from "react-icons/cg";
+import {
+	SimpleDateAndTime,
+	SimpleDateMonthDay,
+	SimpleTime,
+} from "../utils/formateDateTime";
 
 const AllMessages = ({ allMessage }) => {
 	const chatBox = useRef();
@@ -66,12 +71,7 @@ const AllMessages = ({ allMessage }) => {
 										message?.updatedAt
 									).toDateString() && (
 									<span className="text-xs font-light mb-2 mt-1 text-white/50 bg-black h-7 w-fit px-5 rounded-md flex items-center justify-center cursor-pointer">
-										{new Date(message?.updatedAt)
-											.toDateString()
-											.split(" ")
-											.slice(0, 3)
-											.reverse()
-											.join("-")}
+										{SimpleDateMonthDay(message?.updatedAt)}
 									</span>
 								)}
 							</div>
@@ -107,20 +107,23 @@ const AllMessages = ({ allMessage }) => {
 												{message?.sender?.firstName}
 											</span>
 										)}
-									<div className="pb-1 pr-14">
-										<span>{message?.message}</span>
+									<div
+										className={`mt-1 pb-1.5 ${
+											message?.sender?._id == adminId
+												? "pr-16"
+												: "pr-12"
+										}`}
+									>
+										<span className="">
+											{message?.message}
+										</span>
 										<span
-											className="text-xs font-light absolute bottom-1 right-2 flex items-end gap-1.5"
-											title={new Date(
+											className="text-[11px] font-light absolute bottom-1 right-2 flex items-end gap-1.5"
+											title={SimpleDateAndTime(
 												message?.updatedAt
-											).toTimeString()}
+											)}
 										>
-											{new Date(message?.updatedAt)
-												.toTimeString()
-												.split(" ")[0]
-												.split(":")
-												.slice(0, 2)
-												.join(":")}
+											{SimpleTime(message?.updatedAt)}
 											{message?.sender?._id ===
 												adminId && (
 												<VscCheckAll

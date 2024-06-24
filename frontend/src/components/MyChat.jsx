@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { FaPenAlt } from "react-icons/fa";
-import Group_Img from "../assets/group.png";
 import { addMyChat, addSelectedChat } from "../redux/auth/myChatSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setChatLoading, setGroupChatBox } from "../redux/auth/conditionSlice";
 import ChatShimmer from "./loading/ChatShimmer";
 import getChatName, { getChatImage } from "../utils/getChatName";
 import { VscCheckAll } from "react-icons/vsc";
+import { SimpleDateAndTime, SimpleTime } from "../utils/formateDateTime";
 
 const MyChat = () => {
 	const dispatch = useDispatch();
@@ -91,26 +91,13 @@ const MyChat = () => {
 											<span className="line-clamp-1 capitalize">
 												{getChatName(chat, authUserId)}
 											</span>
-											<div className="line-clamp-1 ">
-												<span className="text-xs font-light">
-													{chat?.latestMessage &&
-														new Date(
-															chat?.latestMessage?.createdAt
-														)
-															.toDateString()
-															.split(" ")
-															.slice(1, 3)
-															.join(" ")}
-												</span>{" "}
-												<span className="text-xs font-light">
-													{chat?.latestMessage &&
-														new Date(
-															chat?.latestMessage?.createdAt
-														)
-															.toTimeString()
-															.split(" ")[0]}
-												</span>
-											</div>
+											<span className="text-xs font-light ml-1">
+												{chat?.latestMessage &&
+													SimpleTime(
+														chat?.latestMessage
+															?.createdAt
+													)}
+											</span>
 										</div>
 										<span className="text-xs font-light line-clamp-1 ">
 											{chat?.latestMessage ? (
@@ -133,22 +120,11 @@ const MyChat = () => {
 													</span>
 												</div>
 											) : (
-												<>
-													<span className="text-xs font-light">
-														{new Date(
-															chat?.createdAt
-														).toDateString()}
-													</span>{" "}
-													<span className="text-xs font-light">
-														{
-															new Date(
-																chat?.createdAt
-															)
-																.toTimeString()
-																.split(" ")[0]
-														}
-													</span>
-												</>
+												<span className="text-xs font-light">
+													{SimpleDateAndTime(
+														chat?.createdAt
+													)}
+												</span>
 											)}
 										</span>
 									</div>

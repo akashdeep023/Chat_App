@@ -9,6 +9,7 @@ import {
 import { toast } from "react-toastify";
 import ChatShimmer from "./loading/ChatShimmer";
 import { addSelectedChat } from "../redux/auth/myChatSlice";
+import { SimpleDateAndTime } from "../utils/formateDateTime";
 
 const UserSearch = () => {
 	const dispatch = useDispatch();
@@ -136,16 +137,9 @@ const UserSearch = () => {
 										</span>
 										<div>
 											<span className="text-xs font-light">
-												{new Date(
+												{SimpleDateAndTime(
 													user?.createdAt
-												).toDateString()}
-											</span>{" "}
-											<span className="text-xs font-light">
-												{
-													new Date(user?.createdAt)
-														.toTimeString()
-														.split(" ")[0]
-												}
+												)}
 											</span>
 										</div>
 									</div>
