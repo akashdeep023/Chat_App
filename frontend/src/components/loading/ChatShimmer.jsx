@@ -13,8 +13,8 @@ const ChatShimmer = () => {
 						>
 							<div className="h-12 min-w-12 rounded-full border border-slate-600 shimmer-animated"></div>
 							<div className="w-full">
-								<div className="line-clamp-1 capitalize rounded-lg h-3 w-2/3 min-w-40 border border-slate-600 shimmer-animated mb-3.5"></div>
-								<div className="line-clamp-1 capitalize rounded-lg h-3 w-1/2 min-w-52 border border-slate-600 shimmer-animated"></div>
+								<div className="line-clamp-1 capitalize rounded-lg h-3 w-3/4 min-w-32 border border-slate-600 shimmer-animated mb-3.5"></div>
+								<div className="line-clamp-1 capitalize rounded-lg h-3 w-1/2 min-w-24 border border-slate-600 shimmer-animated"></div>
 							</div>
 						</div>
 					);
