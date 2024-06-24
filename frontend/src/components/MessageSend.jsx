@@ -57,8 +57,8 @@ const MessageSend = ({ chatId }) => {
 				})
 				.catch((err) => {
 					console.log(err);
-					setMessage("");
 					dispatch(setSendLoading(false));
+					setMessage("");
 				});
 		}
 	};

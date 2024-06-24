@@ -39,7 +39,6 @@ const GroupChatBox = () => {
 				.then((json) => {
 					setUsers(json.data || []);
 					setSelectedUsers(json.data || []);
-					dispatch(addSelectedChat(json.data));
 					dispatch(setChatLoading(false));
 				})
 				.catch((err) => {

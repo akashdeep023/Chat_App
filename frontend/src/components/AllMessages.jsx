@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { VscCheckAll } from "react-icons/vsc";
+import { CgChevronDoubleDown } from "react-icons/cg";
 
 const AllMessages = ({ allMessage }) => {
 	const chatBox = useRef();
@@ -44,10 +45,10 @@ const AllMessages = ({ allMessage }) => {
 		<>
 			{scrollShow && (
 				<div
-					className="absolute bottom-16 right-4 cursor-pointer opacity-80 z-20"
+					className="absolute bottom-16 right-4 cursor-pointer z-20 font-light text-white/50 bg-black/80 hover:bg-black hover:text-white p-1.5 rounded-full"
 					onClick={handleScrollDownChat}
 				>
-					<FaArrowAltCircleDown title="Scroll Down" size={30} />
+					<CgChevronDoubleDown title="Scroll Down" fontSize={24} />
 				</div>
 			)}
 			<div
@@ -75,20 +76,24 @@ const AllMessages = ({ allMessage }) => {
 								)}
 							</div>
 							<div
-								className={`flex items-start gap-2 ${
+								className={`flex items-start gap-1 ${
 									message?.sender?._id === adminId
 										? "flex-row-reverse text-white"
 										: "flex-row text-black"
 								}`}
 							>
 								{message?.chat?.isGroupChat &&
-									message?.sender?._id !== adminId && (
+									message?.sender?._id !== adminId &&
+									(allMessage[idx - 1]?.sender?._id !==
+									message?.sender?._id ? (
 										<img
 											src={message?.sender?.image}
 											alt=""
 											className="h-9 w-9 rounded-full"
 										/>
-									)}
+									) : (
+										<div className="h-9 w-9 rounded-full"></div>
+									))}
 								<div
 									className={`${
 										message?.sender?._id === adminId
@@ -104,7 +109,12 @@ const AllMessages = ({ allMessage }) => {
 										)}
 									<div className="pb-1 pr-14">
 										<span>{message?.message}</span>
-										<span className="text-xs font-light absolute bottom-1 right-2 flex items-end gap-1.5">
+										<span
+											className="text-xs font-light absolute bottom-1 right-2 flex items-end gap-1.5"
+											title={new Date(
+												message?.updatedAt
+											).toTimeString()}
+										>
 											{new Date(message?.updatedAt)
 												.toTimeString()
 												.split(" ")[0]

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setChatLoading, setGroupChatBox } from "../redux/auth/conditionSlice";
 import ChatShimmer from "./loading/ChatShimmer";
 import getChatName, { getChatImage } from "../utils/getChatName";
+import { VscCheckAll } from "react-icons/vsc";
 
 const MyChat = () => {
 	const dispatch = useDispatch();
@@ -113,7 +114,24 @@ const MyChat = () => {
 										</div>
 										<span className="text-xs font-light line-clamp-1 ">
 											{chat?.latestMessage ? (
-												chat?.latestMessage?.message
+												<div className="flex items-end gap-1">
+													<span>
+														{chat?.latestMessage
+															?.sender?._id ===
+															authUserId && (
+															<VscCheckAll
+																color="white"
+																fontSize={14}
+															/>
+														)}
+													</span>
+													<span className="line-clamp-1">
+														{
+															chat?.latestMessage
+																?.message
+														}
+													</span>
+												</div>
 											) : (
 												<>
 													<span className="text-xs font-light">
