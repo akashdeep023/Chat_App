@@ -9,7 +9,7 @@ const conditionSlice = createSlice({
 		isSendLoading: false,
 		isProfileDetail: false,
 		isHeaderMenu: false,
-		isChatMenuBtn: false,
+		isChatDetailsBox: false,
 		isUserSearchBox: false,
 		isGroupChatBox: false,
 	},
@@ -31,11 +31,11 @@ const conditionSlice = createSlice({
 		},
 		setHeaderMenu: (state, action) => {
 			state.isHeaderMenu = action.payload;
-			state.isChatMenuBtn = false;
+			state.isChatDetailsBox = false;
 		},
-		setChatMenuBtn: (state, action) => {
+		setChatDetailsBox: (state, action) => {
 			state.isHeaderMenu = false;
-			state.isChatMenuBtn = action.payload;
+			state.isChatDetailsBox = action.payload;
 		},
 		setUserSearchBox: (state, action) => {
 			state.isUserSearchBox = !state.isUserSearchBox;
@@ -52,7 +52,7 @@ export const {
 	setSendLoading,
 	setProfileDetail,
 	setHeaderMenu,
-	setChatMenuBtn,
+	setChatDetailsBox,
 	setUserSearchBox,
 	setGroupChatBox,
 } = conditionSlice.actions;
