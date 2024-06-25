@@ -16,7 +16,6 @@ const UserSearch = () => {
 	const isChatLoading = useSelector(
 		(store) => store?.condition?.isChatLoading
 	);
-	const authUserId = useSelector((store) => store?.auth?._id);
 	const [users, setUsers] = useState([]);
 	const [selectedUsers, setSelectedUsers] = useState([]);
 	const [inputUserName, setInputUserName] = useState("");
