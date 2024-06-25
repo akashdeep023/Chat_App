@@ -66,7 +66,7 @@ const MessageBox = ({ chatId }) => {
 			setTimeout(() => {
 				dispatch(setChatDetailsBox(false));
 				setIsExiting(false);
-			}, 400);
+			}, 500);
 		}
 	};
 
@@ -84,16 +84,18 @@ const MessageBox = ({ chatId }) => {
 	return (
 		<>
 			<div
-				className="p-6 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white cursor-pointer"
+				className="py-6 sm:px-6 px-3 w-full h-[7vh] font-semibold flex justify-between items-center bg-slate-800 text-white cursor-pointer"
 				onClick={() => dispatch(setChatDetailsBox(true))}
 			>
 				<div className="flex items-center gap-2">
-					<div className="sm:hidden bg-black/15 hover:bg-black/50 h-7 w-7 rounded-md flex items-center justify-center cursor-pointer">
-						<FaArrowLeft
-							title="Back"
-							fontSize={14}
-							onClick={() => dispatch(addSelectedChat(null))}
-						/>
+					<div
+						onClick={(e) => {
+							e.stopPropagation();
+							dispatch(addSelectedChat(null));
+						}}
+						className="sm:hidden bg-black/15 hover:bg-black/50 h-8 w-8 rounded-md flex items-center justify-center cursor-pointer"
+					>
+						<FaArrowLeft title="Back" fontSize={14} />
 					</div>
 					<img
 						src={getChatImage(selectedChat, authUserId)}
@@ -112,12 +114,16 @@ const MessageBox = ({ chatId }) => {
 			</div>
 			{isChatDetailsBox && (
 				<div
-					ref={chatDetailsBox}
-					className={`h-[60vh] w-full max-w-96 absolute top-1 left-1 rounded-lg flex border border-slate-400 bg-slate-800 z-20 overflow-hidden ${
+					className={`h-[60vh] w-full max-w-96 absolute top-0 left-0 z-20 p-1 ${
 						isExiting ? "box-exit" : "box-enter"
 					}`}
 				>
-					<ChatDetailsBox />
+					<div
+						ref={chatDetailsBox}
+						className="flex border border-slate-400 bg-slate-800 overflow-hidden rounded-lg"
+					>
+						<ChatDetailsBox />
+					</div>
 				</div>
 			)}
 			{isMessageLoading ? (

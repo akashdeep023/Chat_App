@@ -94,7 +94,7 @@ const GroupChatBox = () => {
 		if (isGroupUsers.length < 2) {
 			toast.warn("Please select atleast 2 users");
 			return;
-		} else if (!isGroupName) {
+		} else if (!isGroupName.trim()) {
 			toast.warn("Please enter group name");
 			return;
 		}
@@ -108,7 +108,7 @@ const GroupChatBox = () => {
 				Authorization: `Bearer ${token}`,
 			},
 			body: JSON.stringify({
-				name: isGroupName,
+				name: isGroupName.trim(),
 				users: isGroupUsers,
 			}),
 		})
