@@ -3,13 +3,13 @@ import { FaArrowLeft } from "react-icons/fa";
 import {
 	setChatDetailsBox,
 	setMessageLoading,
-} from "../../redux/auth/conditionSlice";
+} from "../../redux/slices/conditionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AllMessages from "./AllMessages";
 import MessageSend from "./MessageSend";
-import { addAllMessages } from "../../redux/auth/messageSlice";
+import { addAllMessages } from "../../redux/slices/messageSlice";
 import MessageLoading from "../loading/MessageLoading";
-import { addSelectedChat } from "../../redux/auth/myChatSlice";
+import { addSelectedChat } from "../../redux/slices/myChatSlice";
 import getChatName, { getChatImage } from "../../utils/getChatName";
 import ChatDetailsBox from "../chatDetails/ChatDetailsBox";
 import { CiMenuKebab } from "react-icons/ci";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setLoading } from "../../redux/auth/conditionSlice";
+import { setLoading } from "../../redux/slices/conditionSlice";
 
 const Loading = () => {
 	const dispatch = useDispatch();

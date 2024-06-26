@@ -5,7 +5,7 @@ import UserSearch from "../components/chatComponents/UserSearch";
 import MyChat from "../components/chatComponents/MyChat";
 import MessageBox from "../components/messageComponents/MessageBox";
 import ChatNotSelected from "../components/chatComponents/ChatNotSelected";
-import { setUserSearchBox } from "../redux/auth/conditionSlice";
+import { setUserSearchBox } from "../redux/slices/conditionSlice";
 
 const Home = () => {
 	const selectedChat = useSelector((store) => store?.myChat?.selectedChat);

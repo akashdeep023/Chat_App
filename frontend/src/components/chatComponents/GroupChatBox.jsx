@@ -4,13 +4,13 @@ import {
 	setChatLoading,
 	setGroupChatBox,
 	setLoading,
-} from "../../redux/auth/conditionSlice";
+} from "../../redux/slices/conditionSlice";
 import { MdOutlineClose } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import ChatShimmer from "../loading/ChatShimmer";
 import { handleScrollEnd } from "../../utils/handleScrollTop";
 import { toast } from "react-toastify";
-import { addSelectedChat } from "../../redux/auth/myChatSlice";
+import { addSelectedChat } from "../../redux/slices/myChatSlice";
 import { SimpleDateAndTime } from "../../utils/formateDateTime";
 
 const GroupChatBox = () => {

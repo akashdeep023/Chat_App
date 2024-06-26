@@ -1,7 +1,7 @@
 import React from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { setProfileDetail } from "../redux/auth/conditionSlice";
+import { setProfileDetail } from "../redux/slices/conditionSlice";
 
 const ProfileDetail = () => {
 	const dispatch = useDispatch();

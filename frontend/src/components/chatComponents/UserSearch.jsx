@@ -5,10 +5,10 @@ import {
 	setChatLoading,
 	setLoading,
 	setUserSearchBox,
-} from "../../redux/auth/conditionSlice";
+} from "../../redux/slices/conditionSlice";
 import { toast } from "react-toastify";
 import ChatShimmer from "../loading/ChatShimmer";
-import { addSelectedChat } from "../../redux/auth/myChatSlice";
+import { addSelectedChat } from "../../redux/slices/myChatSlice";
 import { SimpleDateAndTime } from "../../utils/formateDateTime";
 
 const UserSearch = () => {

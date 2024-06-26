@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import { FaFolderOpen, FaPaperPlane } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { setSendLoading } from "../../redux/auth/conditionSlice";
-import { addNewMessageId } from "../../redux/auth/messageSlice";
+import { setSendLoading } from "../../redux/slices/conditionSlice";
+import { addNewMessageId } from "../../redux/slices/messageSlice";
 import { LuLoader } from "react-icons/lu";
 
 const MessageSend = ({ chatId }) => {

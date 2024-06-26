@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { addSelectedChat } from "../../redux/auth/myChatSlice";
-import { setChatLoading, setLoading } from "../../redux/auth/conditionSlice";
+import { addSelectedChat } from "../../redux/slices/myChatSlice";
+import { setChatLoading, setLoading } from "../../redux/slices/conditionSlice";
 import { FaArrowLeft, FaSearch } from "react-icons/fa";
 import { ChatShimmerSmall } from "../loading/ChatShimmer";
 import { IoCheckmarkCircleOutline, IoPersonAddOutline } from "react-icons/io5";

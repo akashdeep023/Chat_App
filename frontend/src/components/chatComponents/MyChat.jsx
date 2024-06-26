@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { FaPenAlt } from "react-icons/fa";
-import { addMyChat, addSelectedChat } from "../../redux/auth/myChatSlice";
+import { addMyChat, addSelectedChat } from "../../redux/slices/myChatSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	setChatLoading,
 	setGroupChatBox,
-} from "../../redux/auth/conditionSlice";
+} from "../../redux/slices/conditionSlice";
 import ChatShimmer from "../loading/ChatShimmer";
 import getChatName, { getChatImage } from "../../utils/getChatName";
 import { VscCheckAll } from "react-icons/vsc";

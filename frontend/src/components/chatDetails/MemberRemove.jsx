@@ -8,8 +8,8 @@ import {
 import { VscError } from "react-icons/vsc";
 import { CiCircleInfo } from "react-icons/ci";
 import { toast } from "react-toastify";
-import { addSelectedChat } from "../../redux/auth/myChatSlice";
-import { setLoading } from "../../redux/auth/conditionSlice";
+import { addSelectedChat } from "../../redux/slices/myChatSlice";
+import { setLoading } from "../../redux/slices/conditionSlice";
 
 const MemberRemove = ({ setMemberAddBox }) => {
 	const dispatch = useDispatch();

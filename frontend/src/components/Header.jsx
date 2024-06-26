@@ -2,10 +2,13 @@ import React, { useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.jpeg";
 import { useDispatch, useSelector } from "react-redux";
-import { addAuth } from "../redux/auth/authSlice";
+import { addAuth } from "../redux/slices/authSlice";
 import handleScrollTop from "../utils/handleScrollTop";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import { setHeaderMenu, setProfileDetail } from "../redux/auth/conditionSlice";
+import {
+	setHeaderMenu,
+	setProfileDetail,
+} from "../redux/slices/conditionSlice";
 import { IoLogOutOutline } from "react-icons/io5";
 import { PiUserCircleLight } from "react-icons/pi";
 
