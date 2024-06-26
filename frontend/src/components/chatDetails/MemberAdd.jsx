@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { addSelectedChat } from "../../redux/auth/myChatSlice";
 import { setChatLoading, setLoading } from "../../redux/auth/conditionSlice";
 import { FaArrowLeft, FaSearch } from "react-icons/fa";
-import ChatShimmer from "../loading/ChatShimmer";
+import { ChatShimmerSmall } from "../loading/ChatShimmer";
 import { IoCheckmarkCircleOutline, IoPersonAddOutline } from "react-icons/io5";
 import { VscError } from "react-icons/vsc";
 
@@ -131,7 +131,7 @@ const MemberAdd = ({ setMemberAddBox }) => {
 			</div>
 			<div className="flex flex-col items-start w-full justify-center gap-1 mb-3 mt-3">
 				{selectedUsers.length == 0 && isChatLoading ? (
-					<ChatShimmer />
+					<ChatShimmerSmall />
 				) : (
 					<>
 						{selectedUsers?.length === 0 && (
