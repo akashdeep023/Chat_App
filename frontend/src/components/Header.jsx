@@ -74,13 +74,15 @@ const Header = () => {
 	}, []);
 
 	const headerMenuBox = useRef(null);
+	const headerUserBox = useRef(null);
 	// headerMenuBox outside click handler
 	const handleClickOutside = (event) => {
 		if (
 			headerMenuBox.current &&
+			!headerUserBox?.current?.contains(event.target) &&
 			!headerMenuBox.current.contains(event.target)
 		) {
-			dispatch(setHeaderMenu(!isHeaderMenu));
+			dispatch(setHeaderMenu(false));
 		}
 	};
 
@@ -119,7 +121,11 @@ const Header = () => {
 						Hi, {user.firstName}
 					</span>
 					<div
-						onClick={() => dispatch(setHeaderMenu(!isHeaderMenu))}
+						ref={headerUserBox}
+						onClick={(e) => {
+							e.preventDefault();
+							dispatch(setHeaderMenu(!isHeaderMenu));
+						}}
 						className="flex flex-nowrap transition-all items-center ml-3  border border-slate-400 rounded-full bg-gradient-to-tr to-slate-800 text-black via-white  from-slate-800 hover:bg-gradient-to-br shadow-sm  cursor-pointer"
 					>
 						<img
