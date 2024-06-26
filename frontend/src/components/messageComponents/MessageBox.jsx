@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { MdOutlineClose } from "react-icons/md";
 import {
 	setChatDetailsBox,
 	setMessageLoading,
-} from "../redux/auth/conditionSlice";
+} from "../../redux/auth/conditionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AllMessages from "./AllMessages";
 import MessageSend from "./MessageSend";
-import { addAllMessages } from "../redux/auth/messageSlice";
-import MessageLoading from "./loading/MessageLoading";
-import { addSelectedChat } from "../redux/auth/myChatSlice";
-import getChatName, { getChatImage } from "../utils/getChatName";
-import ChatDetailsBox from "./ChatDetailsBox";
+import { addAllMessages } from "../../redux/auth/messageSlice";
+import MessageLoading from "../loading/MessageLoading";
+import { addSelectedChat } from "../../redux/auth/myChatSlice";
+import getChatName, { getChatImage } from "../../utils/getChatName";
+import ChatDetailsBox from "../chatDetails/ChatDetailsBox";
 import { CiMenuKebab } from "react-icons/ci";
 
 const MessageBox = ({ chatId }) => {

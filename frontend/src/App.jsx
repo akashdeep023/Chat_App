@@ -12,7 +12,8 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./redux/store";
 import ProfileDetail from "./components/ProfileDetail";
 import Loading from "./components/loading/Loading";
-import GroupChatBox from "./components/GroupChatBox";
+import GroupChatBox from "./components/chatComponents/GroupChatBox";
+// import GroupChatBox from "./components/GroupChatBox";
 
 const Applayout = () => {
 	const [toastPosition, setToastPosition] = useState("bottom-left");

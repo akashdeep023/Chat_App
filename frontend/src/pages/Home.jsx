@@ -1,10 +1,10 @@
 import React from "react";
 import { MdChat } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import UserSearch from "../components/UserSearch";
-import MyChat from "../components/MyChat";
-import MessageBox from "../components/MessageBox";
-import ChatNotSelected from "../components/ChatNotSelected";
+import UserSearch from "../components/chatComponents/UserSearch";
+import MyChat from "../components/chatComponents/MyChat";
+import MessageBox from "../components/messageComponents/MessageBox";
+import ChatNotSelected from "../components/chatComponents/ChatNotSelected";
 import { setUserSearchBox } from "../redux/auth/conditionSlice";
 
 const Home = () => {

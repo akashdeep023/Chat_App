@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import { HiOutlineUsers } from "react-icons/hi2";
-import Overview from "./chatDetails/Overview";
-import Member from "./chatDetails/Member";
+import Overview from "./Overview";
+import Member from "./Member";
 import { IoSettingsOutline } from "react-icons/io5";
-import ChatSetting from "./chatDetails/ChatSetting";
+import ChatSetting from "./ChatSetting";
 import { useSelector } from "react-redux";
 
 const ChatDetailsBox = () => {

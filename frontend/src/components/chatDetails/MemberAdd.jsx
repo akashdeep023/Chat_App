@@ -143,36 +143,33 @@ const MemberAdd = ({ setMemberAddBox }) => {
 						)}
 						{selectedUsers?.map((user) => {
 							return (
-								<>
-									<div
-										key={user?._id}
-										className="w-full h-12 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-black/50 transition-all cursor-pointer text-white"
-									>
-										<img
-											className="h-10 min-w-10 rounded-full"
-											src={user?.image}
-											alt="img"
-										/>
-										<div className="w-full relative">
-											<span className="line-clamp-1 capitalize">
-												{user?.firstName}{" "}
-												{user?.lastName}
-											</span>
-										</div>
-										<div
-											title="Add User"
-											className="border border-slate-600 p-2 w-fit font-normal outline-none rounded-md cursor-pointer bg-transparent active:bg-black/20 hover:bg-black/50"
-											onClick={() =>
-												handleAddUser(
-													user?._id,
-													user?.firstName
-												)
-											}
-										>
-											<IoPersonAddOutline />
-										</div>
+								<div
+									key={user?._id}
+									className="w-full h-12 border-slate-500 border rounded-lg flex justify-start items-center p-2 font-semibold gap-2 hover:bg-black/50 transition-all cursor-pointer text-white"
+								>
+									<img
+										className="h-10 min-w-10 rounded-full"
+										src={user?.image}
+										alt="img"
+									/>
+									<div className="w-full relative">
+										<span className="line-clamp-1 capitalize">
+											{user?.firstName} {user?.lastName}
+										</span>
 									</div>
-								</>
+									<div
+										title="Add User"
+										className="border border-slate-600 p-2 w-fit font-normal outline-none rounded-md cursor-pointer bg-transparent active:bg-black/20 hover:bg-black/50"
+										onClick={() =>
+											handleAddUser(
+												user?._id,
+												user?.firstName
+											)
+										}
+									>
+										<IoPersonAddOutline />
+									</div>
+								</div>
 							);
 						})}
 					</>

@@ -6,6 +6,8 @@ import { addAuth } from "../redux/auth/authSlice";
 import handleScrollTop from "../utils/handleScrollTop";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { setHeaderMenu, setProfileDetail } from "../redux/auth/conditionSlice";
+import { IoLogOutOutline } from "react-icons/io5";
+import { PiUserCircleLight } from "react-icons/pi";
 
 const Header = () => {
 	const user = useSelector((store) => store.auth);
@@ -118,13 +120,19 @@ const Header = () => {
 								}}
 								className="flex flex-nowrap items-center w-full h-fit cursor-pointer justify-center hover:bg-slate-400 hover:text-black p-1"
 							>
-								Profile
+								<div className="flex items-center justify-between w-2/4">
+									<PiUserCircleLight fontSize={23} />
+									<span>Profile</span>
+								</div>
 							</div>
 							<div
 								className="flex flex-nowrap items-center w-full h-fit cursor-pointer justify-center hover:bg-slate-400 hover:text-black p-1"
 								onClick={handleLogout}
 							>
-								Logout
+								<div className="flex items-center justify-between w-2/4">
+									<IoLogOutOutline fontSize={21} />
+									<span>Logout</span>
+								</div>
 							</div>
 						</div>
 					)}

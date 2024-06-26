@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import { FaArrowAltCircleDown } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { VscCheckAll } from "react-icons/vsc";
 import { CgChevronDoubleDown } from "react-icons/cg";
@@ -7,7 +6,7 @@ import {
 	SimpleDateAndTime,
 	SimpleDateMonthDay,
 	SimpleTime,
-} from "../utils/formateDateTime";
+} from "../../utils/formateDateTime";
 
 const AllMessages = ({ allMessage }) => {
 	const chatBox = useRef();
