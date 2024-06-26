@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.jpeg";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,6 +38,7 @@ const Header = () => {
 		}
 		dispatch(setHeaderMenu(false));
 	}, [token]);
+
 	// Scroll to top of page && Redirect Auth change --------------------------------
 	const { pathname } = useLocation();
 	useEffect(() => {
@@ -71,6 +72,29 @@ const Header = () => {
 			window.removeEventListener("scroll", handleScroll);
 		};
 	}, []);
+
+	const headerMenuBox = useRef(null);
+	// headerMenuBox outside click handler
+	const handleClickOutside = (event) => {
+		if (
+			headerMenuBox.current &&
+			!headerMenuBox.current.contains(event.target)
+		) {
+			dispatch(setHeaderMenu(!isHeaderMenu));
+		}
+	};
+
+	// add && remove events according to isHeaderMenu
+	useEffect(() => {
+		if (isHeaderMenu) {
+			document.addEventListener("mousedown", handleClickOutside);
+		} else {
+			document.removeEventListener("mousedown", handleClickOutside);
+		}
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [isHeaderMenu]);
 	return (
 		<div
 			id="header"
@@ -112,7 +136,10 @@ const Header = () => {
 						</span>
 					</div>
 					{isHeaderMenu && (
-						<div className="border border-slate-500 text-white w-40 h-24 py-2 flex flex-col justify-center rounded-md items-center gap-1 absolute top-16 right-4 z-40 bg-slate-700">
+						<div
+							ref={headerMenuBox}
+							className="border border-slate-500 text-white w-40 h-24 py-2 flex flex-col justify-center rounded-md items-center gap-1 absolute top-16 right-4 z-40 bg-slate-700"
+						>
 							<div
 								onClick={() => {
 									dispatch(setHeaderMenu(false));
