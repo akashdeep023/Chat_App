@@ -19,9 +19,9 @@ const GroupChatBox = () => {
 	const isChatLoading = useSelector(
 		(store) => store?.condition?.isChatLoading
 	);
-	const [isGroupName, setGroupName] = useState(); // input text
+	const [isGroupName, setGroupName] = useState(""); // input text
 	const [users, setUsers] = useState([]); // all users
-	const [inputUserName, setInputUserName] = useState(); // input text
+	const [inputUserName, setInputUserName] = useState(""); // input text
 	const [selectedUsers, setSelectedUsers] = useState([]); // user search results
 	const [isGroupUsers, setGroupUsers] = useState([]); // group user results
 	// All Users Api Call
@@ -156,16 +156,14 @@ const GroupChatBox = () => {
 										className="flex justify-center items-center gap-1 border border-slate-600 py-1 px-2 font-normal rounded-md cursor-pointer bg-transparent active:bg-black/20 text-nowrap"
 									>
 										<h1>{user?.firstName}</h1>
-										<div className="bg-black/15 hover:bg-black/50 h-6 w-6 m-0.5 rounded-md flex items-center justify-center cursor-pointer">
-											<MdOutlineClose
-												title={`Remove ${user?.firstName}`}
-												size={18}
-												onClick={() =>
-													handleRemoveGroupUser(
-														user?._id
-													)
-												}
-											/>
+										<div
+											title={`Remove ${user?.firstName}`}
+											onClick={() =>
+												handleRemoveGroupUser(user?._id)
+											}
+											className="bg-black/15 hover:bg-black/50 h-6 w-6 m-0.5 rounded-md flex items-center justify-center cursor-pointer"
+										>
+											<MdOutlineClose size={18} />
 										</div>
 									</div>
 								);
@@ -227,12 +225,12 @@ const GroupChatBox = () => {
 						Create
 					</button>
 				</div>
-				<div className="bg-black/15 hover:bg-black/50 h-7 w-7 rounded-md flex items-center justify-center absolute top-3 right-3 cursor-pointer">
-					<MdOutlineClose
-						title="Close"
-						size={22}
-						onClick={() => dispatch(setGroupChatBox())}
-					/>
+				<div
+					title="Close"
+					onClick={() => dispatch(setGroupChatBox())}
+					className="bg-black/15 hover:bg-black/50 h-7 w-7 rounded-md flex items-center justify-center absolute top-3 right-3 cursor-pointer"
+				>
+					<MdOutlineClose size={22} />
 				</div>
 			</div>
 		</div>
