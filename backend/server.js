@@ -18,15 +18,15 @@ const messageRouter = require("./routes/message");
 
 // Connect to Database
 main()
-	.then(() => console.log("Database Connection established"))
-	.catch((err) => console.log(err));
+    .then(() => console.log("Database Connection established"))
+    .catch((err) => console.log(err));
 
 async function main() {
-	await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI);
 }
 
 app.get("/", (req, res) => {
-	res.json({ message: "Welcome to Chat Application!" });
+    res.json({ message: "Welcome to Chat Application!" });
 });
 
 app.use("/api/auth", authRouter);
@@ -35,14 +35,14 @@ app.use("/api/chat", chatRouter);
 app.use("/api/message", messageRouter);
 
 app.all("*", (req, res) => {
-	res.json({ error: "Invalid Route" });
+    res.json({ error: "Invalid Route" });
 });
 
 app.use((err, req, res, next) => {
-	const errorMessage = err.message || "Something Went Wrong!";
-	res.status(500).json({ message: errorMessage });
+    const errorMessage = err.message || "Something Went Wrong!";
+    res.status(500).json({ message: errorMessage });
 });
 
 app.listen(PORT, async () => {
-	console.log(`Server listening on ${PORT}`);
+    console.log(`Server listening on ${PORT}`);
 });
