@@ -43,6 +43,34 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: errorMessage });
 });
 
-app.listen(PORT, async () => {
+const server = app.listen(PORT, async () => {
     console.log(`Server listening on ${PORT}`);
+});
+
+const { Server } = require("socket.io");
+
+const io = new Server(server, {
+    pingTimeout: 60000,
+    cors: {
+        origin: "*",
+    },
+});
+
+io.on("connection", (socket) => {
+    console.log("Connection to socket.io");
+    console.log(socket.id);
+    // console.log("New user connected");
+
+    // socket.on("join", ({ chatId, userId }) => {
+    //     socket.join(chatId);
+    //     console.log(`User ${userId} joined chat ${chatId}`);
+    // });
+
+    // socket.on("sendMessage", (message) => {
+    //     io.to(message.chatId).emit("newMessage", message);
+    // });
+
+    // socket.on("disconnect", () => {
+    //     console.log("User disconnected");
+    // });
 });
