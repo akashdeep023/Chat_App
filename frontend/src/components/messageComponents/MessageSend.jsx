@@ -50,6 +50,7 @@ const MessageSend = ({ chatId }) => {
     const handleSendMessage = async () => {
         if (newMessage?.trim()) {
             const message = newMessage?.trim();
+            setMessage("");
             dispatch(setSendLoading(true));
             const token = localStorage.getItem("token");
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/message`, {
@@ -67,13 +68,13 @@ const MessageSend = ({ chatId }) => {
                 .then((json) => {
                     dispatch(addNewMessageId(json?.data?._id));
                     dispatch(addNewMessage(json?.data));
-                    setMessage("");
+
                     dispatch(setSendLoading(false));
                 })
                 .catch((err) => {
                     console.log(err);
                     dispatch(setSendLoading(false));
-                    setMessage("");
+
                     toast.error("Message Sending Failed");
                 });
         }
@@ -125,27 +126,27 @@ const MessageSend = ({ chatId }) => {
                     onChange={(e) => setMessage(e.target?.value)}
                 />
                 <span className="flex justify-center items-center">
-                    {newMessage?.trim() &&
-                        (isSendLoading ? (
-                            <button className="outline-none p-2 border-slate-500 border-l">
-                                <LuLoader
-                                    title="loading..."
-                                    fontSize={18}
-                                    className="animate-spin"
-                                />
-                            </button>
-                        ) : (
-                            <button
-                                className="outline-none p-2 border-slate-500 border-l"
-                                onClick={handleSendMessage}
-                            >
-                                <FaPaperPlane
-                                    title="Send"
-                                    size={18}
-                                    className="active:scale-75 hover:text-green-400"
-                                />
-                            </button>
-                        ))}
+                    {newMessage?.trim() && !isSendLoading && (
+                        <button
+                            className="outline-none p-2 border-slate-500 border-l"
+                            onClick={handleSendMessage}
+                        >
+                            <FaPaperPlane
+                                title="Send"
+                                size={18}
+                                className="active:scale-75 hover:text-green-400"
+                            />
+                        </button>
+                    )}
+                    {isSendLoading && (
+                        <button className="outline-none p-2 border-slate-500 border-l">
+                            <LuLoader
+                                title="loading..."
+                                fontSize={18}
+                                className="animate-spin"
+                            />
+                        </button>
+                    )}
                 </span>
             </form>
         </>
