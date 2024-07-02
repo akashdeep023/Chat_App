@@ -13,6 +13,7 @@ import { addSelectedChat } from "../../redux/slices/myChatSlice";
 import getChatName, { getChatImage } from "../../utils/getChatName";
 import ChatDetailsBox from "../chatDetails/ChatDetailsBox";
 import { CiMenuKebab } from "react-icons/ci";
+import { toast } from "react-toastify";
 
 const MessageBox = ({ chatId }) => {
     const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const MessageBox = ({ chatId }) => {
                 .catch((err) => {
                     console.log(err);
                     dispatch(setMessageLoading(false));
+                    toast.error("Message Loading Failed");
                 });
         };
         getMessage(chatId);

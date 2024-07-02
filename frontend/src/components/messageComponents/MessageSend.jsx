@@ -27,7 +27,7 @@ const MessageSend = ({ chatId }) => {
     // socket connection
     useEffect(() => {
         socket = io(ENDPOINT);
-    });
+    }, []);
     // Media Box Control
     const handleMediaBox = () => {
         if (mediaFile.current?.files[0]) {
@@ -74,6 +74,7 @@ const MessageSend = ({ chatId }) => {
                     console.log(err);
                     dispatch(setSendLoading(false));
                     setMessage("");
+                    toast.error("Message Sending Failed");
                 });
         }
     };
