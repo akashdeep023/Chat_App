@@ -13,6 +13,7 @@ const conditionSlice = createSlice({
         isUserSearchBox: false,
         isGroupChatBox: false,
         isGroupChatId: "",
+        isSocketConnected: false,
     },
     reducers: {
         setLoading: (state, action) => {
@@ -47,6 +48,9 @@ const conditionSlice = createSlice({
         setGroupChatId: (state, action) => {
             state.isGroupChatId = action.payload;
         },
+        setSocketConnected: (state, action) => {
+            state.isSocketConnected = action.payload;
+        },
     },
 });
 export const {
@@ -60,5 +64,6 @@ export const {
     setUserSearchBox,
     setGroupChatBox,
     setGroupChatId,
+    setSocketConnected,
 } = conditionSlice.actions;
 export default conditionSlice.reducer;
