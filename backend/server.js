@@ -57,20 +57,26 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-    console.log("Connection to socket.io");
-    console.log(socket.id);
-    // console.log("New user connected");
+    console.log("Connected to socket.io :", socket.id);
+    socket.on("setup", (userId) => {
+        socket.join(userId);
+        console.log("User joined:", userId);
+        socket.emit("connected");
+    });
 
-    // socket.on("join", ({ chatId, userId }) => {
-    //     socket.join(chatId);
-    //     console.log(`User ${userId} joined chat ${chatId}`);
-    // });
+    socket.on("join chat", (room) => {
+        socket.join(room);
+        console.log("User joined Room: " + room);
+    });
+    //
+    socket.on("new message", (newMessageRecieved) => {
+        let chat = newMessageRecieved.chat;
 
-    // socket.on("sendMessage", (message) => {
-    //     io.to(message.chatId).emit("newMessage", message);
-    // });
-
-    // socket.on("disconnect", () => {
-    //     console.log("User disconnected");
-    // });
+        chat.users.forEach((user) => {
+            if (user._id === newMessageRecieved.sender._id) return;
+            console.log("message rec : " + user._id);
+            socket.in(user._id).emit("message recieved", newMessageRecieved);
+        });
+    });
+    //
 });
