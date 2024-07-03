@@ -3,17 +3,20 @@ import { FaArrowLeft } from "react-icons/fa";
 import {
     setChatDetailsBox,
     setMessageLoading,
+    setSocketConnected,
 } from "../../redux/slices/conditionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AllMessages from "./AllMessages";
 import MessageSend from "./MessageSend";
-import { addAllMessages } from "../../redux/slices/messageSlice";
+import { addAllMessages, addNewMessage } from "../../redux/slices/messageSlice";
 import MessageLoading from "../loading/MessageLoading";
 import { addSelectedChat } from "../../redux/slices/myChatSlice";
 import getChatName, { getChatImage } from "../../utils/getChatName";
 import ChatDetailsBox from "../chatDetails/ChatDetailsBox";
 import { CiMenuKebab } from "react-icons/ci";
 import { toast } from "react-toastify";
+import socket from "../../socket/socket";
+let selectedChatCompare;
 
 const MessageBox = ({ chatId }) => {
     const dispatch = useDispatch();
@@ -25,10 +28,32 @@ const MessageBox = ({ chatId }) => {
     const isMessageLoading = useSelector(
         (store) => store?.condition?.isMessageLoading
     );
-
     const allMessage = useSelector((store) => store?.message?.message);
     const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
     const authUserId = useSelector((store) => store?.auth?._id);
+
+    // socket connection
+    useEffect(() => {
+        socket.emit("setup", authUserId);
+        socket.on("connected", () => dispatch(setSocketConnected(true)));
+        //
+    }, []);
+
+    useEffect(() => {
+        socket.on("message recieved", (newMessageRecieved) => {
+            if (selectedChatCompare._id === newMessageRecieved.chat._id) {
+                console.log(
+                    selectedChatCompare._id +
+                        "  &&  " +
+                        newMessageRecieved.chat._id
+                );
+                dispatch(addNewMessage(newMessageRecieved));
+                console.log("message received");
+            } else {
+                console.log("notifying");
+            }
+        });
+    }, []);
 
     useEffect(() => {
         const getMessage = (chatId) => {
@@ -45,6 +70,7 @@ const MessageBox = ({ chatId }) => {
                 .then((json) => {
                     dispatch(addAllMessages(json?.data || []));
                     dispatch(setMessageLoading(false));
+                    socket.emit("join chat", selectedChat._id);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -53,6 +79,7 @@ const MessageBox = ({ chatId }) => {
                 });
         };
         getMessage(chatId);
+        selectedChatCompare = selectedChat;
     }, [chatId]);
 
     // chatDetailsBox outside click handler

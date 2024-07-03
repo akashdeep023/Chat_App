@@ -9,10 +9,7 @@ import {
 } from "../../redux/slices/messageSlice";
 import { LuLoader } from "react-icons/lu";
 import { toast } from "react-toastify";
-
-import { io } from "socket.io-client";
-const ENDPOINT = import.meta.env.VITE_BACKEND_URL || "*";
-let socket, selectedChatCompare;
+import socket from "../../socket/socket";
 
 const MessageSend = ({ chatId }) => {
     const mediaFile = useRef();
@@ -24,10 +21,6 @@ const MessageSend = ({ chatId }) => {
         (store) => store?.condition?.isSendLoading
     );
 
-    // socket connection
-    useEffect(() => {
-        socket = io(ENDPOINT);
-    }, []);
     // Media Box Control
     const handleMediaBox = () => {
         if (mediaFile.current?.files[0]) {
@@ -68,13 +61,12 @@ const MessageSend = ({ chatId }) => {
                 .then((json) => {
                     dispatch(addNewMessageId(json?.data?._id));
                     dispatch(addNewMessage(json?.data));
-
+                    socket.emit("new message", json.data);
                     dispatch(setSendLoading(false));
                 })
                 .catch((err) => {
                     console.log(err);
                     dispatch(setSendLoading(false));
-
                     toast.error("Message Sending Failed");
                 });
         }

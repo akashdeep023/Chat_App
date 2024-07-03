@@ -11,7 +11,7 @@ import {
 const AllMessages = ({ allMessage }) => {
     const chatBox = useRef();
     const adminId = useSelector((store) => store.auth?._id);
-    const newMessageId = useSelector((store) => store?.message?.newMessageId);
+    // const newMessageId = useSelector((store) => store?.message?.newMessageId);
     const [scrollShow, setScrollShow] = useState(true);
     // Handle Chat Box Scroll Down
     const handleScrollDownChat = () => {
@@ -44,7 +44,7 @@ const AllMessages = ({ allMessage }) => {
         return () => {
             chatBoxCurrent.removeEventListener("scroll", handleScroll);
         };
-    }, [newMessageId]);
+    }, [allMessage]);
 
     return (
         <>
