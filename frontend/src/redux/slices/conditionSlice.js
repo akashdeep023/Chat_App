@@ -14,6 +14,7 @@ const conditionSlice = createSlice({
         isGroupChatBox: false,
         isGroupChatId: "",
         isSocketConnected: false,
+        isTyping: false,
     },
     reducers: {
         setLoading: (state, action) => {
@@ -51,6 +52,9 @@ const conditionSlice = createSlice({
         setSocketConnected: (state, action) => {
             state.isSocketConnected = action.payload;
         },
+        setTyping: (state, action) => {
+            state.isTyping = action.payload;
+        },
     },
 });
 export const {
@@ -65,5 +69,6 @@ export const {
     setGroupChatBox,
     setGroupChatId,
     setSocketConnected,
+    setTyping,
 } = conditionSlice.actions;
 export default conditionSlice.reducer;
