@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaFolderOpen, FaPaperPlane } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { setSendLoading } from "../../redux/slices/conditionSlice";
+import { setSendLoading, setTyping } from "../../redux/slices/conditionSlice";
 import {
     addNewMessage,
     addNewMessageId,
@@ -11,6 +11,7 @@ import { LuLoader } from "react-icons/lu";
 import { toast } from "react-toastify";
 import socket from "../../socket/socket";
 
+let lastTypingTime;
 const MessageSend = ({ chatId }) => {
     const mediaFile = useRef();
     const [newMessage, setMessage] = useState("");
@@ -20,6 +21,16 @@ const MessageSend = ({ chatId }) => {
     const isSendLoading = useSelector(
         (store) => store?.condition?.isSendLoading
     );
+    const isSocketConnected = useSelector(
+        (store) => store?.condition?.isSocketConnected
+    );
+    const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
+    const isTyping = useSelector((store) => store?.condition?.isTyping);
+
+    useEffect(() => {
+        socket.on("typing", () => dispatch(setTyping(true)));
+        socket.on("stop typing", () => dispatch(setTyping(false)));
+    }, []);
 
     // Media Box Control
     const handleMediaBox = () => {
@@ -44,6 +55,7 @@ const MessageSend = ({ chatId }) => {
         if (newMessage?.trim()) {
             const message = newMessage?.trim();
             setMessage("");
+            socket.emit("stop typing", selectedChat._id);
             dispatch(setSendLoading(true));
             const token = localStorage.getItem("token");
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/message`, {
@@ -70,6 +82,25 @@ const MessageSend = ({ chatId }) => {
                     toast.error("Message Sending Failed");
                 });
         }
+    };
+
+    const handleTyping = (e) => {
+        setMessage(e.target?.value);
+        if (!isSocketConnected) return;
+        if (!isTyping) {
+            socket.emit("typing", selectedChat._id);
+        }
+        lastTypingTime = new Date().getTime();
+        let timerLength = 3000;
+        let stopTyping = setTimeout(() => {
+            let timeNow = new Date().getTime();
+            let timeDiff = timeNow - lastTypingTime;
+            if (timeDiff > timerLength) {
+                socket.emit("stop typing", selectedChat._id);
+            }
+        }, timerLength);
+
+        return () => clearTimeout(stopTyping);
     };
 
     return (
@@ -115,7 +146,7 @@ const MessageSend = ({ chatId }) => {
                     placeholder="Type a message"
                     value={newMessage}
                     autoFocus
-                    onChange={(e) => setMessage(e.target?.value)}
+                    onChange={(e) => handleTyping(e)}
                 />
                 <span className="flex justify-center items-center">
                     {newMessage?.trim() && !isSendLoading && (

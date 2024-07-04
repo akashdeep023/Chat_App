@@ -31,24 +31,21 @@ const MessageBox = ({ chatId }) => {
     const allMessage = useSelector((store) => store?.message?.message);
     const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
     const authUserId = useSelector((store) => store?.auth?._id);
-
+    const isSocketConnected = useSelector(
+        (store) => store?.condition?.isSocketConnected
+    );
     // socket connection
     useEffect(() => {
-        socket.emit("setup", authUserId);
-        socket.on("connected", () => dispatch(setSocketConnected(true)));
-        //
+        if (!isSocketConnected) {
+            socket.emit("setup", authUserId);
+            socket.on("connected", () => dispatch(setSocketConnected(true)));
+        }
     }, []);
 
     useEffect(() => {
         socket.on("message recieved", (newMessageRecieved) => {
             if (selectedChatCompare._id === newMessageRecieved.chat._id) {
-                console.log(
-                    selectedChatCompare._id +
-                        "  &&  " +
-                        newMessageRecieved.chat._id
-                );
                 dispatch(addNewMessage(newMessageRecieved));
-                console.log("message received");
             } else {
                 console.log("notifying");
             }

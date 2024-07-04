@@ -11,7 +11,8 @@ import {
 const AllMessages = ({ allMessage }) => {
     const chatBox = useRef();
     const adminId = useSelector((store) => store.auth?._id);
-    // const newMessageId = useSelector((store) => store?.message?.newMessageId);
+    const isTyping = useSelector((store) => store?.condition?.isTyping);
+
     const [scrollShow, setScrollShow] = useState(true);
     // Handle Chat Box Scroll Down
     const handleScrollDownChat = () => {
@@ -44,7 +45,7 @@ const AllMessages = ({ allMessage }) => {
         return () => {
             chatBoxCurrent.removeEventListener("scroll", handleScroll);
         };
-    }, [allMessage]);
+    }, [allMessage, isTyping]);
 
     return (
         <>
@@ -138,6 +139,13 @@ const AllMessages = ({ allMessage }) => {
                         </Fragment>
                     );
                 })}
+                {isTyping && (
+                    <div id="typing-animation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                )}
             </div>
         </>
     );
