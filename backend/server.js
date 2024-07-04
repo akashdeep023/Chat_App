@@ -25,30 +25,35 @@ async function main() {
     await mongoose.connect(process.env.MONGODB_URI);
 }
 
+// Root route
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to Chat Application!" });
 });
 
+// All routes
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/chat", chatRouter);
 app.use("/api/message", messageRouter);
 
+// Invaild routes
 app.all("*", (req, res) => {
-    res.json({ error: "Invalid Route" });
+    res.json({ error: "Invaild Route" });
 });
 
+// Error handling middleware
 app.use((err, req, res, next) => {
     const errorMessage = err.message || "Something Went Wrong!";
     res.status(500).json({ message: errorMessage });
 });
 
+// Start the server
 const server = app.listen(PORT, async () => {
     console.log(`Server listening on ${PORT}`);
 });
 
+// Socket.IO setup
 const { Server } = require("socket.io");
-
 const io = new Server(server, {
     pingTimeout: 60000,
     cors: {
