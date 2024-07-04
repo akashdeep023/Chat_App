@@ -99,7 +99,6 @@ const MessageSend = ({ chatId }) => {
                 socket.emit("stop typing", selectedChat._id);
             }
         }, timerLength);
-
         return () => clearTimeout(stopTyping);
     };
 
@@ -145,7 +144,6 @@ const MessageSend = ({ chatId }) => {
                     className="outline-none p-2 w-full bg-transparent"
                     placeholder="Type a message"
                     value={newMessage}
-                    autoFocus
                     onChange={(e) => handleTyping(e)}
                 />
                 <span className="flex justify-center items-center">
