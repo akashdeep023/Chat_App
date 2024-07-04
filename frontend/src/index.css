@@ -12,7 +12,7 @@ body::-webkit-scrollbar-thumb,
 .scroll-style::-webkit-scrollbar-thumb {
     width: 3px;
     border-radius: 50px;
-    background-color: #1E293B;
+    background-color: #1e293b;
     box-shadow: inset 0px 0px 2px white;
 }
 
@@ -24,7 +24,7 @@ body::-webkit-scrollbar-thumb,
 .scroll-style-x::-webkit-scrollbar-thumb {
     height: 1px;
     border-radius: 50px;
-    background-color: #1E293B;
+    background-color: #1e293b;
     box-shadow: inset 0px 0px 2px white;
 }
 
@@ -43,39 +43,42 @@ body {
     aspect-ratio: 1;
     --c: linear-gradient(#fff 0 0);
     --m: radial-gradient(farthest-side, #fff 92%, #0000);
-    background:
-        var(--c), var(--m),
-        var(--c), var(--m),
-        var(--c), var(--m);
+    background: var(--c), var(--m), var(--c), var(--m), var(--c), var(--m);
     background-size: 8px 15px, 8px 8px;
     background-repeat: no-repeat;
     animation: chatLoading 1s infinite alternate;
 }
 
 @keyframes chatLoading {
-
     0%,
     10% {
-        background-position: 0 0, 0 100%, 50% 0, 50% 100%, 100% 0, 100% 100%
+        background-position: 0 0, 0 100%, 50% 0, 50% 100%, 100% 0, 100% 100%;
     }
 
     33% {
-        background-position: 0 100%, 0 0, 50% 0, 50% 100%, 100% 0, 100% 100%
+        background-position: 0 100%, 0 0, 50% 0, 50% 100%, 100% 0, 100% 100%;
     }
 
     66% {
-        background-position: 0 100%, 0 0, 50% 100%, 50% 0, 100% 0, 100% 100%
+        background-position: 0 100%, 0 0, 50% 100%, 50% 0, 100% 0, 100% 100%;
     }
 
     90%,
     100% {
-        background-position: 0 100%, 0 0, 50% 100%, 50% 0, 100% 100%, 100% 0
+        background-position: 0 100%, 0 0, 50% 100%, 50% 0, 100% 100%, 100% 0;
     }
 }
 
 /* Shimmer Style ---- */
 .shimmer-animated {
-    background: linear-gradient(to right, #334155, #1E293B, #334155, #1E293B, #334155);
+    background: linear-gradient(
+        to right,
+        #334155,
+        #1e293b,
+        #334155,
+        #1e293b,
+        #334155
+    );
     background-size: 200% 100%;
     animation: shimmer 3s linear infinite;
 }
@@ -121,4 +124,37 @@ body {
 
 .box-exit {
     animation: slideOut 0.4s forwards;
+}
+
+/* typing animation */
+#typing-animation {
+    /* text-align: center; */
+    text-align: start;
+    margin: 13px 8px;
+}
+#typing-animation span {
+    display: inline-block;
+    /* vertical-align: middle; */
+    margin-right: 3px;
+    width: 13px;
+    height: 13px;
+    background: white;
+    border-radius: 13px;
+    animation: typing-animation 0.9s infinite alternate;
+}
+#typing-animation span:nth-of-type(2) {
+    animation-delay: 0.3s;
+}
+#typing-animation span:nth-of-type(3) {
+    animation-delay: 0.6s;
+}
+@keyframes typing-animation {
+    0% {
+        opacity: 0.9;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 0.05;
+        transform: scale(1);
+    }
 }
