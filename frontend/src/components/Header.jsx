@@ -4,7 +4,11 @@ import Logo from "../assets/logo.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import { addAuth } from "../redux/slices/authSlice";
 import handleScrollTop from "../utils/handleScrollTop";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import {
+    MdKeyboardArrowDown,
+    MdKeyboardArrowUp,
+    MdNotificationsActive,
+} from "react-icons/md";
 import {
     setHeaderMenu,
     setLoading,
@@ -16,6 +20,9 @@ import { PiUserCircleLight } from "react-icons/pi";
 const Header = () => {
     const user = useSelector((store) => store.auth);
     const isHeaderMenu = useSelector((store) => store?.condition?.isHeaderMenu);
+    const newMessageRecieved = useSelector(
+        (store) => store?.myChat?.newMessageRecieved
+    );
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
@@ -126,6 +133,19 @@ const Header = () => {
 
             {user ? (
                 <div className="flex flex-nowrap items-center">
+                    <span
+                        className={`whitespace-nowrap ml-2 flex items-center justify-center relative mr-1.5 cursor-pointer ${
+                            newMessageRecieved.length > 0
+                                ? "animate-bounce"
+                                : "animate-none"
+                        }`}
+                        title="Notifications"
+                    >
+                        <MdNotificationsActive fontSize={25} />
+                        <span className="font-semibold text-xs absolute top-0 right-0 translate-x-1.5 -translate-y-1.5">
+                            {newMessageRecieved.length}
+                        </span>
+                    </span>
                     <span className="whitespace-nowrap ml-2">
                         Hi, {user.firstName}
                     </span>

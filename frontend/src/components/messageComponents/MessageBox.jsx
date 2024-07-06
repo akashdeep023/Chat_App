@@ -10,7 +10,10 @@ import AllMessages from "./AllMessages";
 import MessageSend from "./MessageSend";
 import { addAllMessages, addNewMessage } from "../../redux/slices/messageSlice";
 import MessageLoading from "../loading/MessageLoading";
-import { addSelectedChat } from "../../redux/slices/myChatSlice";
+import {
+    addNewMessageRecieved,
+    addSelectedChat,
+} from "../../redux/slices/myChatSlice";
 import getChatName, { getChatImage } from "../../utils/getChatName";
 import ChatDetailsBox from "../chatDetails/ChatDetailsBox";
 import { CiMenuKebab } from "react-icons/ci";
@@ -45,7 +48,7 @@ const MessageBox = ({ chatId }) => {
             if (selectedChatCompare._id === newMessageReceived.chat._id) {
                 dispatch(addNewMessage(newMessageReceived));
             } else {
-                console.log("notifying");
+                dispatch(addNewMessageRecieved(newMessageReceived));
             }
         };
 
