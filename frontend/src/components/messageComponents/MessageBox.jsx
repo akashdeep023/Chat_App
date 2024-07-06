@@ -36,20 +36,24 @@ const MessageBox = ({ chatId }) => {
     );
     // socket connection
     useEffect(() => {
-        if (!isSocketConnected) {
-            socket.emit("setup", authUserId);
-            socket.on("connected", () => dispatch(setSocketConnected(true)));
-        }
+        socket.emit("setup", authUserId);
+        socket.on("connected", () => dispatch(setSocketConnected(true)));
     }, []);
 
     useEffect(() => {
-        socket.on("message recieved", (newMessageRecieved) => {
-            if (selectedChatCompare._id === newMessageRecieved.chat._id) {
-                dispatch(addNewMessage(newMessageRecieved));
+        const messageHandler = (newMessageReceived) => {
+            if (selectedChatCompare._id === newMessageReceived.chat._id) {
+                dispatch(addNewMessage(newMessageReceived));
             } else {
                 console.log("notifying");
             }
-        });
+        };
+
+        socket.on("message received", messageHandler);
+
+        return () => {
+            socket.off("message received", messageHandler);
+        };
     }, []);
 
     useEffect(() => {
