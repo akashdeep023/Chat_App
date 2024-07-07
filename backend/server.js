@@ -56,13 +56,11 @@ const server = app.listen(PORT, async () => {
 const { Server } = require("socket.io");
 const io = new Server(server, {
 	pingTimeout: 60000,
-	path: "/socket",
-	// wssEngine: ["ws", "wss"],
+	path: "/api/new/socket",
 	transports: ["websocket", "polling"],
-	allowEIO3: true,
 	cors: {
 		origin: process.env.FRONTEND_URL,
-		// credentials: true,
+		methods: ["GET", "POST"],
 	},
 });
 
