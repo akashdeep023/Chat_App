@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 // const ENDPOINT = import.meta.env.VITE_BACKEND_URL;
 // const ENDPOINT = "ws://localhost:9000";
-const ENDPOINT = "ws://chat-app-backend-jack.vercel.app";
+const ENDPOINT = "wss://chat-app-backend-jack.vercel.app";
 const socket = io(ENDPOINT, {
 	path: "/socket",
 	reconnection: true,
