@@ -57,12 +57,11 @@ const { Server } = require("socket.io");
 const io = new Server(server, {
 	pingTimeout: 60000,
 	path: "/socket",
-	wssEngine: ["ws", "wss"],
+	// wssEngine: ["ws", "wss"],
 	transports: ["websocket", "polling"],
 	allowEIO3: true,
 	cors: {
-		origin: "*",
-		// origin: process.env.FRONTEND_URL,
+		origin: process.env.FRONTEND_URL,
 		// credentials: true,
 	},
 });
