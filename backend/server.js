@@ -57,7 +57,7 @@ const { Server } = require("socket.io");
 const io = new Server(server, {
 	pingTimeout: 60000,
 	// path: "/api/new/socket",
-	transports: ["websocket"],
+	transports: ["polling"],
 	cors: {
 		origin: [process.env.FRONTEND_URL],
 		methods: ["GET", "POST"],
