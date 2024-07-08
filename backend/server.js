@@ -5,7 +5,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const app = express();
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(cors({ origin: process.env.FRONTEND_URL }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3000;
@@ -55,13 +55,12 @@ const server = app.listen(PORT, async () => {
 // Socket.IO setup
 const { Server } = require("socket.io");
 const io = new Server(server, {
-	// pingTimeout: 60000,
+	pingTimeout: 60000,
 	// path: "/api/new/socket",
-	// transports: ["websocket", "polling"],
+	transports: ["websocket"],
 	cors: {
-		origin: process.env.FRONTEND_URL,
+		origin: [process.env.FRONTEND_URL],
 		methods: ["GET", "POST"],
-		credentials: true,
 	},
 });
 
