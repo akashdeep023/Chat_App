@@ -8,7 +8,7 @@ const Loading = () => {
 	useEffect(() => {
 		const setId = setTimeout(() => {
 			setShowCancel(true);
-		}, 6000);
+		}, 10000);
 		return () => {
 			clearTimeout(setId);
 		};
