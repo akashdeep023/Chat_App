@@ -35,7 +35,10 @@ async function main() {
 
 // Root route
 app.get("/", (req, res) => {
-	res.json({ message: "Welcome to Chat Application!" });
+	res.json({
+		message: "Welcome to Chat Application!",
+		frontend_url: process.env.FRONTEND_URL,
+	});
 });
 
 // All routes
