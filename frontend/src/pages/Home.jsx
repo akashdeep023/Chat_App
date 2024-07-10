@@ -6,6 +6,7 @@ import MyChat from "../components/chatComponents/MyChat";
 import MessageBox from "../components/messageComponents/MessageBox";
 import ChatNotSelected from "../components/chatComponents/ChatNotSelected";
 import { setUserSearchBox } from "../redux/slices/conditionSlice";
+import socket from "../socket/socket";
 
 const Home = () => {
 	const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
@@ -13,6 +14,12 @@ const Home = () => {
 	const isUserSearchBox = useSelector(
 		(store) => store?.condition?.isUserSearchBox
 	);
+
+	// socket connection
+	useEffect(() => {
+		socket.emit("setup", authUserId);
+		socket.on("connected", () => dispatch(setSocketConnected(true)));
+	}, []);
 
 	return (
 		<div className="flex w-full border-slate-500 border rounded-sm shadow-md shadow-black relative">

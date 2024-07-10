@@ -34,12 +34,8 @@ const MessageBox = ({ chatId }) => {
 	const allMessage = useSelector((store) => store?.message?.message);
 	const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
 	const authUserId = useSelector((store) => store?.auth?._id);
-	// socket connection
-	useEffect(() => {
-		socket.emit("setup", authUserId);
-		socket.on("connected", () => dispatch(setSocketConnected(true)));
-	}, []);
 
+	// socket message received
 	useEffect(() => {
 		const messageHandler = (newMessageReceived) => {
 			if (selectedChatCompare._id === newMessageReceived.chat._id) {
