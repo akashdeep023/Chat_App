@@ -33,7 +33,10 @@ const Home = () => {
 	useEffect(() => {
 		selectedChatCompare = selectedChat;
 		const messageHandler = (newMessageReceived) => {
-			if (selectedChatCompare._id === newMessageReceived.chat._id) {
+			if (
+				selectedChatCompare &&
+				selectedChatCompare._id === newMessageReceived.chat._id
+			) {
 				dispatch(addNewMessage(newMessageReceived));
 			} else {
 				dispatch(addNewMessageRecieved(newMessageReceived));
