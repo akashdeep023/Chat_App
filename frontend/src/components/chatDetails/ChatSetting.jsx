@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import { CiCircleInfo } from "react-icons/ci";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { VscError } from "react-icons/vsc";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import {
+	setChatDetailsBox,
+	setLoading,
+} from "../../redux/slices/conditionSlice";
+import { addAllMessages } from "../../redux/slices/messageSlice";
+import { deleteSelectedChat } from "../../redux/slices/myChatSlice";
 
 const ChatSetting = () => {
+	const dispatch = useDispatch();
 	const authUserId = useSelector((store) => store?.auth?._id);
 	const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
 	const [isConfirm, setConfirm] = useState("");
@@ -34,17 +41,72 @@ const ChatSetting = () => {
 
 	//  handle Clear Chat Call
 	const handleClearChatCall = () => {
-		console.log("Clear Chat Call");
-		toast.warn("Coming soon");
-		setConfirm("");
-		// -----------------------------------
+		dispatch(setLoading(true));
+		const token = localStorage.getItem("token");
+		fetch(
+			`${import.meta.env.VITE_BACKEND_URL}/api/message/clearChat/${
+				selectedChat?._id
+			}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				setConfirm("");
+				dispatch(setLoading(false));
+				if (json?.message === "success") {
+					dispatch(addAllMessages([]));
+					toast.success("Cleared all messages");
+				} else {
+					toast.error("Failed to clear chat");
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+				setConfirm("");
+				dispatch(setLoading(false));
+				toast.error("Message Clear Failed");
+			});
 	};
 	// handle Delete Chat Call
 	const handleDeleteChatCall = () => {
-		console.log("Delete Chat Call");
-		toast.warn("Coming soon");
-		setConfirm("");
-		// -----------------------------------
+		dispatch(setLoading(true));
+		const token = localStorage.getItem("token");
+		fetch(
+			`${import.meta.env.VITE_BACKEND_URL}/api/chat/deleteGroup/${
+				selectedChat?._id
+			}`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		)
+			.then((res) => res.json())
+			.then((json) => {
+				dispatch(setLoading(false));
+				if (json?.message === "success") {
+					const chatId = selectedChat?._id;
+					dispatch(setChatDetailsBox(false));
+					dispatch(addAllMessages([]));
+					dispatch(deleteSelectedChat(chatId));
+					toast.success("Chat deleted successfully");
+				} else {
+					toast.error("Failed to delete chat");
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+				dispatch(setLoading(false));
+				toast.error("Message Clear Failed");
+			});
 	};
 
 	return (
