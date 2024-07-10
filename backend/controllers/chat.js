@@ -1,4 +1,5 @@
 const Chat = require("../models/chat");
+const Message = require("../models/message");
 
 const postChat = async (req, res) => {
 	const { userId } = req.body;
@@ -79,6 +80,12 @@ const createGroup = async (req, res) => {
 		.populate("groupAdmin", "-password");
 	res.status(200).json({ data: groups });
 };
+const deleteGroup = async (req, res) => {
+	const chatId = req.params.chatId;
+	await Message.deleteMany({ chat: chatId });
+	await Chat.deleteOne({ _id: chatId });
+	return res.status(200).json({ message: "success" });
+};
 const renameGroup = async (req, res) => {
 	const { name, chatId } = req.body;
 	if (!name || !chatId) {
@@ -142,6 +149,7 @@ module.exports = {
 	postChat,
 	getChat,
 	createGroup,
+	deleteGroup,
 	renameGroup,
 	removeFromGroup,
 	addToGroup,
