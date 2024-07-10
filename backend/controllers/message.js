@@ -31,5 +31,10 @@ const allMessage = async (req, res) => {
 		.populate("chat");
 	return res.status(200).json({ data: messages });
 };
+const clearChat = async (req, res) => {
+	const chatId = req.params.chatId;
+	await Message.deleteMany({ chat: chatId });
+	return res.status(200).json({ message: "success" });
+};
 
-module.exports = { createMessage, allMessage };
+module.exports = { createMessage, allMessage, clearChat };
