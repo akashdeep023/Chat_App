@@ -54,7 +54,7 @@ const ChatSetting = () => {
 			</h1>
 			<div
 				onClick={handleClearChat}
-				className="w-full h-8 border-slate-500 border rounded-lg flex justify-between items-center p-2 font-semibold gap-2 transition-all cursor-pointer text-white"
+				className="w-full h-8 border-slate-500 border text-sm rounded-lg flex justify-between items-center p-2 font-normal gap-2 transition-all cursor-pointer text-white"
 			>
 				<h1>Clear Chat</h1>
 				<CiCircleInfo
@@ -70,7 +70,7 @@ const ChatSetting = () => {
 			{selectedChat?.isGroupChat ? (
 				<div
 					onClick={handleDeleteGroup}
-					className="w-full h-8 border-slate-500 border rounded-lg flex justify-between items-center p-2 font-semibold gap-2 transition-all cursor-pointer text-white"
+					className="w-full h-8 border-slate-500 border text-sm rounded-lg flex justify-between items-center p-2 font-normal gap-2 transition-all cursor-pointer text-white"
 				>
 					<h1>Delete Group</h1>
 					<CiCircleInfo
@@ -82,7 +82,7 @@ const ChatSetting = () => {
 			) : (
 				<div
 					onClick={handleDeleteChat}
-					className="w-full h-8 border-slate-500 border rounded-lg flex justify-between items-center p-2 font-semibold gap-2 transition-all cursor-pointer text-white"
+					className="w-full h-8 border-slate-500 border text-sm rounded-lg flex justify-between items-center p-2 font-normal gap-2 transition-all cursor-pointer text-white"
 				>
 					<h1>Delete Chat</h1>
 					<CiCircleInfo
