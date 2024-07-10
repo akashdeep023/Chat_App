@@ -4,157 +4,164 @@
 
 body::-webkit-scrollbar,
 .scroll-style::-webkit-scrollbar {
-    width: 5px;
-    background-color: white;
+	width: 5px;
+	/* background: linear-gradient(to right, #ffffff00, rgb(255, 255, 255)); */
+	background: linear-gradient(
+		to right,
+		rgba(255, 255, 255, 0) 40%,
+		rgba(255, 255, 255, 0.5) 40%,
+		rgba(255, 255, 255, 0.5) 60%,
+		rgba(255, 255, 255, 0) 60%
+	);
 }
 
 body::-webkit-scrollbar-thumb,
 .scroll-style::-webkit-scrollbar-thumb {
-    width: 3px;
-    border-radius: 50px;
-    background-color: #1e293b;
-    box-shadow: inset 0px 0px 2px white;
+	width: 3px;
+	border-radius: 50px;
+	background-color: #1e293b;
+	box-shadow: inset 0px 0px 2px white;
 }
 
 .scroll-style-x::-webkit-scrollbar {
-    height: 2px;
-    background-color: white;
+	height: 2px;
+	background-color: white;
 }
 
 .scroll-style-x::-webkit-scrollbar-thumb {
-    height: 1px;
-    border-radius: 50px;
-    background-color: #1e293b;
-    box-shadow: inset 0px 0px 2px white;
+	height: 1px;
+	border-radius: 50px;
+	background-color: #1e293b;
+	box-shadow: inset 0px 0px 2px white;
 }
 
 body {
-    user-select: none;
+	user-select: none;
 }
 
 /* Header Style */
 .hiddenbox {
-    top: -80px;
+	top: -80px;
 }
 
 /* Chat Loading Style */
 #loader {
-    width: 40px;
-    aspect-ratio: 1;
-    --c: linear-gradient(#fff 0 0);
-    --m: radial-gradient(farthest-side, #fff 92%, #0000);
-    background: var(--c), var(--m), var(--c), var(--m), var(--c), var(--m);
-    background-size: 8px 15px, 8px 8px;
-    background-repeat: no-repeat;
-    animation: chatLoading 1s infinite alternate;
+	width: 40px;
+	aspect-ratio: 1;
+	--c: linear-gradient(#fff 0 0);
+	--m: radial-gradient(farthest-side, #fff 92%, #0000);
+	background: var(--c), var(--m), var(--c), var(--m), var(--c), var(--m);
+	background-size: 8px 15px, 8px 8px;
+	background-repeat: no-repeat;
+	animation: chatLoading 1s infinite alternate;
 }
 
 @keyframes chatLoading {
-    0%,
-    10% {
-        background-position: 0 0, 0 100%, 50% 0, 50% 100%, 100% 0, 100% 100%;
-    }
+	0%,
+	10% {
+		background-position: 0 0, 0 100%, 50% 0, 50% 100%, 100% 0, 100% 100%;
+	}
 
-    33% {
-        background-position: 0 100%, 0 0, 50% 0, 50% 100%, 100% 0, 100% 100%;
-    }
+	33% {
+		background-position: 0 100%, 0 0, 50% 0, 50% 100%, 100% 0, 100% 100%;
+	}
 
-    66% {
-        background-position: 0 100%, 0 0, 50% 100%, 50% 0, 100% 0, 100% 100%;
-    }
+	66% {
+		background-position: 0 100%, 0 0, 50% 100%, 50% 0, 100% 0, 100% 100%;
+	}
 
-    90%,
-    100% {
-        background-position: 0 100%, 0 0, 50% 100%, 50% 0, 100% 100%, 100% 0;
-    }
+	90%,
+	100% {
+		background-position: 0 100%, 0 0, 50% 100%, 50% 0, 100% 100%, 100% 0;
+	}
 }
 
 /* Shimmer Style ---- */
 .shimmer-animated {
-    background: linear-gradient(
-        to right,
-        #334155,
-        #1e293b,
-        #334155,
-        #1e293b,
-        #334155
-    );
-    background-size: 200% 100%;
-    animation: shimmer 3s linear infinite;
+	background: linear-gradient(
+		to right,
+		#334155,
+		#1e293b,
+		#334155,
+		#1e293b,
+		#334155
+	);
+	background-size: 200% 100%;
+	animation: shimmer 3s linear infinite;
 }
 
 @keyframes shimmer {
-    0% {
-        background-position: 200% 0;
-    }
+	0% {
+		background-position: 200% 0;
+	}
 
-    100% {
-        background-position: -200% 0;
-    }
+	100% {
+		background-position: -200% 0;
+	}
 }
 
 /* ChatDetailsBox  */
 @keyframes slideIn {
-    from {
-        transform: translateY(-200px);
-        opacity: 0;
-    }
+	from {
+		transform: translateY(-200px);
+		opacity: 0;
+	}
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }
 
 @keyframes slideOut {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
 
-    to {
-        transform: translateY(-200px);
-        opacity: 0;
-    }
+	to {
+		transform: translateY(-200px);
+		opacity: 0;
+	}
 }
 
 .box-enter {
-    animation: slideIn 0.4s forwards;
+	animation: slideIn 0.4s forwards;
 }
 
 .box-exit {
-    animation: slideOut 0.4s forwards;
+	animation: slideOut 0.4s forwards;
 }
 
 /* typing animation */
 #typing-animation {
-    /* text-align: center; */
-    text-align: start;
-    margin: 13px 8px;
+	/* text-align: center; */
+	text-align: start;
+	margin: 13px 8px;
 }
 #typing-animation span {
-    display: inline-block;
-    /* vertical-align: middle; */
-    margin-right: 3px;
-    width: 13px;
-    height: 13px;
-    background: white;
-    border-radius: 13px;
-    animation: typing-animation 0.9s infinite alternate;
+	display: inline-block;
+	/* vertical-align: middle; */
+	margin-right: 3px;
+	width: 13px;
+	height: 13px;
+	background: white;
+	border-radius: 13px;
+	animation: typing-animation 0.9s infinite alternate;
 }
 #typing-animation span:nth-of-type(2) {
-    animation-delay: 0.3s;
+	animation-delay: 0.3s;
 }
 #typing-animation span:nth-of-type(3) {
-    animation-delay: 0.6s;
+	animation-delay: 0.6s;
 }
 @keyframes typing-animation {
-    0% {
-        opacity: 0.9;
-        transform: scale(0.5);
-    }
-    100% {
-        opacity: 0.05;
-        transform: scale(1);
-    }
+	0% {
+		opacity: 0.9;
+		transform: scale(0.5);
+	}
+	100% {
+		opacity: 0.05;
+		transform: scale(1);
+	}
 }
