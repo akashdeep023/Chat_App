@@ -3,7 +3,6 @@ import { FaArrowLeft } from "react-icons/fa";
 import {
 	setChatDetailsBox,
 	setMessageLoading,
-	setSocketConnected,
 } from "../../redux/slices/conditionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import AllMessages from "./AllMessages";

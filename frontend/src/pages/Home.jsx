@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdChat } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import UserSearch from "../components/chatComponents/UserSearch";
 import MyChat from "../components/chatComponents/MyChat";
 import MessageBox from "../components/messageComponents/MessageBox";
 import ChatNotSelected from "../components/chatComponents/ChatNotSelected";
-import { setUserSearchBox } from "../redux/slices/conditionSlice";
+import {
+	setSocketConnected,
+	setUserSearchBox,
+} from "../redux/slices/conditionSlice";
 import socket from "../socket/socket";
 
 const Home = () => {
@@ -14,12 +17,13 @@ const Home = () => {
 	const isUserSearchBox = useSelector(
 		(store) => store?.condition?.isUserSearchBox
 	);
-
+	const authUserId = useSelector((store) => store?.auth?._id);
 	// socket connection
 	useEffect(() => {
+		if (!authUserId) return;
 		socket.emit("setup", authUserId);
 		socket.on("connected", () => dispatch(setSocketConnected(true)));
-	}, []);
+	}, [authUserId]);
 
 	return (
 		<div className="flex w-full border-slate-500 border rounded-sm shadow-md shadow-black relative">

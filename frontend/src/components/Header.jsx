@@ -17,7 +17,6 @@ import {
 } from "../redux/slices/conditionSlice";
 import { IoLogOutOutline } from "react-icons/io5";
 import { PiUserCircleLight } from "react-icons/pi";
-import NotificationBox from "./NotificationBox";
 
 const Header = () => {
 	const user = useSelector((store) => store.auth);
