@@ -7,18 +7,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import AllMessages from "./AllMessages";
 import MessageSend from "./MessageSend";
-import { addAllMessages, addNewMessage } from "../../redux/slices/messageSlice";
+import { addAllMessages } from "../../redux/slices/messageSlice";
 import MessageLoading from "../loading/MessageLoading";
-import {
-	addNewMessageRecieved,
-	addSelectedChat,
-} from "../../redux/slices/myChatSlice";
+import { addSelectedChat } from "../../redux/slices/myChatSlice";
 import getChatName, { getChatImage } from "../../utils/getChatName";
 import ChatDetailsBox from "../chatDetails/ChatDetailsBox";
 import { CiMenuKebab } from "react-icons/ci";
 import { toast } from "react-toastify";
 import socket from "../../socket/socket";
-let selectedChatCompare;
 
 const MessageBox = ({ chatId }) => {
 	const dispatch = useDispatch();
@@ -33,23 +29,6 @@ const MessageBox = ({ chatId }) => {
 	const allMessage = useSelector((store) => store?.message?.message);
 	const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
 	const authUserId = useSelector((store) => store?.auth?._id);
-
-	// socket message received
-	useEffect(() => {
-		const messageHandler = (newMessageReceived) => {
-			if (selectedChatCompare._id === newMessageReceived.chat._id) {
-				dispatch(addNewMessage(newMessageReceived));
-			} else {
-				dispatch(addNewMessageRecieved(newMessageReceived));
-			}
-		};
-
-		socket.on("message received", messageHandler);
-
-		return () => {
-			socket.off("message received", messageHandler);
-		};
-	}, []);
 
 	useEffect(() => {
 		const getMessage = (chatId) => {
@@ -75,7 +54,6 @@ const MessageBox = ({ chatId }) => {
 				});
 		};
 		getMessage(chatId);
-		selectedChatCompare = selectedChat;
 	}, [chatId]);
 
 	// chatDetailsBox outside click handler

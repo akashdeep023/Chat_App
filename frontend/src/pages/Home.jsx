@@ -10,6 +10,9 @@ import {
 	setUserSearchBox,
 } from "../redux/slices/conditionSlice";
 import socket from "../socket/socket";
+import { addNewMessage } from "../redux/slices/messageSlice";
+import { addNewMessageRecieved } from "../redux/slices/myChatSlice";
+let selectedChatCompare;
 
 const Home = () => {
 	const selectedChat = useSelector((store) => store?.myChat?.selectedChat);
@@ -18,12 +21,30 @@ const Home = () => {
 		(store) => store?.condition?.isUserSearchBox
 	);
 	const authUserId = useSelector((store) => store?.auth?._id);
+
 	// socket connection
 	useEffect(() => {
 		if (!authUserId) return;
 		socket.emit("setup", authUserId);
 		socket.on("connected", () => dispatch(setSocketConnected(true)));
 	}, [authUserId]);
+
+	// socket message received
+	useEffect(() => {
+		selectedChatCompare = selectedChat;
+		const messageHandler = (newMessageReceived) => {
+			if (selectedChatCompare._id === newMessageReceived.chat._id) {
+				dispatch(addNewMessage(newMessageReceived));
+			} else {
+				dispatch(addNewMessageRecieved(newMessageReceived));
+			}
+		};
+		socket.on("message received", messageHandler);
+
+		return () => {
+			socket.off("message received", messageHandler);
+		};
+	});
 
 	return (
 		<div className="flex w-full border-slate-500 border rounded-sm shadow-md shadow-black relative">
