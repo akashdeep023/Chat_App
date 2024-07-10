@@ -71,9 +71,11 @@ const io = new Server(server, {
 	cors: corsOptions,
 });
 
+// Socket connection
 io.on("connection", (socket) => {
 	console.log("Connected to socket.io:", socket.id);
 
+	// Join user and message send to client
 	const setupHandler = (userId) => {
 		if (!socket.hasJoined) {
 			socket.join(userId);
@@ -82,7 +84,16 @@ io.on("connection", (socket) => {
 			socket.emit("connected");
 		}
 	};
+	const newMessageHandler = (newMessageReceived) => {
+		let chat = newMessageReceived.chat;
+		chat.users.forEach((user) => {
+			if (user._id === newMessageReceived.sender._id) return;
+			console.log("Message received by:", user._id);
+			socket.in(user._id).emit("message received", newMessageReceived);
+		});
+	};
 
+	// Join a Chat Room and Typing effect
 	const joinChatHandler = (room) => {
 		if (socket.currentRoom) {
 			if (socket.currentRoom === room) {
@@ -96,36 +107,25 @@ io.on("connection", (socket) => {
 		socket.currentRoom = room;
 		console.log("User joined Room:", room);
 	};
-
 	const typingHandler = (room) => {
 		socket.in(room).emit("typing");
 	};
-
 	const stopTypingHandler = (room) => {
 		socket.in(room).emit("stop typing");
 	};
 
-	const newMessageHandler = (newMessageReceived) => {
-		let chat = newMessageReceived.chat;
-		chat.users.forEach((user) => {
-			if (user._id === newMessageReceived.sender._id) return;
-			console.log("Message received by:", user._id);
-			socket.in(user._id).emit("message received", newMessageReceived);
-		});
-	};
-
 	socket.on("setup", setupHandler);
+	socket.on("new message", newMessageHandler);
 	socket.on("join chat", joinChatHandler);
 	socket.on("typing", typingHandler);
 	socket.on("stop typing", stopTypingHandler);
-	socket.on("new message", newMessageHandler);
 
 	socket.on("disconnect", () => {
 		console.log("User disconnected:", socket.id);
 		socket.off("setup", setupHandler);
+		socket.off("new message", newMessageHandler);
 		socket.off("join chat", joinChatHandler);
 		socket.off("typing", typingHandler);
 		socket.off("stop typing", stopTypingHandler);
-		socket.off("new message", newMessageHandler);
 	});
 });
