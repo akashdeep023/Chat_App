@@ -16,7 +16,7 @@ const createMessage = async (req, res) => {
 			.populate("sender", "-password")
 			.populate({
 				path: "chat",
-				populate: { path: "users", select: "-password" },
+				populate: { path: "users groupAdmin", select: "-password" },
 			});
 		return res.status(201).json({ data: fullMessage });
 	} else {
