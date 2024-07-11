@@ -13,6 +13,7 @@ import {
 import socket from "../socket/socket";
 import { addAllMessages, addNewMessage } from "../redux/slices/messageSlice";
 import {
+	addNewChat,
 	addNewMessageRecieved,
 	deleteSelectedChat,
 } from "../redux/slices/myChatSlice";
@@ -80,6 +81,18 @@ const Home = () => {
 		socket.on("delete chat", deleteChatHandler);
 		return () => {
 			socket.off("delete chat", deleteChatHandler);
+		};
+	});
+
+	// socket chat created
+	useEffect(() => {
+		const chatCreatedHandler = (chat) => {
+			dispatch(addNewChat(chat));
+			toast.success("Created & Selected chat");
+		};
+		socket.on("chat created", chatCreatedHandler);
+		return () => {
+			socket.off("chat created", chatCreatedHandler);
 		};
 	});
 
