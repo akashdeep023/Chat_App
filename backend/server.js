@@ -8,7 +8,7 @@ const app = express();
 
 const corsOptions = {
 	origin: process.env.FRONTEND_URL,
-	methods: ["GET", "POST"],
+	methods: ["GET", "POST", "DELETE"],
 	allowedHeaders: ["Content-Type", "Authorization"],
 	credentials: true,
 };
@@ -85,8 +85,8 @@ io.on("connection", (socket) => {
 		}
 	};
 	const newMessageHandler = (newMessageReceived) => {
-		let chat = newMessageReceived.chat;
-		chat.users.forEach((user) => {
+		let chat = newMessageReceived?.chat;
+		chat?.users.forEach((user) => {
 			if (user._id === newMessageReceived.sender._id) return;
 			console.log("Message received by:", user._id);
 			socket.in(user._id).emit("message received", newMessageReceived);
@@ -113,12 +113,24 @@ io.on("connection", (socket) => {
 	const stopTypingHandler = (room) => {
 		socket.in(room).emit("stop typing");
 	};
+	const clearChatHandler = (chatId) => {
+		socket.in(chatId).emit("clear chat", chatId);
+	};
+	const deleteChatHandler = (chat) => {
+		chat.users.forEach((user) => {
+			if (user._id === chat.groupAdmin._id) return;
+			console.log("Chat delete:", user._id);
+			socket.in(user._id).emit("delete chat", chat._id);
+		});
+	};
 
 	socket.on("setup", setupHandler);
 	socket.on("new message", newMessageHandler);
 	socket.on("join chat", joinChatHandler);
 	socket.on("typing", typingHandler);
 	socket.on("stop typing", stopTypingHandler);
+	socket.on("clear chat", clearChatHandler);
+	socket.on("delete chat", deleteChatHandler);
 
 	socket.on("disconnect", () => {
 		console.log("User disconnected:", socket.id);
@@ -127,5 +139,7 @@ io.on("connection", (socket) => {
 		socket.off("join chat", joinChatHandler);
 		socket.off("typing", typingHandler);
 		socket.off("stop typing", stopTypingHandler);
+		socket.off("clear chat", clearChatHandler);
+		socket.off("delete chat", deleteChatHandler);
 	});
 });
