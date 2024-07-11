@@ -95,11 +95,12 @@ const ChatSetting = () => {
 			.then((json) => {
 				dispatch(setLoading(false));
 				if (json?.message === "success") {
-					const chat = selectedChat;
+					let chat = selectedChat;
 					dispatch(setChatDetailsBox(false));
 					dispatch(addAllMessages([]));
 					dispatch(deleteSelectedChat(chat._id));
-					socket.emit("delete chat", chat);
+					socket.emit("delete chat", chat, authUserId);
+
 					toast.success("Chat deleted successfully");
 				} else {
 					toast.error("Failed to delete chat");
