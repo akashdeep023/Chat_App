@@ -20,8 +20,7 @@ const postChat = async (req, res) => {
 				path: "sender",
 				select: "-password",
 			},
-		})
-		.populate("groupAdmin", "-password");
+		});
 
 	if (existingChat.length == 0) {
 		const chatName = "Messenger";
