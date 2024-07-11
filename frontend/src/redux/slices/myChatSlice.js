@@ -14,6 +14,14 @@ const myChatSlice = createSlice({
 		addSelectedChat: (state, action) => {
 			state.selectedChat = action.payload;
 		},
+		addNewChat: (state, action) => {
+			const isExistChat = state.chat.find(
+				(chat) => chat._id === action.payload._id
+			);
+			if (!isExistChat) {
+				state.chat = [action.payload, ...state.chat];
+			}
+		},
 		deleteSelectedChat: (state, action) => {
 			if (
 				state.selectedChat &&
@@ -46,6 +54,7 @@ const myChatSlice = createSlice({
 export const {
 	addMyChat,
 	addSelectedChat,
+	addNewChat,
 	deleteSelectedChat,
 	addNewMessageRecieved,
 	removeNewMessageRecieved,
