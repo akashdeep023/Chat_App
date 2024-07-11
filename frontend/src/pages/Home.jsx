@@ -6,12 +6,17 @@ import MyChat from "../components/chatComponents/MyChat";
 import MessageBox from "../components/messageComponents/MessageBox";
 import ChatNotSelected from "../components/chatComponents/ChatNotSelected";
 import {
+	setChatDetailsBox,
 	setSocketConnected,
 	setUserSearchBox,
 } from "../redux/slices/conditionSlice";
 import socket from "../socket/socket";
-import { addNewMessage } from "../redux/slices/messageSlice";
-import { addNewMessageRecieved } from "../redux/slices/myChatSlice";
+import { addAllMessages, addNewMessage } from "../redux/slices/messageSlice";
+import {
+	addNewMessageRecieved,
+	deleteSelectedChat,
+} from "../redux/slices/myChatSlice";
+import { toast } from "react-toastify";
 let selectedChatCompare;
 
 const Home = () => {
@@ -46,6 +51,35 @@ const Home = () => {
 
 		return () => {
 			socket.off("message received", messageHandler);
+		};
+	});
+
+	// socket clear chat messages
+	useEffect(() => {
+		const clearChatHandler = (chatId) => {
+			if (chatId === selectedChat?._id) {
+				dispatch(addAllMessages([]));
+				toast.success("Cleared all messages");
+			}
+		};
+		socket.on("clear chat", clearChatHandler);
+		return () => {
+			socket.off("clear chat", clearChatHandler);
+		};
+	});
+	// socket delete chat messages
+	useEffect(() => {
+		const deleteChatHandler = (chatId) => {
+			dispatch(setChatDetailsBox(false));
+			if (selectedChat && chatId === selectedChat._id) {
+				dispatch(addAllMessages([]));
+			}
+			dispatch(deleteSelectedChat(chatId));
+			toast.success("Chat deleted successfully");
+		};
+		socket.on("delete chat", deleteChatHandler);
+		return () => {
+			socket.off("delete chat", deleteChatHandler);
 		};
 	});
 
