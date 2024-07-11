@@ -13,6 +13,7 @@ import { handleScrollEnd } from "../../utils/handleScrollTop";
 import { toast } from "react-toastify";
 import { addSelectedChat } from "../../redux/slices/myChatSlice";
 import { SimpleDateAndTime } from "../../utils/formateDateTime";
+import socket from "../../socket/socket";
 
 const GroupChatBox = () => {
 	const groupUser = useRef("");
@@ -20,6 +21,7 @@ const GroupChatBox = () => {
 	const isChatLoading = useSelector(
 		(store) => store?.condition?.isChatLoading
 	);
+	const authUserId = useSelector((store) => store?.auth?._id);
 	const [isGroupName, setGroupName] = useState(""); // input text
 	const [users, setUsers] = useState([]); // all users
 	const [inputUserName, setInputUserName] = useState(""); // input text
@@ -115,9 +117,10 @@ const GroupChatBox = () => {
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				dispatch(addSelectedChat(json.data));
-				dispatch(setGroupChatId(json.data?._id));
+				dispatch(addSelectedChat(json?.data));
+				dispatch(setGroupChatId(json?.data?._id));
 				dispatch(setLoading(false));
+				socket.emit("chat created", json?.data, authUserId);
 				toast.success("Created & Selected chat");
 				// console.log(json);
 			})

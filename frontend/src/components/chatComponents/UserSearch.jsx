@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import ChatShimmer from "../loading/ChatShimmer";
 import { addSelectedChat } from "../../redux/slices/myChatSlice";
 import { SimpleDateAndTime } from "../../utils/formateDateTime";
+import socket from "../../socket/socket";
 
 const UserSearch = () => {
 	const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const UserSearch = () => {
 	const [users, setUsers] = useState([]);
 	const [selectedUsers, setSelectedUsers] = useState([]);
 	const [inputUserName, setInputUserName] = useState("");
+	const authUserId = useSelector((store) => store?.auth?._id);
 
 	// All Users Api Call
 	useEffect(() => {
@@ -78,8 +80,9 @@ const UserSearch = () => {
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				dispatch(addSelectedChat(json.data));
+				dispatch(addSelectedChat(json?.data));
 				dispatch(setLoading(false));
+				socket.emit("chat created", json?.data, authUserId);
 				toast.success("Created & Selected chat");
 				dispatch(setUserSearchBox());
 			})
