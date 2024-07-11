@@ -15,7 +15,12 @@ const myChatSlice = createSlice({
 			state.selectedChat = action.payload;
 		},
 		deleteSelectedChat: (state, action) => {
-			state.selectedChat = null;
+			if (
+				state.selectedChat &&
+				state.selectedChat._id === action.payload
+			) {
+				state.selectedChat = null;
+			}
 			const allChat = state.chat.filter(
 				(chat) => chat._id !== action.payload
 			);
