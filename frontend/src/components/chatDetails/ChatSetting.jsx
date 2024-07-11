@@ -10,6 +10,7 @@ import {
 } from "../../redux/slices/conditionSlice";
 import { addAllMessages } from "../../redux/slices/messageSlice";
 import { deleteSelectedChat } from "../../redux/slices/myChatSlice";
+import socket from "../../socket/socket";
 
 const ChatSetting = () => {
 	const dispatch = useDispatch();
@@ -61,6 +62,7 @@ const ChatSetting = () => {
 				dispatch(setLoading(false));
 				if (json?.message === "success") {
 					dispatch(addAllMessages([]));
+					socket.emit("clear chat", selectedChat._id);
 					toast.success("Cleared all messages");
 				} else {
 					toast.error("Failed to clear chat");
@@ -70,7 +72,7 @@ const ChatSetting = () => {
 				console.log(err);
 				setConfirm("");
 				dispatch(setLoading(false));
-				toast.error("Message Clear Failed");
+				toast.error("Failed to clear chat");
 			});
 	};
 	// handle Delete Chat Call
@@ -93,10 +95,11 @@ const ChatSetting = () => {
 			.then((json) => {
 				dispatch(setLoading(false));
 				if (json?.message === "success") {
-					const chatId = selectedChat?._id;
+					const chat = selectedChat;
 					dispatch(setChatDetailsBox(false));
 					dispatch(addAllMessages([]));
-					dispatch(deleteSelectedChat(chatId));
+					dispatch(deleteSelectedChat(chat._id));
+					socket.emit("delete chat", chat);
 					toast.success("Chat deleted successfully");
 				} else {
 					toast.error("Failed to delete chat");
@@ -105,7 +108,7 @@ const ChatSetting = () => {
 			.catch((err) => {
 				console.log(err);
 				dispatch(setLoading(false));
-				toast.error("Message Clear Failed");
+				toast.error("Failed to delete chat");
 			});
 	};
 
