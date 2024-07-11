@@ -113,6 +113,8 @@ io.on("connection", (socket) => {
 	const stopTypingHandler = (room) => {
 		socket.in(room).emit("stop typing");
 	};
+
+	// Clear, Delete and Create chat handlers
 	const clearChatHandler = (chatId) => {
 		socket.in(chatId).emit("clear chat", chatId);
 	};
