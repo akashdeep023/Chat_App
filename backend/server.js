@@ -116,11 +116,18 @@ io.on("connection", (socket) => {
 	const clearChatHandler = (chatId) => {
 		socket.in(chatId).emit("clear chat", chatId);
 	};
-	const deleteChatHandler = (chat) => {
+	const deleteChatHandler = (chat, authUserId) => {
 		chat.users.forEach((user) => {
-			if (user._id === chat.groupAdmin._id) return;
+			if (authUserId === user._id) return;
 			console.log("Chat delete:", user._id);
 			socket.in(user._id).emit("delete chat", chat._id);
+		});
+	};
+	const chatCreateChatHandler = (chat, authUserId) => {
+		chat.users.forEach((user) => {
+			if (authUserId === user._id) return;
+			console.log("Create chat:", user._id);
+			socket.in(user._id).emit("chat created", chat);
 		});
 	};
 
@@ -131,6 +138,7 @@ io.on("connection", (socket) => {
 	socket.on("stop typing", stopTypingHandler);
 	socket.on("clear chat", clearChatHandler);
 	socket.on("delete chat", deleteChatHandler);
+	socket.on("chat created", chatCreateChatHandler);
 
 	socket.on("disconnect", () => {
 		console.log("User disconnected:", socket.id);
@@ -141,5 +149,6 @@ io.on("connection", (socket) => {
 		socket.off("stop typing", stopTypingHandler);
 		socket.off("clear chat", clearChatHandler);
 		socket.off("delete chat", deleteChatHandler);
+		socket.off("chat created", chatCreateChatHandler);
 	});
 });
