@@ -18,6 +18,7 @@ import {
 	deleteSelectedChat,
 } from "../redux/slices/myChatSlice";
 import { toast } from "react-toastify";
+import { receivedSound } from "../utils/notificationSound";
 let selectedChatCompare;
 
 const Home = () => {
@@ -45,6 +46,7 @@ const Home = () => {
 			) {
 				dispatch(addNewMessage(newMessageReceived));
 			} else {
+				receivedSound();
 				dispatch(addNewMessageRecieved(newMessageReceived));
 			}
 		};
