@@ -20,11 +20,21 @@ Chat Application 😊 using MERN Stack with Tailwind CSS
 -   **Express.js**: Web application framework for Node.js, providing robust features for web and mobile applications.
 -   **Node.js**: JavaScript runtime for server-side development.
 -   **React.js**: A JavaScript library for building reusable UI components and efficient single-page application views.
+-   **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+-   **Socket.IO**: Enables real-time, bidirectional and event-based communication.
+-   **JWT (JSON Web Tokens)**: Securely transmits information between parties as a JSON object.
+-   **Redux**: A Predictable State Container for JavaScript Apps.
+-   **React-Toastify**: A JavaScript library for providing toast notifications in React.
 
 ## Key Features
 
--   **User Authentication:** SignIn, SignUp and Logout
--   **Chat**: ------
+-   **User Authentication:** SignIn, SignUp, and Logout functionality.
+-   **Real-time Chat:** Users can send and receive messages in real-time.
+-   **Group Chat:** Create and participate in group chats.
+-   **Message Notifications:** Get notified of new messages with sound and visual alerts.
+<!-- -   **User Status:** Display online/offline status of users. -->
+-   **State Management:** Manage application state efficiently using Redux.
+-   **Responsive Design:** Tailwind CSS for a responsive and modern user interface.
 
 ## How to Install
 
@@ -90,6 +100,35 @@ Follow these steps to set up and run the project locally:
 5.  **Open in Your Browser:**
 
 Open `http://localhost:5173` in your web browser.
+
+## Project Structure
+
+    ├── frontend
+    │   ├── public
+    │   ├── src
+    │   │   ├── assets
+    │   │   ├── components
+    │   │   ├── pages
+    │   │   ├── redux
+    │   │   ├── socket
+    │   │   ├── utils
+    │   │   ├── App.jsx
+    │   │   ├── main.jsx
+    │   │   └── index.css
+    │   ├── index.html
+    │   ├── tailwind.config.js
+    │   ├── .env
+    │   └── package.json
+    ├── backend
+    │   ├── config
+    │   ├── controllers
+    │   ├── middlewares
+    │   ├── models
+    │   ├── routes
+    │   ├── server.js
+    │   ├── .env
+    │   └── package.json
+    └── README.md
 
 ## Author
 
