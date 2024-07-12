@@ -32,9 +32,9 @@ Chat Application 😊 using MERN Stack with Tailwind CSS
 -   **Real-time Chat:** Users can send and receive messages in real-time.
 -   **Group Chat:** Create and participate in group chats.
 -   **Message Notifications:** Get notified of new messages with sound and visual alerts.
-<!-- -   **User Status:** Display online/offline status of users. -->
 -   **State Management:** Manage application state efficiently using Redux.
 -   **Responsive Design:** Tailwind CSS for a responsive and modern user interface.
+<!-- -   **User Status:** Display online/offline status of users. -->
 
 ## How to Install
 
