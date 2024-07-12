@@ -13,6 +13,10 @@ const myChatSlice = createSlice({
 		},
 		addSelectedChat: (state, action) => {
 			state.selectedChat = action.payload;
+			const newMessageRecieved = state.newMessageRecieved.filter(
+				(message) => message.chat._id !== action.payload._id
+			);
+			state.newMessageRecieved = newMessageRecieved;
 		},
 		addNewChat: (state, action) => {
 			const isExistChat = state.chat.find(
