@@ -1,4 +1,4 @@
-# Chat Application MERN-Stack Web Application 🖋️
+# Chat Application MERN-Stack Web Application.
 
 <p align="center">
   <b style="color: blue;  ">Visitor count</b>
@@ -9,6 +9,7 @@
 </p>
 
 ---
+
 ![Macbook-Air-Iphone-13](https://github.com/user-attachments/assets/24edbef0-083f-44d4-9717-3e659ecb404b)
 
 ---
