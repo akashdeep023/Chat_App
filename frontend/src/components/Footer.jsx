@@ -40,23 +40,23 @@ const Footer = () => {
 							className="hover:text-blue-600 hover:underline"
 							to={"/signin"}
 						>
-							SingIn
+							SignIn
 						</Link>
 					</span>
 					<span>
 						<Link
 							className="hover:text-blue-600 hover:underline"
-							to={"/contact"}
+							to={"/signup"}
 						>
-							Contact
+							SignUp
 						</Link>
 					</span>
 					<span>
 						<Link
 							className="hover:text-blue-600 hover:underline"
-							to={"/about"}
+							to={"/home"}
 						>
-							About
+							Home
 						</Link>
 					</span>
 				</div>
