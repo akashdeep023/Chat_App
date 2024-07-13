@@ -135,13 +135,11 @@ body {
 
 /* typing animation */
 #typing-animation {
-	/* text-align: center; */
 	text-align: start;
 	margin: 13px 8px;
 }
 #typing-animation span {
 	display: inline-block;
-	/* vertical-align: middle; */
 	margin-right: 3px;
 	width: 13px;
 	height: 13px;
