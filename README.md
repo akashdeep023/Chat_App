@@ -140,6 +140,43 @@ Akash Deep \
 Email: contact.akashdeep023@gmail.com \
 LinkedIn : https://www.linkedin.com/in/akashdeep023/
 
+## Images
+**Profile**
+![Macbook-Air-localhost](https://github.com/user-attachments/assets/7ea906d8-10a9-4e79-a3aa-46f45dd328bb)
+
+**Group Create**
+![Macbook-Air-localhost (5)](https://github.com/user-attachments/assets/49cff226-f372-4668-8095-8f741265edc3)
+
+**Chat & Group Overview**
+![Macbook-Air-localhost (2)](https://github.com/user-attachments/assets/1c367efe-4059-432c-8e6c-86ccb41bf712)
+
+**Chat & Group Members**
+![Macbook-Air-localhost (3)](https://github.com/user-attachments/assets/58764949-ac05-4c6b-ae6d-34c1d3232f64)
+
+**Chat & Group Setting**
+![Macbook-Air-localhost (4)](https://github.com/user-attachments/assets/33001244-8e21-46ff-b047-14bcac81829d)
+
+**Add User in Group (Admin Access)**
+![Macbook-Air-localhost (1)](https://github.com/user-attachments/assets/3dbf0fdb-4754-4d77-af5e-81fbf7a681d5)
+
+**Remove User in Group (Admin Access)**
+![Macbook-Air-localhost (6)](https://github.com/user-attachments/assets/526d6786-8813-4997-922c-bc3bfba2ee8b)
+
+**User Search & Chat**
+![Macbook-Air-localhost (7)](https://github.com/user-attachments/assets/b187e389-0fac-4c50-ba9c-aee1f9f55d66)
+
+**Notification Box**
+![Macbook-Air-localhost (8)](https://github.com/user-attachments/assets/376bdfd8-7ffa-435b-b506-0a7405d5137c)
+
+**Notification Alert**
+![Screenshot 2024-07-22 231334](https://github.com/user-attachments/assets/fbaa92af-ee49-48b7-8442-cd8f8cc4d3bc)
+
+**Shimmer**
+![image](https://github.com/user-attachments/assets/45b6665a-9e2d-4a61-b092-7cb7a0b775be)
+
+**Footer**
+![Screenshot 2024-07-22 154954](https://github.com/user-attachments/assets/82daa377-4285-45a3-af99-f0920344fa0b)
+
 ## Thank You
 
 Thank you for exploring Chat App! Your feedback is valuable. If you have any suggestions or thoughts, feel free to share them with us. 😊
