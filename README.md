@@ -20,7 +20,7 @@
 
 ## Project Overview
 
-Chat Application 😊 using MERN Stack with Tailwind CSS
+_A real-time **Chat application** built using the MERN stack (MongoDB, Express, React, Node.js) and styled with Tailwind CSS. It supports user authentication, group chats, and instant messaging with real-time updates via Socket.IO. The application is fully responsive and provides smooth communication with features like notifications and state management using Redux._
 
 ## Technologies & Packages Used
 
